@@ -25,11 +25,13 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import SIcon from './src/components/ui-kit/SIcon/SIcon';
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
+      <SIcon iconName="ruble" iconColor="red" iconSize={20} />
       <Text
         style={[
           styles.sectionTitle,
