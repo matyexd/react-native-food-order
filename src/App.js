@@ -1,9 +1,9 @@
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {View, Text} from 'react-native';
 import {fonts} from './theme/Fonts';
 import SMainButton from './components/ui-kit/Button/mainButton';
-=======
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -15,7 +15,6 @@ import {
 } from './screens';
 
 const Tab = createBottomTabNavigator();
->>>>>>> 02ac4d756d09d35765629cc1ea316e3dd52dbbe2
 
 const App = () => {
   return (
