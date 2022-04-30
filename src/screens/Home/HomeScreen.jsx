@@ -36,7 +36,7 @@ const HomeScreen = () => {
 
   const renderItem = ({item}) => (
     <View key={item.id}>
-      <SDishCard name={item.header} />
+      <SDishCard header={item.name} />
     </View>
   );
 
