@@ -1,3 +1,3 @@
-import mainButton from './mainButton';
+import SMainButton from './mainButton';
 
-export {mainButton};
+export {SMainButton};

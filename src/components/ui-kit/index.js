@@ -1,5 +1,6 @@
-import {mainButton} from './Button';
+import {SMainButton} from './Button';
 import {SIcon} from './SIcon';
 import {SDishCard} from '../SDishCard';
+import {SCounter} from './Counter';
 
-export default {mainButton, SIcon, SDishCard};
+export {SMainButton, SIcon, SDishCard, SCounter};
