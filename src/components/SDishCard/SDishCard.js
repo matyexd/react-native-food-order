@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, Image} from 'react-native';
 import SMainButton from '../ui-kit/Button/mainButton';
+import SIcon from '../ui-kit/SIcon';
 import {styles} from './SDishCardStyle';
 
 const SDishCard = props => {
@@ -18,14 +19,12 @@ const SDishCard = props => {
       <Text style={styles.header}>{header}</Text>
       <View style={styles.about}>
         <Text style={styles.calorie}>100гр.</Text>
-        <Text style={styles.calorie}>550 ккал</Text>
+        <View style={styles.price}>
+          <Text style={styles.calorie}>40</Text>
+          <SIcon iconName="ruble" iconColor="black" />
+        </View>
       </View>
-      <SMainButton
-        text="40"
-        iconName="ruble"
-        iconColor="white"
-        onPress={onPressHandler}
-      />
+      <SMainButton text="Добавить" onPress={onPressHandler} />
     </View>
   );
 };

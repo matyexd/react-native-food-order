@@ -3,8 +3,10 @@ import {height, sp, width} from '../../../../utils/Responsive';
 import {fonts} from '../../../../theme/Fonts';
 export const styles = StyleSheet.create({
   mainButton: {
-    backgroundColor: 'black',
+    backgroundColor: '#333333',
+    borderRadius: width(8),
     alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: width(20),
     paddingVertical: height(8),
     flexDirection: 'row',
