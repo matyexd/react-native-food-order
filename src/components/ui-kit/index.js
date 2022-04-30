@@ -1,6 +1,5 @@
-import {mainButton} from './Button';
-import {SIcon} from './SIcon';
-import {SDishCard} from '../SDishCard';
-import Search from './Search';
+import UiMainButton from './UiButton';
+import UiIcon from './UiIcon';
+import UiSearch from './UiSearch';
 
-export default {mainButton, SIcon, SDishCard, Search};
+export {UiMainButton, UiIcon, UiSearch};

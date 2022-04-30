@@ -15,6 +15,8 @@ export const styles = StyleSheet.create({
     height: height(106),
     width: width(155),
     marginBottom: height(8),
+    borderTopLeftRadius: width(6),
+    borderTopRightRadius: width(6),
   },
   header: {
     ...fonts.SecondaryText,
@@ -23,6 +25,7 @@ export const styles = StyleSheet.create({
   calorie: {
     ...fonts.PrimaryText,
     color: '#333333',
+    alignSelf: 'center',
   },
   about: {
     flexDirection: 'row',
@@ -30,5 +33,13 @@ export const styles = StyleSheet.create({
   },
   price: {
     flexDirection: 'row',
+    alignItems: 'center',
+  },
+  count: {
+    ...fonts.h2,
+    color: '#333333',
+  },
+  icon: {
+    alignSelf: 'center',
   },
 });

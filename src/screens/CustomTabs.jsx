@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import SIcon from '../components/ui-kit/SIcon';
+import SIcon from '../components/ui-kit/UiIcon';
 import {styles} from './ CustomTabsStyle';
 
 const CustomTabs = ({route}) => ({
