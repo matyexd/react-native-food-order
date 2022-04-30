@@ -9,7 +9,6 @@ const SDishCard = props => {
   const onPressHandler = () => {
     console.log('Нажата кнопка');
   };
-  console.log(props);
 
   return (
     <View style={styles.container}>

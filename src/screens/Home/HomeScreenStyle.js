@@ -8,10 +8,9 @@ export const styles = StyleSheet.create({
   },
   mainList: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
   card: {
+    flex: 1,
     marginBottom: height(10),
     justifyContent: 'center',
     alignItems: 'center',

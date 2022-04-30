@@ -10,8 +10,6 @@ export const styles = StyleSheet.create({
     borderColor: 'black',
     boxSizing: 'border-box',
     borderRadius: width(8),
-    width: width(165),
-    height: height(198),
   },
   img: {
     height: height(106),
