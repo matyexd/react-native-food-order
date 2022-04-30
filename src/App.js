@@ -3,6 +3,7 @@ import React from 'react';
 <<<<<<< HEAD
 import {View, Text} from 'react-native';
 import {fonts} from './theme/Fonts';
+<<<<<<< HEAD
 import SMainButton from './components/ui-kit/Button/mainButton';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -15,6 +16,8 @@ import {
 } from './screens';
 
 const Tab = createBottomTabNavigator();
+=======
+>>>>>>> feature/DishCard
 
 const App = () => {
   return (

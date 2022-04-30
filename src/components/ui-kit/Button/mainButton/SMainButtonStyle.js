@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: width(20),
     paddingVertical: height(8),
+    flexDirection: 'row',
   },
   mainButtonText: {
     color: 'white',
