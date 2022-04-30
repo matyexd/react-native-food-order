@@ -16,7 +16,7 @@ export const fonts = {
 
   SecondaryTextSmall: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: sp(14),
+    fontSize: sp(10),
   },
   h1: {
     fontFamily: 'Montserrat-ExtraBold',
