@@ -10,6 +10,7 @@ const SDishCard = props => {
     console.log('Нажата кнопка');
   };
   console.log(props);
+
   return (
     <View style={styles.container}>
       <Image
