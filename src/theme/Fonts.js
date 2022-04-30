@@ -11,12 +11,12 @@ export const fonts = {
   },
   SecondaryText: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: sp(14),
+    fontSize: sp(16),
   },
 
   SecondaryTextSmall: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: sp(10),
+    fontSize: sp(14),
   },
   h1: {
     fontFamily: 'Montserrat-ExtraBold',
