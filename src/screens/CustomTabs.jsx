@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import SIcon from '../components/ui-kit/SIcon';
-import {fonts} from '../theme/Fonts';
+import {styles} from './ CustomTabsStyle';
 
 const CustomTabs = ({route}) => ({
   tabBarIcon: ({focused}) => {
@@ -39,7 +39,7 @@ const CustomTabs = ({route}) => ({
     }
 
     return (
-      <Text style={[{color: textColor}, fonts.SecondaryTextSmall]}>
+      <Text style={StyleSheet.flatten([styles.textLabel, {color: textColor}])}>
         {textContent}
       </Text>
     );
