@@ -14,6 +14,7 @@ import {
   ProfileScreen,
   FavouritesScreen,
   BasketScreen,
+  CustomTabs,
 } from './screens';
 
 const Tab = createBottomTabNavigator();
@@ -21,11 +22,27 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Basket" component={BasketScreen} />
-        <Tab.Screen name="Favourites" component={FavouritesScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Navigator screenOptions={props => CustomTabs(props)}>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Basket"
+          component={BasketScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Favourites"
+          component={FavouritesScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{headerShown: false}}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
