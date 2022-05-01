@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import SDishCard from '../../components/SDishCard';
-import {UiIcon, UiSearch} from '../../components/ui-kit';
+import {UiIcon, UiSearch, UiDropdown} from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
 
@@ -96,6 +96,8 @@ const HomeScreen = () => {
       gramm: '100',
     },
   ];
+  const categories = ['Комплексный обед', 'Салаты', 'Супы', 'Горячее из мяса'];
+
   const [item, setItem] = useState();
   const [visible, setVisible] = useState(false);
   const onPressCardHandler = obj => {
@@ -132,6 +134,9 @@ const HomeScreen = () => {
         </View>
         <View>
           <UiSearch />
+        </View>
+        <View style={styles.dropdown}>
+          <UiDropdown titleDropdown="Комплексный обед" items={categories} />
         </View>
         <View style={styles.mainList}>
           <FlatList
