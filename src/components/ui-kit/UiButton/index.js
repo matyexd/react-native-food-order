@@ -1,3 +1,3 @@
 import UiMainButton from './UiMainButton';
 
-export default UiMainButton;
+export {UiMainButton};
