@@ -3,9 +3,6 @@ import {fonts} from '../../theme/Fonts';
 import {height, width} from '../../utils/Responsive';
 
 export const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: width(24),
-  },
   button: {
     marginBottom: width(8),
   },
@@ -16,7 +13,7 @@ export const styles = StyleSheet.create({
     marginBottom: width(50),
   },
   ava: {
-    marginTop: height(80),
+    marginTop: height(70),
     alignItems: 'center',
     marginBottom: height(16),
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
-import {UiProfileButton} from '../../components/ui-kit';
+import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 
 const ProfileScreen = () => {
@@ -15,7 +15,7 @@ const ProfileScreen = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <UiContainer>
       <View style={styles.ava}>
         <Image source={require('./../../assets/img/ava.png')} />
       </View>
@@ -40,7 +40,7 @@ const ProfileScreen = () => {
         })}
       </View>
       <UiProfileButton text="Выход" />
-    </View>
+    </UiContainer>
   );
 };
 
