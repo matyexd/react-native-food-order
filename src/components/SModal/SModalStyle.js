@@ -53,6 +53,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: height(8),
+    marginTop: height(10),
   },
   count: {
     ...fonts.h2,
@@ -60,5 +61,16 @@ export const styles = StyleSheet.create({
   },
   iconPrice: {
     alignSelf: 'center',
+  },
+  footer: {
+    marginTop: height(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  counter: {
+    flexGrow: 1,
+  },
+  button: {
+    flexGrow: 3,
   },
 });

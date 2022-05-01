@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {styles} from './SModalStyle';
-import {UiIcon, UiMainButton} from '../ui-kit';
+import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 
 const InfoModal = props => {
   const {isVisible, item, closeModal} = props;
@@ -53,7 +53,12 @@ const InfoModal = props => {
             </View>
           </View>
           <View style={styles.footer}>
-            <UiMainButton text="Добавить" />
+            <View style={styles.counter}>
+              <UiCounter value={1} isVertical={false} />
+            </View>
+            <View style={styles.button}>
+              <UiMainButton text="Добавить" />
+            </View>
           </View>
         </View>
       </View>
