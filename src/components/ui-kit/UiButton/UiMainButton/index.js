@@ -1,3 +1,3 @@
-import SMainButton from './UiMainButton';
+import UiMainButton from './UiMainButton';
 
-export default SMainButton;
+export default UiMainButton;
