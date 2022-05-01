@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   hi: {
     ...fonts.h1,
     alignSelf: 'center',
-    marginTop: height(200),
+    marginTop: height(150),
     marginBottom: height(8),
   },
   text: {
