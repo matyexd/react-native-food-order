@@ -8,15 +8,15 @@ const UiSearch = () => {
     <View style={styles.container}>
       <View style={styles.input}>
         <View style={styles.searchIcon}>
-          <UiIcon iconName="search" iconColor="#DDDDDD" iconSize={18} />
+          <UiIcon iconName="search" iconColor="#999999" iconSize={18} />
         </View>
         <TextInput
           style={styles.inputText}
           placeholder="Поиск"
-          placeholderTextColor="#DDDDDD"
+          placeholderTextColor="#999999"
         />
         <View style={styles.closeIcon}>
-          <UiIcon iconName="close" iconColor="#DDDDDD" iconSize={18} />
+          <UiIcon iconName="close" iconColor="#999999" iconSize={18} />
         </View>
       </View>
     </View>
