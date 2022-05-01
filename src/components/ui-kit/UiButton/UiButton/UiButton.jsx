@@ -1,8 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
-import {styles} from './UiMainButtonStyle';
+import {styles} from './UiButtonStyle';
 
-const UiMainButton = ({text, onPress}) => {
+const UiButton = ({text, onPress}) => {
   return (
     <View>
       <TouchableOpacity style={styles.mainButton} onPress={onPress}>
@@ -12,4 +12,4 @@ const UiMainButton = ({text, onPress}) => {
   );
 };
 
-export default UiMainButton;
+export default UiButton;

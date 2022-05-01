@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: width(3),
     paddingVertical: height(3),
     borderWidth: width(1),
-    borderColor: 'black',
+    borderColor: '#999999',
     boxSizing: 'border-box',
     borderRadius: width(8),
   },
