@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, Image, TextInput} from 'react-native';
-import {UiButton, UiMainButton} from '../../components/ui-kit';
+import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './FavouritesScreenStyle';
 
 const FavouritesScreen = () => {
   return (
-    <View style={styles.container}>
+    <UiContainer>
       <View style={styles.logo}>
         <Image
           style={styles.imgLogo}
@@ -33,7 +33,7 @@ const FavouritesScreen = () => {
       <View style={styles.button}>
         <UiButton text="Войти" />
       </View>
-    </View>
+    </UiContainer>
   );
 };
 

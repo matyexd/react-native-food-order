@@ -3,11 +3,8 @@ import {fonts} from '../../theme/Fonts';
 import {height, width} from '../../utils/Responsive';
 
 export const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: width(16),
-  },
   logo: {
-    marginTop: height(80),
+    marginTop: height(70),
     alignItems: 'center',
   },
   hi: {

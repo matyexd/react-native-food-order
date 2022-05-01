@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import SDishCard from '../../components/SDishCard';
-import {UiIcon, UiSearch, UiDropdown} from '../../components/ui-kit';
+import {
+  UiIcon,
+  UiSearch,
+  UiDropdown,
+  UiContainer,
+} from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
 
@@ -124,7 +129,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <View style={styles.container}>
+      <UiContainer>
         <View style={styles.header}>
           <Text style={styles.limitLabel}>Осталось потратить</Text>
           <View style={styles.limitPrice}>
@@ -146,7 +151,7 @@ const HomeScreen = () => {
             keyExtractor={item => item.id}
           />
         </View>
-      </View>
+      </UiContainer>
       <InfoModal
         item={item}
         isVisible={visible}

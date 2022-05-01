@@ -3,10 +3,6 @@ import {fonts} from '../../theme/Fonts';
 import {height, width} from '../../utils/Responsive';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: width(20),
-  },
   mainList: {
     flex: 1,
   },
@@ -19,7 +15,7 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: height(12),
+    paddingBottom: height(12),
     paddingHorizontal: 2,
   },
   limitPrice: {

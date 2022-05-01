@@ -1,8 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
+import {styles} from './UiContainerStyle';
 
-const UiContainer = () => {
-  return <View></View>;
+const UiContainer = ({children}) => {
+  return <View style={styles.container}>{children}</View>;
 };
 
 export default UiContainer;
