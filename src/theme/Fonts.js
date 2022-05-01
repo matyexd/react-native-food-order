@@ -3,7 +3,7 @@ import {sp} from '../utils/Responsive';
 export const fonts = {
   PrimaryText: {
     fontFamily: 'Montserrat-Regular',
-    fontSize: sp(14),
+    fontSize: sp(16),
   },
   PrimaryTextSmall: {
     fontFamily: 'Montserrat-Regular',

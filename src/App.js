@@ -1,7 +1,4 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {fonts} from './theme/Fonts';
-import SMainButton from './components/ui-kit/UiButton/UiMainButton';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
