@@ -1,3 +1,4 @@
+import UiButton from './UiButton';
 import UiMainButton from './UiMainButton';
 
-export default UiMainButton;
+export {UiButton, UiMainButton};
