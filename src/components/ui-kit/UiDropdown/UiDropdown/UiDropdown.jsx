@@ -2,8 +2,8 @@ import React from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 // import {View} from 'react-native'
 import {fonts} from '../../../../theme/Fonts';
-import {height} from '../../../../utils/Responsive';
 import UiIcon from '../../UiIcon';
+import {styles} from './UiDropdownStyle';
 
 const UiDropdown = ({titleDropdown = 'Select', categories}) => {
   return (
@@ -18,24 +18,16 @@ const UiDropdown = ({titleDropdown = 'Select', categories}) => {
       rowTextForSelection={(item, index) => {
         return item;
       }}
-      buttonStyle={{
-        width: '100%',
-        borderWidth: 1,
-        borderColor: 'grey',
-        borderRadius: height(8),
-        backgroundColor: 'white',
-        height: height(50),
-        alignSelf: 'flex-start',
-      }}
-      buttonTextStyle={{...fonts.PrimaryText, textAlign: 'left'}}
+      buttonStyle={styles.buttonDropdownStyle}
+      buttonTextStyle={styles.buttonDropdownTextStyle}
       defaultButtonText={titleDropdown}
       renderDropdownIcon={() => {
         return (
           <UiIcon iconName={'arrowDown'} iconColor={'black'} iconSize={7} />
         );
       }}
-      rowStyle={{height: height(50)}}
-      rowTextStyle={{...fonts.PrimaryText, textAlign: 'left'}}
+      rowStyle={styles.rowDropdownStyle}
+      rowTextStyle={styles.rowDropdownTextStyle}
     />
   );
 };
