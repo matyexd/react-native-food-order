@@ -5,10 +5,10 @@ import {fonts} from '../../../../theme/Fonts';
 import UiIcon from '../../UiIcon';
 import {styles} from './UiDropdownStyle';
 
-const UiDropdown = ({titleDropdown = 'Select', categories}) => {
+const UiDropdown = ({titleDropdown = 'Select', items}) => {
   return (
     <SelectDropdown
-      data={categories}
+      data={items}
       onSelect={(selectedItem, index) => {
         console.log(selectedItem);
       }}
@@ -28,6 +28,7 @@ const UiDropdown = ({titleDropdown = 'Select', categories}) => {
       }}
       rowStyle={styles.rowDropdownStyle}
       rowTextStyle={styles.rowDropdownTextStyle}
+      dropdownStyle={styles.dropdownStyle}
     />
   );
 };

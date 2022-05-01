@@ -36,4 +36,7 @@ export const styles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
   },
+  dropdown: {
+    marginBottom: height(24),
+  },
 });
