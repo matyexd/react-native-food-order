@@ -1,6 +1,6 @@
-import {SMainButton} from './Button';
-import {SIcon} from './SIcon';
-import {SDishCard} from '../SDishCard';
-import {SCounter} from './Counter';
+import UiMainButton from './UiButton';
+import UiIcon from './UiIcon';
+import UiSearch from './UiSearch';
+import {UiCounter} from './UiCounter';
 
-export {SMainButton, SIcon, SDishCard, SCounter};
+export {UiMainButton, UiIcon, UiSearch, UiCounter};

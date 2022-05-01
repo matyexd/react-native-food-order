@@ -3,14 +3,20 @@ import {fonts} from '../../theme/Fonts';
 import {height, sp, width} from '../../utils/Responsive';
 export const styles = StyleSheet.create({
   container: {
-    //flex: 1,
+    flex: 1,
     paddingHorizontal: width(3),
     paddingVertical: height(3),
+    borderWidth: width(1),
+    borderColor: 'black',
+    boxSizing: 'border-box',
+    borderRadius: width(8),
   },
   img: {
-    height: height(280),
-    width: width(369),
+    height: height(106),
+    width: width(155),
     marginBottom: height(8),
+    borderTopLeftRadius: width(6),
+    borderTopRightRadius: width(6),
   },
   header: {
     ...fonts.SecondaryText,
@@ -19,9 +25,21 @@ export const styles = StyleSheet.create({
   calorie: {
     ...fonts.PrimaryText,
     color: '#333333',
+    alignSelf: 'center',
   },
   about: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  price: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  count: {
+    ...fonts.h2,
+    color: '#333333',
+  },
+  icon: {
+    alignSelf: 'center',
   },
 });

@@ -14,6 +14,11 @@ export const fonts = {
     fontSize: sp(16),
   },
 
+  SecondaryTextBig: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: sp(25),
+  },
+
   SecondaryTextSmall: {
     fontFamily: 'Montserrat-Bold',
     fontSize: sp(10),
