@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {UiCounter} from '../../components/ui-kit';
+import {UiCounter, UiDropdown} from '../../components/ui-kit';
 
 const BasketScreen = () => {
   return (
