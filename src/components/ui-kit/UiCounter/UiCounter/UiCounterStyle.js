@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {height, sp, width} from '../../../../utils/Responsive';
+import {height, width} from '../../../../utils/Responsive';
 import {fonts} from '../../../../theme/Fonts';
 
 export const styles = StyleSheet.create({
@@ -18,5 +18,8 @@ export const styles = StyleSheet.create({
   counterText: {
     color: 'black',
     ...fonts.PrimaryText,
+  },
+  minusTouchable: {
+    paddingVertical: height(12),
   },
 });

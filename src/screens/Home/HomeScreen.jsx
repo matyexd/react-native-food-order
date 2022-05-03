@@ -5,7 +5,7 @@ import {
   UiIcon,
   UiSearch,
   UiDropdown,
-  UiContainer,
+  UiContainerHome,
 } from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
@@ -129,7 +129,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <UiContainer>
+      <UiContainerHome>
         <View style={styles.header}>
           <Text style={styles.limitLabel}>Осталось потратить</Text>
           <View style={styles.limitPrice}>
@@ -151,7 +151,7 @@ const HomeScreen = () => {
             keyExtractor={item => item.id}
           />
         </View>
-      </UiContainer>
+      </UiContainerHome>
       <InfoModal
         item={item}
         isVisible={visible}
