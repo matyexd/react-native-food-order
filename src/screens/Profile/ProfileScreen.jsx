@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 
@@ -15,32 +15,34 @@ const ProfileScreen = () => {
   ];
 
   return (
-    <UiContainer>
-      <View style={styles.ava}>
-        <Image source={require('./../../assets/img/ava.png')} />
-      </View>
-      <Text style={styles.name}>Сергей</Text>
-      <Text style={styles.status}>Любитель пирожков</Text>
-      <View style={styles.data1}>
-        {data1.map(button => {
-          return (
-            <View style={button.style} key={button.id}>
-              <UiProfileButton text={button.text} />
-            </View>
-          );
-        })}
-      </View>
-      <View style={styles.data2}>
-        {data2.map(button => {
-          return (
-            <View style={button.style} key={button.id}>
-              <UiProfileButton text={button.text} />
-            </View>
-          );
-        })}
-      </View>
-      <UiProfileButton text="Выход" />
-    </UiContainer>
+    <ScrollView>
+      <UiContainer>
+        <View style={styles.ava}>
+          <Image source={require('./../../assets/img/ava.png')} />
+        </View>
+        <Text style={styles.name}>Сергей</Text>
+        <Text style={styles.status}>Любитель пирожков</Text>
+        <View style={styles.data1}>
+          {data1.map(button => {
+            return (
+              <View style={button.style} key={button.id}>
+                <UiProfileButton text={button.text} />
+              </View>
+            );
+          })}
+        </View>
+        <View style={styles.data2}>
+          {data2.map(button => {
+            return (
+              <View style={button.style} key={button.id}>
+                <UiProfileButton text={button.text} />
+              </View>
+            );
+          })}
+        </View>
+        <UiProfileButton text="Выход" />
+      </UiContainer>
+    </ScrollView>
   );
 };
 

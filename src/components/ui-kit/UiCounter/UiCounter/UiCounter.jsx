@@ -1,12 +1,14 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {height, sp, width} from '../../../../utils/Responsive';
+import {height, width} from '../../../../utils/Responsive';
 import UiIcon from '../../UiIcon';
 import {styles} from './UiCounterStyle';
 
 const UiCounter = ({value, setCounterValue, isVertical = false}) => {
   const handlerMinus = () => {
-    setCounterValue(value - 1);
+    if (value > 0) {
+      setCounterValue(value - 1);
+    }
   };
 
   const handlerPlus = () => {
@@ -20,7 +22,7 @@ const UiCounter = ({value, setCounterValue, isVertical = false}) => {
           ? styles.counter
           : StyleSheet.flatten([styles.counter, verticalStyle.verticalCounter])
       }>
-      <TouchableOpacity onPress={handlerMinus}>
+      <TouchableOpacity onPress={handlerMinus} style={styles.minusTouchable}>
         <UiIcon
           iconName={isVertical ? 'plus' : 'minus'}
           iconColor="black"

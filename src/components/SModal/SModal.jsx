@@ -1,17 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-native-modal';
-import {
-  View,
-  Image,
-  Text,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import {styles} from './SModalStyle';
 import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 
 const InfoModal = props => {
   const {isVisible, item, closeModal} = props;
+  const [counterValue, setCounterValue] = useState(0);
 
   return (
     <Modal
@@ -19,6 +14,8 @@ const InfoModal = props => {
       isVisible={isVisible}
       animationIn={'slideInUp'}
       backdropColor={'black'}
+      onBackButtonPress={closeModal}
+      onBackdropPress={closeModal}
       backdropOpacity={0.6}>
       <View style={styles.modal}>
         <ImageBackground source={item?.image} style={styles.image}>
@@ -54,7 +51,11 @@ const InfoModal = props => {
           </View>
           <View style={styles.footer}>
             <View style={styles.counter}>
-              <UiCounter value={1} isVertical={false} />
+              <UiCounter
+                value={counterValue}
+                setCounterValue={setCounterValue}
+                isVertical={false}
+              />
             </View>
             <View style={styles.button}>
               <UiMainButton text="Добавить" />
