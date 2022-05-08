@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import Modal from 'react-native-modal';
-import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {styles} from './SModalStyle';
 import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 
 const InfoModal = props => {
   const {isVisible, item, closeModal} = props;
-  const [counterValue, setCounterValue] = useState(0);
+  const [counterValue, setCounterValue] = useState(1);
 
   return (
     <Modal
+      useNativeDriverForBackdrop={true}
+      onSwipeComplete={swipeDirection => closeModal()}
+      swipeThreshold={100}
+      swipeDirection={'down'}
       style={styles.infoModal}
       isVisible={isVisible}
       animationIn={'slideInUp'}
@@ -18,13 +22,7 @@ const InfoModal = props => {
       onBackdropPress={closeModal}
       backdropOpacity={0.6}>
       <View style={styles.modal}>
-        <ImageBackground source={item?.image} style={styles.image}>
-          <View style={styles.icon}>
-            <TouchableOpacity style={styles.iconClose} onPress={closeModal}>
-              <UiIcon iconName="close" iconColor={'black'} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
+        <Image source={item?.image} style={styles.image} />
         <View style={styles.container}>
           <View style={styles.about}>
             <View>
