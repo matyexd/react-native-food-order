@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import SDishCard from '../../components/SDishCard';
 import {
@@ -9,100 +9,24 @@ import {
 } from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
+import {data} from '../../temp/menu';
 
 const HomeScreen = () => {
-  const data = [
-    {
-      id: 1,
-      name: 'Винегрет овощной',
-      price: '40',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 2,
-      name: 'Винегрет овощной',
-      price: '70',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 3,
-      name: 'Винегрет овощной',
-      price: '60',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 4,
-      name: 'Винегрет овощной',
-      price: '80',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 5,
-      name: 'Винегрет овощной',
-      price: '40',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 6,
-      name: 'Винегрет овощной',
-      price: '70',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 7,
-      name: 'Винегрет овощной',
-      price: '60',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
-    {
-      id: 8,
-      name: 'Винегрет овощной',
-      price: '80',
-      calorie: '550',
-      category: 'salad',
-      description:
-        'Свекла, морковь, картофель, капуста, зеленый горошек, масло растительное',
-      image: require('./../../assets/img/salat.png'),
-      gramm: '100',
-    },
+  const categories = [
+    'Комплексный обед',
+    'Салаты',
+    'Супы',
+    'Горячее из мяса',
+    'Горячее из птицы',
+    'Горячее из рыбы',
+    'Гарниры',
+    'Мучные изделия',
+    'Напитки и соки',
+    'Соусы',
+    'Пельмени и вареники',
+    'Прочее',
+    'Пироги и торты',
   ];
-  const categories = ['Комплексный обед', 'Салаты', 'Супы', 'Горячее из мяса'];
-
   const [item, setItem] = useState();
   const [visible, setVisible] = useState(false);
   const onPressCardHandler = obj => {
@@ -126,6 +50,16 @@ const HomeScreen = () => {
       />
     </TouchableOpacity>
   );
+  const [filterData, setFilterData] = useState(data);
+  const filterByCategory = category => {
+    const newData = data.filter(pr => pr.category == category);
+    setFilterData(newData);
+    console.log(newData);
+  };
+
+  useEffect(() => {
+    filterByCategory('Комплексный обед');
+  }, []);
 
   return (
     <>
@@ -141,12 +75,16 @@ const HomeScreen = () => {
           <UiSearch />
         </View>
         <View style={styles.dropdown}>
-          <UiDropdown titleDropdown="Комплексный обед" items={categories} />
+          <UiDropdown
+            titleDropdown="Комплексный обед"
+            items={categories}
+            filter={filterByCategory}
+          />
         </View>
         <View style={styles.mainList}>
           <FlatList
             numColumns={2}
-            data={data}
+            data={filterData}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
