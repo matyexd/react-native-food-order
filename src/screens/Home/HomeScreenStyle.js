@@ -23,11 +23,11 @@ export const styles = StyleSheet.create({
   },
   limitCount: {
     ...fonts.h2,
-    color: '#333333',
+    color: '#000000',
   },
   limitLabel: {
-    ...fonts.SecondaryTextBig,
-    color: '#333333',
+    ...fonts.h2,
+    color: '#000000',
   },
   icon: {
     alignSelf: 'center',

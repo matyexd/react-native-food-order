@@ -6,14 +6,8 @@ export const styles = StyleSheet.create({
   button: {
     marginBottom: width(8),
   },
-  data1: {
-    marginBottom: width(24),
-  },
-  data2: {
-    marginBottom: width(50),
-  },
   ava: {
-    marginTop: height(70),
+    marginTop: height(30),
     alignItems: 'center',
     marginBottom: height(16),
   },
@@ -21,11 +15,10 @@ export const styles = StyleSheet.create({
     ...fonts.h2,
     color: '#333333',
     alignSelf: 'center',
-  },
-  status: {
-    ...fonts.h3,
-    color: '#333333',
-    alignSelf: 'center',
     marginBottom: height(50),
+  },
+  title: {
+    ...fonts.h2,
+    color: '#000000',
   },
 });
