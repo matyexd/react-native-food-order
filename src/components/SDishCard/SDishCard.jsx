@@ -25,7 +25,7 @@ const SDishCard = props => {
                 <Text style={styles.count}>{price}</Text>
                 <UiIcon
                   iconName="ruble"
-                  iconColor="black"
+                  iconColor="#333333"
                   iconSize={24}
                   style={styles.icon}
                 />

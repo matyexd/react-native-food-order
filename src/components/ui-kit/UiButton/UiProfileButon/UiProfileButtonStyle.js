@@ -6,13 +6,11 @@ export const styles = StyleSheet.create({
   profileButton: {
     borderRadius: width(8),
     alignItems: 'center',
+    justifyContent: 'space-between',
     //justifyContent: 'center',
-    paddingHorizontal: width(20),
-    paddingVertical: height(8),
+    paddingHorizontal: width(10),
+    paddingVertical: height(12),
     flexDirection: 'row',
-    borderWidth: width(1),
-    borderColor: '#999999',
-    borderRadius: height(8),
     boxSizing: 'border-box',
   },
   profileButtonText: {

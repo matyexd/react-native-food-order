@@ -8,34 +8,50 @@ import {
   BasketScreen,
   CustomTabs,
 } from './screens';
+import {createStackNavigator} from '@react-navigation/stack';
 
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={props => CustomTabs(props)}
+      initialRouteName="Home">
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Basket"
+        component={BasketScreen}
+        options={{headerShown: false}}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={props => CustomTabs(props)}>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="TabNavigator"
+          component={TabNavigator}
           options={{headerShown: false}}
         />
-        <Tab.Screen
-          name="Basket"
-          component={BasketScreen}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen
-          name="Favourites"
+        <Stack.Screen
+          name="Auth"
           component={FavouritesScreen}
           options={{headerShown: false}}
         />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{headerShown: false}}
-        />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

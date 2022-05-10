@@ -11,7 +11,11 @@ export const styles = StyleSheet.create({
     height: height(50),
     alignSelf: 'flex-start',
   },
-  buttonDropdownTextStyle: {...fonts.SecondaryText, textAlign: 'left'},
+  buttonDropdownTextStyle: {
+    ...fonts.SecondaryText,
+    textAlign: 'left',
+    color: '#333333',
+  },
   rowDropdownStyle: {height: height(50)},
   rowDropdownTextStyle: {...fonts.PrimaryText, textAlign: 'left'},
   dropdownStyle: {

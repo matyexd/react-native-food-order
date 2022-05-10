@@ -77,7 +77,7 @@ const HomeScreen = () => {
             />
           </View>
         </View>
-        <View style={{paddingHorizontal: width(20)}}>
+        <View>
           <UiSearch />
           <View style={styles.dropdown}>
             <UiDropdown
@@ -89,10 +89,10 @@ const HomeScreen = () => {
         </View>
         <View style={styles.mainList}>
           <FlatList
-            contentContainerStyle={{
-              paddingHorizontal: width(20),
-              paddingTop: height(12),
-            }}
+            // contentContainerStyle={{
+            //   paddingHorizontal: width(20),
+            //   paddingTop: height(12),
+            // }}
             data={filterData}
             renderItem={renderItem}
             keyExtractor={item => item.id}

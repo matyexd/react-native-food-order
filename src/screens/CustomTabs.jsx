@@ -11,13 +11,11 @@ const CustomTabs = ({route}) => ({
     iconColor = focused ? 'black' : 'gray';
 
     if (route.name === 'Home') {
-      iconName = focused ? 'main' : 'main';
+      iconName = 'main';
     } else if (route.name === 'Basket') {
-      iconName = focused ? 'basket' : 'basket';
-    } else if (route.name === 'Favourites') {
-      iconName = focused ? 'favorites' : 'favorites';
+      iconName = 'basket';
     } else if (route.name === 'Profile') {
-      iconName = focused ? 'profile' : 'profile';
+      iconName = 'profile';
     }
 
     // You can return any component that you like here!
@@ -32,8 +30,6 @@ const CustomTabs = ({route}) => ({
       textContent = 'Главная';
     } else if (route.name === 'Basket') {
       textContent = 'Корзина';
-    } else if (route.name === 'Favourites') {
-      textContent = 'Избранное';
     } else if (route.name === 'Profile') {
       textContent = 'Профиль';
     }

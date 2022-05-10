@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     ...fonts.SecondaryText,
-    color: 'black',
+    color: '#333333',
   },
   calorie: {
     ...fonts.h3,
