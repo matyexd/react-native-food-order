@@ -13,7 +13,7 @@ const CustomTabs = ({route}) => ({
     if (route.name === 'Home') {
       iconName = focused ? 'main' : 'main';
     } else if (route.name === 'Basket') {
-      iconName = focused ? 'shopCart' : 'shopCart';
+      iconName = focused ? 'basket' : 'basket';
     } else if (route.name === 'Favourites') {
       iconName = focused ? 'favorites' : 'favorites';
     } else if (route.name === 'Profile') {
