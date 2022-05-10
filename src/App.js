@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
   ProfileScreen,
-  FavouritesScreen,
+  AuthenticationScreen,
   BasketScreen,
   CustomTabs,
 } from './screens';
@@ -48,7 +48,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Auth"
-          component={FavouritesScreen}
+          component={AuthenticationScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -3,8 +3,14 @@ import {fonts} from '../../theme/Fonts';
 import {height, width} from '../../utils/Responsive';
 
 export const styles = StyleSheet.create({
+  addContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+
   logo: {
     marginTop: height(70),
+    marginBottom: height(20),
     alignItems: 'center',
   },
   hi: {
@@ -22,18 +28,40 @@ export const styles = StyleSheet.create({
   inputText: {
     ...fonts.PrimaryText,
     paddingVertical: 0,
+    paddingLeft: width(16),
     flex: 1,
+  },
+
+  inputError: {
+    borderWidth: width(1),
+    borderColor: 'red',
+    flexDirection: 'row',
+    borderRadius: height(8),
+    boxSizing: 'border-box',
+    paddingVertical: height(12),
+  },
+
+  inputData: {
+    marginBottom: height(30),
   },
   input: {
     flexDirection: 'row',
     borderWidth: width(1),
     borderColor: '#999999',
     borderRadius: height(8),
-    marginBottom: height(15),
     boxSizing: 'border-box',
     paddingVertical: height(12),
   },
+
   button: {
-    marginTop: height(50),
+    marginTop: height(20),
+  },
+
+  loginError: {
+    ...fonts.h3,
+    color: 'red',
+    marginLeft: width(15),
+    marginTop: height(3),
+    marginBottom: height(6),
   },
 });
