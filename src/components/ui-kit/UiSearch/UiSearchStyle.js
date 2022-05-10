@@ -4,7 +4,7 @@ import {height, sp, width} from '../../../utils/Responsive';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 2,
+    // paddingHorizontal: 2,
   },
   input: {
     flexDirection: 'row',

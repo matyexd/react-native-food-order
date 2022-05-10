@@ -45,8 +45,9 @@ const HomeScreen = () => {
       <SDishCard
         header={item.name}
         price={item.price}
-        gramm={100}
+        gramm={item.gramm}
         image={item.image}
+        calorie={item.calorie}
       />
     </TouchableOpacity>
   );
@@ -65,10 +66,15 @@ const HomeScreen = () => {
     <>
       <UiContainerHome>
         <View style={styles.header}>
-          <Text style={styles.limitLabel}>Осталось потратить</Text>
+          <Text style={styles.limitLabel}>Меню</Text>
           <View style={styles.limitPrice}>
             <Text style={styles.limitCount}>230</Text>
-            <UiIcon iconName="ruble" iconColor="#333333" style={styles.icon} />
+            <UiIcon
+              iconName="ruble"
+              iconColor="#333333"
+              style={styles.icon}
+              iconSize={24}
+            />
           </View>
         </View>
         <View>
@@ -83,7 +89,6 @@ const HomeScreen = () => {
         </View>
         <View style={styles.mainList}>
           <FlatList
-            numColumns={2}
             data={filterData}
             renderItem={renderItem}
             keyExtractor={item => item.id}

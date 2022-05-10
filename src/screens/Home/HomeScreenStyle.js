@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
   card: {
     flex: 1,
     marginBottom: height(10),
-    justifyContent: 'center',
-    alignItems: 'center',
+    //justifyContent: 'center',
+    //alignItems: 'center',
   },
   header: {
     flexDirection: 'row',

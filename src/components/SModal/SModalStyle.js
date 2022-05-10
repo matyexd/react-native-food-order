@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   about: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: height(8),
+    //marginBottom: height(8),
   },
   header: {
     ...fonts.SecondaryText,
@@ -48,12 +48,13 @@ export const styles = StyleSheet.create({
   description: {
     ...fonts.PrimaryText,
     color: '#333333',
+    marginTop: height(8),
+    marginBottom: height(10),
   },
   price: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: height(8),
-    marginTop: height(10),
   },
   count: {
     ...fonts.h2,
