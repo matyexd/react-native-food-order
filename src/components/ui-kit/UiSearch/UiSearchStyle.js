@@ -4,14 +4,15 @@ import {height, sp, width} from '../../../utils/Responsive';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 2,
+    // paddingHorizontal: 2,
+    marginBottom: height(8),
   },
   input: {
+    backgroundColor: '#efefef',
+    borderRadius: height(8),
     flexDirection: 'row',
     borderWidth: width(1),
     borderColor: '#DDDDDD',
-    borderRadius: height(8),
-    marginBottom: height(8),
     boxSizing: 'border-box',
     paddingVertical: height(8),
   },

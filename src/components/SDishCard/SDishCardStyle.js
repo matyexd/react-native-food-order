@@ -4,32 +4,31 @@ import {height, sp, width} from '../../utils/Responsive';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: width(3),
-    paddingVertical: height(3),
+    flexDirection: 'row',
     borderWidth: width(1),
     borderColor: '#999999',
     boxSizing: 'border-box',
     borderRadius: width(8),
   },
   img: {
-    height: height(106),
-    width: width(155),
-    marginBottom: height(8),
-    borderTopLeftRadius: width(6),
-    borderTopRightRadius: width(6),
+    height: height(96),
+    width: width(96),
+    margin: height(8),
+    borderRadius: width(6),
   },
   header: {
     ...fonts.SecondaryText,
     color: 'black',
   },
   calorie: {
-    ...fonts.PrimaryText,
+    ...fonts.h3,
     color: '#333333',
-    alignSelf: 'center',
   },
   about: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginRight: width(8),
+    marginBottom: width(8),
   },
   price: {
     flexDirection: 'row',
@@ -41,5 +40,10 @@ export const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: 'center',
+  },
+  info: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: height(8),
   },
 });

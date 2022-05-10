@@ -10,7 +10,7 @@ import {
 import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
 import {data} from '../../temp/menu';
-
+import {height, width} from '../../utils/Responsive';
 const HomeScreen = () => {
   const categories = [
     'Комплексный обед',
@@ -45,8 +45,9 @@ const HomeScreen = () => {
       <SDishCard
         header={item.name}
         price={item.price}
-        gramm={100}
+        gramm={item.gramm}
         image={item.image}
+        calorie={item.calorie}
       />
     </TouchableOpacity>
   );
@@ -65,25 +66,33 @@ const HomeScreen = () => {
     <>
       <UiContainerHome>
         <View style={styles.header}>
-          <Text style={styles.limitLabel}>Осталось потратить</Text>
+          <Text style={styles.limitLabel}>Меню</Text>
           <View style={styles.limitPrice}>
             <Text style={styles.limitCount}>230</Text>
-            <UiIcon iconName="ruble" iconColor="#333333" style={styles.icon} />
+            <UiIcon
+              iconName="ruble"
+              iconColor="#333333"
+              style={styles.icon}
+              iconSize={24}
+            />
           </View>
         </View>
-        <View>
+        <View style={{paddingHorizontal: width(20)}}>
           <UiSearch />
-        </View>
-        <View style={styles.dropdown}>
-          <UiDropdown
-            titleDropdown="Комплексный обед"
-            items={categories}
-            filter={filterByCategory}
-          />
+          <View style={styles.dropdown}>
+            <UiDropdown
+              titleDropdown="Комплексный обед"
+              items={categories}
+              filter={filterByCategory}
+            />
+          </View>
         </View>
         <View style={styles.mainList}>
           <FlatList
-            numColumns={2}
+            contentContainerStyle={{
+              paddingHorizontal: width(20),
+              paddingTop: height(12),
+            }}
             data={filterData}
             renderItem={renderItem}
             keyExtractor={item => item.id}

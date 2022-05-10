@@ -31,11 +31,10 @@ const InfoModal = props => {
                 {item?.gramm} гр {item?.calorie} Ккал
               </Text>
             </View>
-            <TouchableOpacity style={styles.iconFavorite}>
-              <UiIcon iconName="favorites" iconColor="black" />
-            </TouchableOpacity>
           </View>
-          <Text style={styles.description}>{item?.description}</Text>
+          {item?.description?.length > 0 && (
+            <Text style={styles.description}>{item?.description}</Text>
+          )}
           <View>
             <View style={styles.price}>
               <Text style={styles.count}>{item?.price}</Text>
