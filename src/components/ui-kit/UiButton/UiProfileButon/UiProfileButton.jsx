@@ -8,7 +8,10 @@ import {sp} from '../../../../utils/Responsive';
 const UiProfileButton = ({text, onPress, iconName}) => {
   return (
     <View>
-      <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
+      <Shadow
+        viewStyle={{alignSelf: 'stretch'}}
+        offset={[0, 8]}
+        startColor={'rgba(51, 51, 51, 0.06)'}>
         <TouchableOpacity style={styles.profileButton} onPress={onPress}>
           <Text style={styles.profileButtonText}>{text}</Text>
           <UiIcon iconName={iconName} iconColor={'black'} iconSize={sp(20)} />

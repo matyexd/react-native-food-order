@@ -3,34 +3,29 @@ import {fonts} from '../../../theme/Fonts';
 import {height, sp, width} from '../../../utils/Responsive';
 
 export const styles = StyleSheet.create({
-  container: {
-    // paddingHorizontal: 2,
-    marginBottom: height(8),
-  },
-  input: {
-    backgroundColor: '#efefef',
-    borderRadius: height(8),
+  searchSection: {
+    // flex: 1,
     flexDirection: 'row',
-    borderWidth: width(1),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 1,
     borderColor: '#DDDDDD',
-    boxSizing: 'border-box',
-    paddingVertical: height(8),
-  },
-  inputText: {
-    flexGrow: 5,
-    ...fonts.PrimaryText,
-    paddingVertical: 0,
+    borderRadius: width(8),
   },
   searchIcon: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexGrow: 1,
+    paddingLeft: width(10),
   },
-  closeIcon: {
+  iconClose: {
+    paddingRight: width(10),
+  },
+  input: {
+    ...fonts.PrimaryText,
     flex: 1,
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingLeft: width(10),
+    paddingVertical: height(7),
+    // padding: width(10),
+    backgroundColor: '#fff',
+    color: '#424242',
   },
 });

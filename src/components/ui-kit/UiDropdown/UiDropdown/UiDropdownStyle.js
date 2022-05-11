@@ -4,6 +4,7 @@ import {height} from '../../../../utils/Responsive';
 
 export const styles = StyleSheet.create({
   buttonDropdownStyle: {
+    backgroundColor: 'white',
     width: '100%',
     borderWidth: 1,
     borderColor: '#DDDDDD',
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#333333',
   },
-  rowDropdownStyle: {height: height(50)},
+  rowDropdownStyle: {height: height(50), backgroundColor: 'white'},
   rowDropdownTextStyle: {...fonts.PrimaryText, textAlign: 'left'},
   dropdownStyle: {
     borderRadius: height(7),

@@ -78,7 +78,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <View>
-          <UiSearch />
+          <UiSearch/>
           <View style={styles.dropdown}>
             <UiDropdown
               titleDropdown="Комплексный обед"
