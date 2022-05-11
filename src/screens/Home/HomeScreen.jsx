@@ -11,7 +11,10 @@ import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
 import {data} from '../../temp/menu';
 import {height, width} from '../../utils/Responsive';
-const HomeScreen = () => {
+import {addProductAction} from '../../store/actions/basketActions';
+import {connect} from 'react-redux';
+
+const HomeScreen = props => {
   const categories = [
     'Комплексный обед',
     'Салаты',
@@ -42,25 +45,22 @@ const HomeScreen = () => {
       style={styles.card}
       key={item.id}
       onPress={() => onPressCardHandler(item)}>
-      <SDishCard
-        header={item.name}
-        price={item.price}
-        gramm={item.gramm}
-        image={item.image}
-        calorie={item.calorie}
-      />
+      <SDishCard product={item} addToBasket={addProductCallback} />
     </TouchableOpacity>
   );
   const [filterData, setFilterData] = useState(data);
   const filterByCategory = category => {
     const newData = data.filter(pr => pr.category == category);
     setFilterData(newData);
-    console.log(newData);
   };
 
   useEffect(() => {
     filterByCategory('Комплексный обед');
   }, []);
+
+  const addProductCallback = product => {
+    props.addProduct(product);
+  };
 
   return (
     <>
@@ -110,4 +110,8 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+const mapDispatchToProps = dispatch => ({
+  addProduct: product => dispatch(addProductAction(product)),
+});
+
+export default connect(null, mapDispatchToProps)(HomeScreen);

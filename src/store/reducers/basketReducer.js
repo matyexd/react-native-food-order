@@ -12,6 +12,7 @@ export const basketReducer = (state = initialState, action) => {
     case ADD_PRODUCT_TO_BASKET:
       return {
         ...state,
+        products: [...state.products, action.product],
       };
     case DELETE_PRODUCT_FROM_BASKET:
       return {

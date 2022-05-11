@@ -5,24 +5,24 @@ import {styles} from './SDishCardStyle';
 import {Shadow} from 'react-native-shadow-2';
 
 const SDishCard = props => {
-  const {header, calorie, gramm, price, image} = props;
-  const onPressHandler = () => {
-    console.log('Нажата кнопка');
+  const {product, addToBasket} = props;
+  const onPressAddProductHandler = () => {
+    addToBasket(product);
   };
 
   return (
     <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
       <View style={styles.container}>
-        <Image style={styles.img} source={image} />
+        <Image style={styles.img} source={product.image} />
         <View style={styles.info}>
-          <Text style={styles.header}>{header}</Text>
+          <Text style={styles.header}>{product.name}</Text>
           <Text style={styles.calorie}>
-            {gramm}гр {calorie}Ккал
+            {product.gramm}гр {product.calorie}Ккал
           </Text>
           <View style={{flex: 1, justifyContent: 'flex-end'}}>
             <View style={styles.about}>
               <View style={styles.price}>
-                <Text style={styles.count}>{price}</Text>
+                <Text style={styles.count}>{product.price}</Text>
                 <UiIcon
                   iconName="ruble"
                   iconColor="#333333"
@@ -30,7 +30,10 @@ const SDishCard = props => {
                   style={styles.icon}
                 />
               </View>
-              <UiMainButton text="Добавить" onPress={onPressHandler} />
+              <UiMainButton
+                text="Добавить"
+                onPress={onPressAddProductHandler}
+              />
             </View>
           </View>
         </View>

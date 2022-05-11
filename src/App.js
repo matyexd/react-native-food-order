@@ -39,9 +39,6 @@ const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
-console.log('====================================');
-console.log(store);
-console.log('====================================');
 const App = () => {
   return (
     <Provider store={store}>
