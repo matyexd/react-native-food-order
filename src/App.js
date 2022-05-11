@@ -42,13 +42,13 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="TabNavigator"
-          component={TabNavigator}
+          name="Auth"
+          component={AuthenticationScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Auth"
-          component={AuthenticationScreen}
+          name="TabNavigator"
+          component={TabNavigator}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

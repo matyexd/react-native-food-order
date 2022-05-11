@@ -30,8 +30,8 @@ const AuthenticationScreen = props => {
     }
 
     if (password && login) {
-      // props.navigation.navigate('TabNavigator');
-      alert('что');
+      props.navigation.navigate('TabNavigator');
+      // alert('что');
     }
   };
 
@@ -61,6 +61,7 @@ const AuthenticationScreen = props => {
               style={styles.inputText}
               placeholder="Пароль"
               placeholderTextColor="#999999"
+              secureTextEntry={true}
               onChangeText={val => onChangePassword(val)}
               value={password}
             />
