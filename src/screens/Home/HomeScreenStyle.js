@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   dropdown: {
+    marginTop: height(7),
     marginBottom: height(24),
   },
 });
