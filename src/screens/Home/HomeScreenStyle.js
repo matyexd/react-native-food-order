@@ -3,6 +3,10 @@ import {fonts} from '../../theme/Fonts';
 import {height, width} from '../../utils/Responsive';
 
 export const styles = StyleSheet.create({
+  styleScreen: {
+    backgroundColor: 'white',
+  },
+
   mainList: {
     flex: 1,
   },

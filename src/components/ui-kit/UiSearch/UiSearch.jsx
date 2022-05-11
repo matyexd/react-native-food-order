@@ -9,7 +9,7 @@ const UiSearch = () => {
     <Shadow
       viewStyle={{alignSelf: 'stretch'}}
       offset={[0, 8]}
-      startColor="#00000015">
+      startColor={'rgba(51, 51, 51, 0.06)'}>
       <View style={styles.container}>
         <View style={styles.input}>
           <View style={styles.searchIcon}>

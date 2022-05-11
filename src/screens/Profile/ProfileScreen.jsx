@@ -10,31 +10,29 @@ const ProfileScreen = props => {
   ];
 
   return (
-    <ScrollView>
-      <UiContainer>
-        <View>
-          <Text style={styles.title}>Профиль</Text>
-        </View>
-        <View style={styles.ava}>
-          <Image source={require('./../../assets/img/ava.png')} />
-        </View>
-        <Text style={styles.name}>Сергей</Text>
-        <View style={styles.data1}>
-          {data.map(button => {
-            return (
-              <View key={button.id} style={styles.button}>
-                <UiProfileButton
-                  text={button.text}
-                  // style={styles.button}
-                  iconName={button.icon}
-                  onPress={() => props.navigation.navigate(button.navigate)}
-                />
-              </View>
-            );
-          })}
-        </View>
-      </UiContainer>
-    </ScrollView>
+    <UiContainer>
+      <View>
+        <Text style={styles.title}>Профиль</Text>
+      </View>
+      <View style={styles.ava}>
+        <Image source={require('./../../assets/img/ava.png')} />
+      </View>
+      <Text style={styles.name}>Сергей</Text>
+      <View style={styles.data1}>
+        {data.map(button => {
+          return (
+            <View key={button.id} style={styles.button}>
+              <UiProfileButton
+                text={button.text}
+                // style={styles.button}
+                iconName={button.icon}
+                onPress={() => props.navigation.navigate(button.navigate)}
+              />
+            </View>
+          );
+        })}
+      </View>
+    </UiContainer>
   );
 };
 

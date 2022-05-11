@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     marginBottom: height(8),
   },
   input: {
-    backgroundColor: '#efefef',
+    backgroundColor: 'white',
     borderRadius: height(8),
     flexDirection: 'row',
     borderWidth: width(1),
