@@ -36,4 +36,8 @@ export const fonts = {
     fontFamily: 'Montserrat-Medium',
     fontSize: sp(10),
   },
+  h4: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: sp(14),
+  },
 };
