@@ -4,9 +4,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
   ProfileScreen,
-  FavouritesScreen,
+  AuthenticationScreen,
   BasketScreen,
   CustomTabs,
+  SplashScreen,
 } from './screens';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -42,13 +43,18 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="TabNavigator"
-          component={TabNavigator}
+          name="Auth"
+          component={AuthenticationScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Auth"
-          component={FavouritesScreen}
+          name="Splash"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="TabNavigator"
+          component={TabNavigator}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

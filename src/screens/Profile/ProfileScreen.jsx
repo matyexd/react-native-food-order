@@ -5,8 +5,8 @@ import {styles} from './ProfileScreenStyle';
 
 const ProfileScreen = props => {
   const data = [
-    {id: 1, text: 'Личные данные', icon: 'settings'},
-    {id: 2, text: 'Выход', icon: 'logout'},
+    {id: 1, text: 'Личные данные', icon: 'settings', navigate: ''},
+    {id: 2, text: 'Выход', icon: 'logout', navigate: 'Auth'},
   ];
 
   return (
@@ -27,7 +27,7 @@ const ProfileScreen = props => {
                   text={button.text}
                   // style={styles.button}
                   iconName={button.icon}
-                  onPress={() => props.navigation.navigate('Auth')}
+                  onPress={() => props.navigation.navigate(button.navigate)}
                 />
               </View>
             );
