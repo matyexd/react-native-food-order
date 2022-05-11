@@ -5,6 +5,7 @@ import {height, sp, width} from '../../../utils/Responsive';
 export const styles = StyleSheet.create({
   searchSection: {
     // flex: 1,
+    // marginHorizontal: width(20),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

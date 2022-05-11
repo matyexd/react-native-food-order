@@ -13,14 +13,14 @@ export const styles = StyleSheet.create({
   card: {
     flex: 1,
     marginBottom: height(10),
-    //justifyContent: 'center',
-    //alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: height(12),
-    paddingHorizontal: 2,
+    paddingHorizontal: width(20),
   },
   limitPrice: {
     flexDirection: 'row',
@@ -39,5 +39,6 @@ export const styles = StyleSheet.create({
   dropdown: {
     marginTop: height(7),
     marginBottom: height(24),
+    paddingHorizontal: width(20),
   },
 });
