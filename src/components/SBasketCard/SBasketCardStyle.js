@@ -66,8 +66,4 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-  button: {
-    position: 'absolute',
-    top: height(650),
-  },
 });

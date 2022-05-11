@@ -26,4 +26,8 @@ export const styles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
   },
+  button: {
+    backgroundColor: '#ffffff',
+    padding: width(16),
+  },
 });

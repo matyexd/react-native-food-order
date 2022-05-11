@@ -12,8 +12,8 @@ const SBasketCard = props => {
   };
   const [counterValue, setCounterValue] = useState(1);
   return (
-    <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
-      <>
+    <>
+      <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
         <View style={styles.container}>
           <Image style={styles.img} source={image} />
           <View style={styles.info}>
@@ -53,11 +53,8 @@ const SBasketCard = props => {
             </View>
           </View>
         </View>
-        <View style={styles.button}>
-          <UiButton text="Оформить заказ" />
-        </View>
-      </>
-    </Shadow>
+      </Shadow>
+    </>
   );
 };
 
