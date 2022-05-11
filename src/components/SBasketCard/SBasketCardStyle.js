@@ -55,4 +55,19 @@ export const styles = StyleSheet.create({
     paddingRight: width(13),
     alignSelf: 'center',
   },
+  trash: {
+    justifyContent: 'center',
+  },
+  gramm: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  infoPrice: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  button: {
+    position: 'absolute',
+    top: height(650),
+  },
 });
