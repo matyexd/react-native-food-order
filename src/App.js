@@ -7,6 +7,7 @@ import {
   AuthenticationScreen,
   BasketScreen,
   CustomTabs,
+  SplashScreen,
 } from './screens';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -44,6 +45,11 @@ const App = () => {
         <Stack.Screen
           name="Auth"
           component={AuthenticationScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen

@@ -30,7 +30,7 @@ const AuthenticationScreen = props => {
     }
 
     if (password && login) {
-      props.navigation.navigate('TabNavigator');
+      props.navigation.navigate('Splash');
       // alert('что');
     }
   };
