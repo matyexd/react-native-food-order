@@ -2,13 +2,14 @@ import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
 import {styles} from './UiButtonStyle';
 
-const UiButton = ({text, onPress}) => {
+const UiButton = ({text, onPress, style, textStyle}) => {
   return (
-    <View>
-      <TouchableOpacity style={styles.mainButton} onPress={onPress}>
-        <Text style={styles.mainButtonText}>{text}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      style={[styles.mainButton, style]}
+      onPress={onPress}
+      activeOpacity={0.9}>
+      <Text style={[styles.mainButtonText, textStyle]}>{text}</Text>
+    </TouchableOpacity>
   );
 };
 
