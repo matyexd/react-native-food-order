@@ -43,6 +43,7 @@ const HomeScreen = props => {
   const closeModalCallback = () => {
     setVisible(false);
   };
+
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.card}
