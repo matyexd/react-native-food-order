@@ -11,7 +11,10 @@ import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
 import {data} from '../../temp/menu';
 import {height, width} from '../../utils/Responsive';
-import {addProductAction} from '../../store/actions/basketActions';
+import {
+  addProductAction,
+  changeProductCountAction,
+} from '../../store/actions/basketActions';
 import {connect} from 'react-redux';
 
 const HomeScreen = props => {
@@ -61,7 +64,9 @@ const HomeScreen = props => {
   const addProductCallback = product => {
     props.addProduct(product);
   };
-
+  const setProductCount = (product, count) => {
+    props.changeCount(product, count);
+  };
   return (
     <>
       <UiContainerHome>
@@ -102,9 +107,11 @@ const HomeScreen = props => {
         </View>
       </UiContainerHome>
       <InfoModal
-        item={item}
+        product={item}
+        addToBasket={addProductCallback}
         isVisible={visible}
         closeModal={closeModalCallback}
+        setProductCount={setProductCount}
       />
     </>
   );
@@ -112,6 +119,8 @@ const HomeScreen = props => {
 
 const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(addProductAction(product)),
+  changeCount: (product, count) =>
+    dispatch(changeProductCountAction(product, count)),
 });
 
 export default connect(null, mapDispatchToProps)(HomeScreen);

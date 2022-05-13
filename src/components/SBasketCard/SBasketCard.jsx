@@ -6,11 +6,14 @@ import {styles} from './SBasketCardStyle';
 import {Button} from 'react-native-paper';
 
 const SBasketCard = props => {
-  const {product} = props;
+  const {product, count, setCount} = props;
+
   const onPressHandler = () => {
     console.log('Нажата кнопка');
   };
-  const [counterValue, setCounterValue] = useState(1);
+
+  //const [counterValue, setCounterValue] = useState(1);
+
   return (
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
@@ -18,7 +21,7 @@ const SBasketCard = props => {
           <Image style={styles.img} source={product.image} />
           <View style={styles.info}>
             <View style={styles.gramm}>
-              <View>
+              <View style={{flex: 1}}>
                 <Text style={styles.header}>{product.name}</Text>
                 <Text style={styles.calorie}>
                   {product.gramm}гр {product.calorie}Ккал
@@ -45,8 +48,8 @@ const SBasketCard = props => {
                   />
                 </View>
                 <UiCounter
-                  value={counterValue}
-                  setCounterValue={setCounterValue}
+                  value={count}
+                  setCounterValue={count => setCount(product, count)}
                   isVertical={false}
                 />
               </View>

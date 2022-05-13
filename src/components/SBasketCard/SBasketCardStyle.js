@@ -56,7 +56,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   trash: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 5,
   },
   gramm: {
     flexDirection: 'row',

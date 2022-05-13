@@ -12,15 +12,25 @@ import {data} from '../../temp/menu';
 import {styles} from './BasketScreenStyle';
 import {connect} from 'react-redux';
 import {height, width} from '../../utils/Responsive';
+import {changeProductCountAction} from '../../store/actions/basketActions';
 
 const BasketScreen = props => {
-  console.log(props.products.products[0]);
+  // console.log(props.products.products[0]);
+
+  const setProductCount = (product, count) => {
+    props.changeCount(product, count);
+  };
 
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
-      <SBasketCard product={item} />
+      <SBasketCard
+        product={item.product}
+        count={item.count}
+        setCount={setProductCount}
+      />
     </View>
   );
+
   return (
     <>
       <View style={styles.main}>
@@ -56,4 +66,8 @@ const BasketScreen = props => {
 };
 
 const mapStateToProps = state => ({products: state.basket});
-export default connect(mapStateToProps)(BasketScreen);
+const mapDispatchToProps = dispatch => ({
+  changeCount: (product, count) =>
+    dispatch(changeProductCountAction(product, count)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen);
