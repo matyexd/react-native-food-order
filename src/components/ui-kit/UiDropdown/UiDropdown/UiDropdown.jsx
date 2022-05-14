@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 import {View} from 'react-native';
-import {fonts} from '../../../../theme/Fonts';
 import UiIcon from '../../UiIcon';
 import {styles} from './UiDropdownStyle';
 import {Shadow} from 'react-native-shadow-2';
 
 const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <Shadow
       viewStyle={{alignSelf: 'stretch'}}
@@ -19,15 +17,15 @@ const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
           onFocus={() => setIsOpen(true)}
           onBlur={() => setIsOpen(false)}
           data={items}
-          onSelect={(selectedItem, index) => {
-            filter(selectedItem);
-            console.log(selectedItem);
+          onSelect={selectedItem => {
+            filter(selectedItem.id);
+            console.log(selectedItem.categoryName);
           }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
+          buttonTextAfterSelection={selectedItem => {
+            return selectedItem.categoryName;
           }}
-          rowTextForSelection={(item, index) => {
-            return item;
+          rowTextForSelection={item => {
+            return item.categoryName;
           }}
           buttonStyle={styles.buttonDropdownStyle}
           buttonTextStyle={styles.buttonDropdownTextStyle}

@@ -12,8 +12,13 @@ export const styles = StyleSheet.create({
     marginBottom: height(16),
   },
   name: {
-    ...fonts.h2,
+    ...fonts.SecondaryText,
     color: '#333333',
+    alignSelf: 'center',
+    marginBottom: height(10),
+  },
+  info: {
+    ...fonts.h3,
     alignSelf: 'center',
     marginBottom: height(50),
   },
