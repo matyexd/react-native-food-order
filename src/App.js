@@ -43,7 +43,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={'TabNavigator'}>
           <Stack.Screen
             name="Auth"
             component={AuthenticationScreen}
