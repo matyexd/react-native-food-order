@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import SBasketCard from '../../components/SBasketCard';
 import {
   UiCounter,
@@ -10,11 +10,30 @@ import {
 } from '../../components/ui-kit';
 import {data} from '../../temp/menu';
 import {styles} from './BasketScreenStyle';
+import {connect} from 'react-redux';
+import {height, width} from '../../utils/Responsive';
+import {changeProductCountAction} from '../../store/actions/basketActions';
 
-const BasketScreen = () => {
+const BasketScreen = props => {
+  // console.log(props.products.products[0]);
+
+  const setProductCount = (product, count) => {
+    props.changeCount(product, count);
+  };
+
+  const renderItem = ({item}) => (
+    <View style={styles.card} key={item.id}>
+      <SBasketCard
+        product={item.product}
+        count={item.count}
+        setCount={setProductCount}
+      />
+    </View>
+  );
+
   return (
     <>
-      <UiContainer>
+      <View style={styles.main}>
         <View style={styles.header}>
           <Text style={styles.limitLabel}>Корзина</Text>
           <View style={styles.limitPrice}>
@@ -28,15 +47,17 @@ const BasketScreen = () => {
           </View>
         </View>
         <View style={styles.card}>
-          <SBasketCard
-            header={data[0].name}
-            image={data[0].image}
-            calorie={data[0].calorie}
-            gramm={data[0].gramm}
-            price={data[0].price}
+          <FlatList
+            contentContainerStyle={{
+              paddingHorizontal: width(20),
+              paddingTop: height(12),
+            }}
+            data={props.products.products}
+            renderItem={renderItem}
+            keyExtractor={item => item.id + 'b'}
           />
         </View>
-      </UiContainer>
+      </View>
       <View style={styles.button}>
         <UiButton text="Оформить заказ" />
       </View>
@@ -44,4 +65,9 @@ const BasketScreen = () => {
   );
 };
 
-export default BasketScreen;
+const mapStateToProps = state => ({products: state.basket});
+const mapDispatchToProps = dispatch => ({
+  changeCount: (product, count) =>
+    dispatch(changeProductCountAction(product, count)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen);

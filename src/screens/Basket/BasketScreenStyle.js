@@ -2,6 +2,14 @@ import {StyleSheet} from 'react-native';
 import {fonts} from '../../theme/Fonts';
 import {height, sp, width} from '../../utils/Responsive';
 export const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    //paddingHorizontal: width(20),
+    paddingTop: height(12),
+    paddingBottom: height(12),
+    backgroundColor: 'white',
+  },
+
   card: {
     flex: 1,
     marginBottom: height(10),
@@ -10,7 +18,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: height(12),
-    paddingHorizontal: 2,
+    paddingHorizontal: 20,
   },
   limitPrice: {
     flexDirection: 'row',

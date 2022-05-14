@@ -5,9 +5,11 @@ import {styles} from './SModalStyle';
 import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 
 const InfoModal = props => {
-  const {isVisible, item, closeModal} = props;
+  const {isVisible, product, closeModal, addToBasket} = props;
   const [counterValue, setCounterValue] = useState(1);
-
+  const onPressAddProductHandler = () => {
+    addToBasket(product);
+  };
   return (
     <Modal
       useNativeDriverForBackdrop={true}
@@ -22,22 +24,22 @@ const InfoModal = props => {
       onBackdropPress={closeModal}
       backdropOpacity={0.6}>
       <View style={styles.modal}>
-        <Image source={item?.image} style={styles.image} />
+        <Image source={product?.image} style={styles.image} />
         <View style={styles.container}>
           <View style={styles.about}>
             <View>
-              <Text style={styles.header}>{item?.name}</Text>
+              <Text style={styles.header}>{product?.name}</Text>
               <Text style={styles.gramm}>
-                {item?.gramm} гр {item?.calorie} Ккал
+                {product?.gramm} гр {product?.calorie} Ккал
               </Text>
             </View>
           </View>
-          {item?.description?.length > 0 && (
-            <Text style={styles.description}>{item?.description}</Text>
+          {product?.description?.length > 0 && (
+            <Text style={styles.description}>{product?.description}</Text>
           )}
           <View>
             <View style={styles.price}>
-              <Text style={styles.count}>{item?.price}</Text>
+              <Text style={styles.count}>{product?.price}</Text>
               <UiIcon
                 iconName="ruble"
                 iconColor="#333333"
@@ -55,7 +57,10 @@ const InfoModal = props => {
               />
             </View>
             <View style={styles.button}>
-              <UiMainButton text="Добавить" />
+              <UiMainButton
+                text="Добавить"
+                onPress={onPressAddProductHandler}
+              />
             </View>
           </View>
         </View>
