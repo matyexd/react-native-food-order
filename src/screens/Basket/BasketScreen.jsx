@@ -54,7 +54,7 @@ const BasketScreen = props => {
             }}
             data={props.products.products}
             renderItem={renderItem}
-            keyExtractor={item => item.id + 'b'}
+            keyExtractor={item => item.product.id + 'b'}
           />
         </View>
       </View>
