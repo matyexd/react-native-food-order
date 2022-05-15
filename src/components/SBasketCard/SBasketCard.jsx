@@ -6,7 +6,7 @@ import {styles} from './SBasketCardStyle';
 import {Button} from 'react-native-paper';
 
 const SBasketCard = props => {
-  const {product, count, setCount} = props;
+  const {product, count, setCount, deleteProduct} = props;
 
   const onPressHandler = () => {
     console.log('Нажата кнопка');
@@ -27,7 +27,9 @@ const SBasketCard = props => {
                   {product.gramm}гр {product.calorie}Ккал
                 </Text>
               </View>
-              <TouchableOpacity style={styles.trash}>
+              <TouchableOpacity
+                style={styles.trash}
+                onPress={() => deleteProduct(product)}>
                 <UiIcon
                   iconName="trash"
                   iconColor="#000"
