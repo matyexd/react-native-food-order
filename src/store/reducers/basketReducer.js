@@ -19,8 +19,12 @@ export const basketReducer = (state = initialState, action) => {
     }
 
     case DELETE_PRODUCT_FROM_BASKET:
+      let newProducts = state.products.filter(
+        product => product.product.id !== action.product.id,
+      );
       return {
         ...state,
+        products: [...newProducts],
       };
     case CHANGE_PRODUCT_COUNT: {
       const products = state.products;
