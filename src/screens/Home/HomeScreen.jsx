@@ -52,7 +52,6 @@ const HomeScreen = props => {
   };
 
   const addProductCallback = product => {
-    console.log(product);
     props.addProduct(product);
   };
   const setProductCount = (product, count) => {
@@ -71,10 +70,17 @@ const HomeScreen = props => {
         <View style={styles.header}>
           <Text style={styles.limitLabel}>Меню</Text>
           <View style={styles.limitPrice}>
-            <Text style={styles.limitCount}>230</Text>
+            <Text
+              style={
+                props.basket.totalCost > 230
+                  ? styles.limitCountRed
+                  : styles.limitCount
+              }>
+              {props.basket.totalCost}
+            </Text>
             <UiIcon
               iconName="ruble"
-              iconColor="#333333"
+              iconColor={props.basket.totalCost > 230 ? 'red' : '#333333'}
               style={styles.icon}
               iconSize={24}
             />

@@ -6,7 +6,7 @@ import {styles} from './UiCounterStyle';
 
 const UiCounter = ({value, setCounterValue, isVertical = false}) => {
   const handlerMinus = () => {
-    if (value > 0) {
+    if (value > 1) {
       setCounterValue(value - 1);
     }
   };

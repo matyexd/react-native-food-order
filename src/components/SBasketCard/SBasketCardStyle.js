@@ -6,9 +6,9 @@ export const styles = StyleSheet.create({
   container: {
     // flex: 1,
     flexDirection: 'row',
-    borderWidth: width(1),
-    borderColor: '#999999',
-    boxSizing: 'border-box',
+    //borderWidth: width(1),
+    //borderColor: '#999999',
+    //boxSizing: 'border-box',
     borderRadius: width(8),
   },
   img: {
