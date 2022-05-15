@@ -29,8 +29,8 @@ const HomeScreen = props => {
   }, []);
 
   const onPressCardHandler = obj => {
-    setVisible(true);
     setItem(obj);
+    setVisible(true);
   };
 
   const closeModalCallback = () => {
@@ -58,6 +58,13 @@ const HomeScreen = props => {
   const setProductCount = (product, count) => {
     props.changeCount(product, count);
   };
+
+  const getProductsCount = () => {
+    const count =
+      props.basket.products.find(p => p.product.id == item?.id)?.count || 1;
+    return count;
+  };
+
   return (
     <>
       <UiContainerHome>
@@ -97,13 +104,16 @@ const HomeScreen = props => {
           />
         </View>
       </UiContainerHome>
-      <InfoModal
-        product={item}
-        addToBasket={addProductCallback}
-        isVisible={visible}
-        closeModal={closeModalCallback}
-        setProductCount={setProductCount}
-      />
+      {visible && (
+        <InfoModal
+          product={item}
+          addToBasket={addProductCallback}
+          isVisible={visible}
+          closeModal={closeModalCallback}
+          setProductCount={setProductCount}
+          count={getProductsCount()}
+        />
+      )}
     </>
   );
 };
@@ -111,6 +121,7 @@ const HomeScreen = props => {
 const mapStateToProps = store => ({
   products: store.products,
   categories: store.categories,
+  basket: store.basket,
 });
 
 const mapDispatchToProps = dispatch => ({
