@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, Image, ScrollView, SafeAreaView} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 import {ModalLogout} from '../../components/ModalLogout';
 
 const ProfileScreen = props => {
   const data = [
-    {id: 1, text: 'Личные данные', icon: 'settings', navigate: ''},
+    {id: 1, text: 'О приложении', icon: 'settings', navigate: ''},
     {
       id: 2,
       text: 'Выход',
@@ -22,7 +22,6 @@ const ProfileScreen = props => {
   };
 
   return (
-    // <SafeAreaView>
     <>
       <UiContainer>
         <View>
@@ -32,6 +31,7 @@ const ProfileScreen = props => {
           <Image source={require('./../../assets/img/ava.png')} />
         </View>
         <Text style={styles.name}>Сергей</Text>
+        <Text style={styles.info}>7 этаж</Text>
         <View style={styles.data1}>
           {data.map(button => {
             return (
@@ -53,7 +53,6 @@ const ProfileScreen = props => {
         handleLogout={() => props.navigation.navigate('Auth')}
       />
     </>
-    // </SafeAreaView>
   );
 };
 

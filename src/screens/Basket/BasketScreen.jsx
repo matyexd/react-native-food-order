@@ -1,14 +1,7 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import SBasketCard from '../../components/SBasketCard';
-import {
-  UiCounter,
-  UiDropdown,
-  UiContainer,
-  UiIcon,
-  UiButton,
-} from '../../components/ui-kit';
-import {data} from '../../temp/menu';
+import {UiIcon, UiButton} from '../../components/ui-kit';
 import {styles} from './BasketScreenStyle';
 import {connect} from 'react-redux';
 import {height, width} from '../../utils/Responsive';

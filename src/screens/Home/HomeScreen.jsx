@@ -9,7 +9,6 @@ import {
 } from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
 import InfoModal from '../../components/SModal/SModal';
-import {data} from '../../temp/menu';
 import {height, width} from '../../utils/Responsive';
 import {
   addProductAction,
@@ -18,23 +17,17 @@ import {
 import {connect} from 'react-redux';
 
 const HomeScreen = props => {
-  const categories = [
-    'Комплексный обед',
-    'Салаты',
-    'Супы',
-    'Горячее из мяса',
-    'Горячее из птицы',
-    'Горячее из рыбы',
-    'Гарниры',
-    'Мучные изделия',
-    'Напитки и соки',
-    'Соусы',
-    'Пельмени и вареники',
-    'Прочее',
-    'Пироги и торты',
-  ];
+  const categories = props.categories.categories;
+  const data = props.products.products;
+
   const [item, setItem] = useState();
   const [visible, setVisible] = useState(false);
+  const [filterData, setFilterData] = useState(data);
+
+  useEffect(() => {
+    filterByCategory(categories[0].id);
+  }, []);
+
   const onPressCardHandler = obj => {
     setVisible(true);
     setItem(obj);
@@ -52,17 +45,14 @@ const HomeScreen = props => {
       <SDishCard product={item} addToBasket={addProductCallback} />
     </TouchableOpacity>
   );
-  const [filterData, setFilterData] = useState(data);
+
   const filterByCategory = category => {
-    const newData = data.filter(pr => pr.category == category);
+    const newData = data.filter(pr => pr.category === category);
     setFilterData(newData);
   };
 
-  useEffect(() => {
-    filterByCategory('Комплексный обед');
-  }, []);
-
   const addProductCallback = product => {
+    console.log(product);
     props.addProduct(product);
   };
   const setProductCount = (product, count) => {
@@ -89,7 +79,7 @@ const HomeScreen = props => {
           </View>
           <View style={styles.dropdown}>
             <UiDropdown
-              titleDropdown="Комплексный обед"
+              titleDropdown={categories[0].categoryName}
               items={categories}
               filter={filterByCategory}
             />
@@ -118,10 +108,15 @@ const HomeScreen = props => {
   );
 };
 
+const mapStateToProps = store => ({
+  products: store.products,
+  categories: store.categories,
+});
+
 const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(addProductAction(product)),
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
 });
 
-export default connect(null, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
