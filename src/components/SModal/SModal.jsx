@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-native-modal';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {styles} from './SModalStyle';
 import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 
 const InfoModal = props => {
-  const {isVisible, product, closeModal, addToBasket} = props;
-  const [counterValue, setCounterValue] = useState(1);
-  const onPressAddProductHandler = () => {
+  const {isVisible, product, closeModal, addToBasket, setProductCount, count} =
+    props;
+  const [counterValue, setCounterValue] = useState(count);
+  const addProductHandler = () => {
     addToBasket(product);
   };
+
   return (
     <Modal
       useNativeDriverForBackdrop={true}
@@ -52,14 +54,19 @@ const InfoModal = props => {
             <View style={styles.counter}>
               <UiCounter
                 value={counterValue}
-                setCounterValue={setCounterValue}
+                setCounterValue={
+                  setCounterValue /*count => setProductCount(product, count)*/
+                }
                 isVertical={false}
               />
             </View>
             <View style={styles.button}>
               <UiMainButton
                 text="Добавить"
-                onPress={onPressAddProductHandler}
+                onPress={() => {
+                  addProductHandler(product);
+                  setProductCount(product, counterValue);
+                }}
               />
             </View>
           </View>

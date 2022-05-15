@@ -5,21 +5,26 @@ import {UiIcon, UiButton} from '../../components/ui-kit';
 import {styles} from './BasketScreenStyle';
 import {connect} from 'react-redux';
 import {height, width} from '../../utils/Responsive';
-import {changeProductCountAction} from '../../store/actions/basketActions';
+import {
+  changeProductCountAction,
+  deleteProductAction,
+} from '../../store/actions/basketActions';
 
 const BasketScreen = props => {
-  // console.log(props.products.products[0]);
-
   const setProductCount = (product, count) => {
     props.changeCount(product, count);
   };
 
+  const deleteProductFromBasket = product => {
+    props.deleteProduct(product);
+  };
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
       <SBasketCard
         product={item.product}
         count={item.count}
         setCount={setProductCount}
+        deleteProduct={deleteProductFromBasket}
       />
     </View>
   );
@@ -59,8 +64,10 @@ const BasketScreen = props => {
 };
 
 const mapStateToProps = state => ({products: state.basket});
+
 const mapDispatchToProps = dispatch => ({
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
+  deleteProduct: product => dispatch(deleteProductAction(product)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen);
