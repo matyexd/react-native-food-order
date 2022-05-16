@@ -8,12 +8,12 @@ export async function storeUserSession(key, value) {
   }
 }
 
-export async function retrieveUserSession(key) {
+export async function retrieveUserSession(key, config) {
   try {
-    const session = await EncryptedStorage.getItem(key);
+    const token = await EncryptedStorage.getItem(key);
 
-    if (session !== undefined) {
-      return session;
+    if (token !== undefined) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
   } catch (error) {
     console.log(error);

@@ -3,6 +3,7 @@ import {View, Text, Image} from 'react-native';
 import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 import {ModalLogout} from '../../components/ModalLogout';
+import {removeUserSession} from '../../storage';
 
 const ProfileScreen = props => {
   const data = [
@@ -10,7 +11,7 @@ const ProfileScreen = props => {
       id: 1,
       text: 'О приложении',
       icon: 'settings',
-      navigate: () => console.log('О приложении'),
+      navigate: () => removeUserSession('token'),
     },
     {
       id: 2,

@@ -12,7 +12,7 @@ export const loginAction = (login, password) => ({
 });
 
 export const setAuthSuccessAction = payload => ({
-  type: AUTH_LOGIN,
+  type: AUTH_SUCCESS,
   payload: payload,
 });
 
@@ -26,7 +26,6 @@ export const logoutAction = () => ({
 });
 
 export const loginFetch = ({login, password}) => {
-  console.log(1);
   return $api
     .post('/auth/login', {email: login, password: password})
     .then(response => response.data);
