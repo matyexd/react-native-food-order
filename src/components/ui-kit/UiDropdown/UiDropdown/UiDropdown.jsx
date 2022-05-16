@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import UiIcon from '../../UiIcon';
 import {styles} from './UiDropdownStyle';
 import {Shadow} from 'react-native-shadow-2';
+import {width} from '../../../../utils/Responsive';
 
 const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,6 @@ const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
           data={items}
           onSelect={selectedItem => {
             filter(selectedItem.id);
-            console.log(selectedItem.categoryName);
           }}
           buttonTextAfterSelection={selectedItem => {
             return selectedItem.categoryName;
@@ -35,13 +35,21 @@ const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
               <UiIcon
                 iconName={'arrowDown'}
                 iconColor={'black'}
-                iconSize={7}
+                iconSize={8}
                 style={{
                   transform: [{rotate: '180deg'}],
+                  marginRight: width(5),
                 }}
               />
             ) : (
-              <UiIcon iconName={'arrowDown'} iconColor={'black'} iconSize={7} />
+              <UiIcon
+                iconName={'arrowDown'}
+                iconColor={'black'}
+                iconSize={8}
+                style={{
+                  marginRight: width(5),
+                }}
+              />
             );
           }}
           rowStyle={styles.rowDropdownStyle}

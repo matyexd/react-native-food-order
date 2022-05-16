@@ -47,7 +47,6 @@ const HomeScreen = props => {
       <SDishCard product={item} addToBasket={addProductCallback} />
     </TouchableOpacity>
   );
-
   const filterByCategory = category => {
     const newData = data.filter(pr => pr.category === category);
     setFilterData(newData);
@@ -66,15 +65,21 @@ const HomeScreen = props => {
     return count;
   };
 
-  const onInputChangeHandler = searchString => {
+  const onSearchChangeHandler = searchString => {
     setSearchQuery(searchString);
+
     const data = [];
     for (let i = 0; i < props.products.products.length; i++) {
-      if (props.products.products[i].name?.includes(searchString)) {
+      if (
+        props.products.products[i].name
+          ?.toLowerCase()
+          .includes(searchString.toLowerCase())
+      ) {
         data.push(props.products.products[i]);
       }
     }
     setSearchedData(data);
+    if (searchString.length == 0) filterByCategory(categories[0].id);
   };
 
   return (
@@ -103,7 +108,7 @@ const HomeScreen = props => {
           <View style={{paddingHorizontal: width(20)}}>
             <UiSearch
               value={searchQuery}
-              onInputChangeHandler={onInputChangeHandler}
+              onInputChangeHandler={onSearchChangeHandler}
             />
           </View>
           {searchQuery.length == 0 && (
