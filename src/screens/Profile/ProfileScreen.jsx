@@ -6,7 +6,12 @@ import {ModalLogout} from '../../components/ModalLogout';
 
 const ProfileScreen = props => {
   const data = [
-    {id: 1, text: 'О приложении', icon: 'settings', navigate: ''},
+    {
+      id: 1,
+      text: 'О приложении',
+      icon: 'settings',
+      navigate: () => console.log('О приложении'),
+    },
     {
       id: 2,
       text: 'Выход',
