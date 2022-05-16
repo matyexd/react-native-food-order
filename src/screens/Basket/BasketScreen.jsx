@@ -35,10 +35,17 @@ const BasketScreen = props => {
         <View style={styles.header}>
           <Text style={styles.limitLabel}>Корзина</Text>
           <View style={styles.limitPrice}>
-            <Text style={styles.limitCount}>230</Text>
+            <Text
+              style={
+                props.products.totalCost > 230
+                  ? styles.limitCountRed
+                  : styles.limitCount
+              }>
+              {props.products.totalCost}
+            </Text>
             <UiIcon
               iconName="ruble"
-              iconColor="#333333"
+              iconColor={props.products.totalCost > 230 ? 'red' : '#333333'}
               style={styles.icon}
               iconSize={24}
             />
@@ -57,7 +64,11 @@ const BasketScreen = props => {
         </View>
       </View>
       <View style={styles.button}>
-        <UiButton text="Оформить заказ" />
+        <UiButton
+          text="Оформить заказ"
+          disabled={props.products.totalCost > 230 ? true : false}
+          style={props.products.totalCost > 230 ? styles.buttonDisable : {}}
+        />
       </View>
     </>
   );

@@ -11,7 +11,8 @@ import {
 } from './screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Provider} from 'react-redux';
-import {store} from './store/configureStore';
+import reduxStore from './store/configureStore';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,27 +41,30 @@ const TabNavigator = () => {
   );
 };
 const App = () => {
+  const {store, persistor} = reduxStore();
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName={'TabNavigator'}>
-          <Stack.Screen
-            name="Auth"
-            component={AuthenticationScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Splash"
-            component={SplashScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="TabNavigator"
-            component={TabNavigator}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName={'TabNavigator'}>
+            <Stack.Screen
+              name="Auth"
+              component={AuthenticationScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Splash"
+              component={SplashScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="TabNavigator"
+              component={TabNavigator}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };

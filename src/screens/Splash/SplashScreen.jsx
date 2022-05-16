@@ -8,7 +8,7 @@ const SplashScreen = props => {
   useEffect(() => {
     setTimeout(async () => {
       props.navigation.navigate('TabNavigator');
-    }, 0);
+    }, 1000);
   }, []);
 
   return (
