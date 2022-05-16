@@ -4,7 +4,7 @@ import UiIcon from '../UiIcon';
 import {styles} from './UiSearchStyle';
 import {Shadow} from 'react-native-shadow-2';
 
-const UiSearch = () => {
+const UiSearch = props => {
   return (
     <Shadow
       viewStyle={{alignSelf: 'stretch'}}
@@ -21,6 +21,8 @@ const UiSearch = () => {
           style={styles.input}
           placeholder="Поиск"
           underlineColorAndroid="transparent"
+          value={props.value}
+          onChangeText={props.onInputChangeHandler}
         />
         <UiIcon
           iconName={'close'}
