@@ -27,6 +27,10 @@ export const styles = StyleSheet.create({
     ...fonts.h2,
     color: '#000000',
   },
+  limitCountRed: {
+    ...fonts.h2,
+    color: 'red',
+  },
   limitLabel: {
     ...fonts.h2,
     color: '#000000',
@@ -37,5 +41,8 @@ export const styles = StyleSheet.create({
   button: {
     backgroundColor: '#ffffff',
     padding: width(16),
+  },
+  buttonDisable: {
+    backgroundColor: '#DDDDDD',
   },
 });
