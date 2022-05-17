@@ -8,5 +8,5 @@ export const rootReducer = combineReducers({
   basket: basketReducer,
   products: productsReducer,
   categories: categoriesReducer,
-  auth: authUserReducer,
+  authUser: authUserReducer,
 });

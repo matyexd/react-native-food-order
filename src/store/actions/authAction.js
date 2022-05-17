@@ -30,3 +30,7 @@ export const loginFetch = ({login, password}) => {
     .post('/auth/login', {email: login, password: password})
     .then(response => response.data);
 };
+
+export const checkAuthFetch = () => {
+  return $api.get('/auth/login');
+};
