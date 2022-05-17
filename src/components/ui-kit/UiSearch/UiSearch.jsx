@@ -3,8 +3,9 @@ import {View, Text, TextInput} from 'react-native';
 import UiIcon from '../UiIcon';
 import {styles} from './UiSearchStyle';
 import {Shadow} from 'react-native-shadow-2';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const UiSearch = () => {
+const UiSearch = props => {
   return (
     <Shadow
       viewStyle={{alignSelf: 'stretch'}}
@@ -21,13 +22,17 @@ const UiSearch = () => {
           style={styles.input}
           placeholder="Поиск"
           underlineColorAndroid="transparent"
+          value={props.value}
+          onChangeText={props.onInputChangeHandler}
         />
-        <UiIcon
-          iconName={'close'}
-          iconSize={18}
-          iconColor="rgba(170, 170, 170, 1)"
-          style={styles.iconClose}
-        />
+        <TouchableOpacity onPress={() => props.onInputChangeHandler('')}>
+          <UiIcon
+            iconName={'close'}
+            iconSize={18}
+            iconColor="rgba(170, 170, 170, 1)"
+            style={styles.iconClose}
+          />
+        </TouchableOpacity>
       </View>
     </Shadow>
   );

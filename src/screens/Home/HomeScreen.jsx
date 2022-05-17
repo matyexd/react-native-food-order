@@ -23,6 +23,8 @@ const HomeScreen = props => {
   const [item, setItem] = useState();
   const [visible, setVisible] = useState(false);
   const [filterData, setFilterData] = useState(data);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchedData, setSearchedData] = useState(data);
 
   useEffect(() => {
     filterByCategory(categories[0].id);
@@ -45,7 +47,6 @@ const HomeScreen = props => {
       <SDishCard product={item} addToBasket={addProductCallback} />
     </TouchableOpacity>
   );
-
   const filterByCategory = category => {
     const newData = data.filter(pr => pr.category === category);
     setFilterData(newData);
@@ -62,6 +63,23 @@ const HomeScreen = props => {
     const count =
       props.basket.products.find(p => p.product.id == item?.id)?.count || 1;
     return count;
+  };
+
+  const onSearchChangeHandler = searchString => {
+    setSearchQuery(searchString);
+
+    const data = [];
+    for (let i = 0; i < props.products.products.length; i++) {
+      if (
+        props.products.products[i].name
+          ?.toLowerCase()
+          .includes(searchString.toLowerCase())
+      ) {
+        data.push(props.products.products[i]);
+      }
+    }
+    setSearchedData(data);
+    if (searchString.length == 0) filterByCategory(categories[0].id);
   };
 
   return (
@@ -88,15 +106,20 @@ const HomeScreen = props => {
         </View>
         <View>
           <View style={{paddingHorizontal: width(20)}}>
-            <UiSearch />
-          </View>
-          <View style={styles.dropdown}>
-            <UiDropdown
-              titleDropdown={categories[0].categoryName}
-              items={categories}
-              filter={filterByCategory}
+            <UiSearch
+              value={searchQuery}
+              onInputChangeHandler={onSearchChangeHandler}
             />
           </View>
+          {searchQuery.length == 0 && (
+            <View style={styles.dropdown}>
+              <UiDropdown
+                titleDropdown={categories[0].categoryName}
+                items={categories}
+                filter={filterByCategory}
+              />
+            </View>
+          )}
         </View>
         <View style={styles.mainList}>
           <FlatList
@@ -104,7 +127,7 @@ const HomeScreen = props => {
               paddingHorizontal: width(20),
               paddingTop: height(12),
             }}
-            data={filterData}
+            data={searchQuery.length > 0 ? searchedData : filterData}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
