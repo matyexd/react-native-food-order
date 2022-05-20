@@ -27,10 +27,10 @@ export const logoutAction = () => ({
 
 export const loginFetch = ({login, password}) => {
   return $api
-    .post('/auth/login', {email: login, password: password})
+    .post('/login', {login: login, password: password})
     .then(response => response.data);
 };
 
 export const checkAuthFetch = () => {
-  return $api.get('/auth/login');
+  return $api.get('/user');
 };

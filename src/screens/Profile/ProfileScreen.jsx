@@ -9,8 +9,10 @@ import {logoutAction} from '../../store/actions/authAction';
 
 const ProfileScreen = props => {
   async function testApi() {
-    const response = await $api.get('/products').then;
-    console.log(props.authUser);
+    const response = await $api
+      .get('/user')
+      .then(response => response.data.data);
+    console.log(response);
   }
 
   const data = [

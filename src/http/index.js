@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {retrieveUserSession} from '../storage';
 
-export const API_URL = `http://192.168.1.4:8000`;
+export const API_URL = `https://food-order-2.academy.smartworld.team/api/api`;
 
 const $api = axios.create({
   withCredentials: true,
@@ -22,8 +22,7 @@ $api.interceptors.response.use(
     return config;
   },
   error => {
-    if (error.response.status === 401) {
-    }
+    console.log(error);
   },
 );
 

@@ -2,18 +2,18 @@ import {AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT} from '../types/authTypes';
 import {removeUserSession, storeUserSession} from '../../storage';
 
 const initialState = {
-  user: {},
+  user: {email: false},
   isAuth: false,
 };
 
 export const authUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_SUCCESS:
-      storeUserSession('token', action.payload.access_token);
-      console.log('dfd');
+      console.log(action.payload.data.access_token);
+      storeUserSession('token', action.payload.data.access_token);
       return {
         ...state,
-        user: {...state.user, email: action.payload.user.email},
+        user: {...state.user, email: true},
         isAuth: true,
       };
     case AUTH_LOGOUT:

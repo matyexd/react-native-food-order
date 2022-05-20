@@ -4,7 +4,6 @@ import {loginFetch, setAuthSuccessAction} from '../store/actions/authAction';
 
 function* loginWorker({payload}) {
   try {
-    console.log(123);
     const data = yield call(loginFetch, payload);
     yield put(setAuthSuccessAction(data));
   } catch (e) {
