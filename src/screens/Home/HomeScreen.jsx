@@ -15,6 +15,8 @@ import {
   changeProductCountAction,
 } from '../../store/actions/basketActions';
 import {connect} from 'react-redux';
+import {categoriesFetch, menuFetch} from './../../http/menuService';
+import {getCategoriesAction} from '../../store/actions/menuActions';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;
@@ -27,9 +29,10 @@ const HomeScreen = props => {
   const [searchedData, setSearchedData] = useState(data);
 
   useEffect(() => {
-    filterByCategory(categories[0].id);
+    props.getCategories();
+    filterByCategory(categories[0]?.id);
   }, []);
-
+  console.log(categories);
   const onPressCardHandler = obj => {
     setItem(obj);
     setVisible(true);
@@ -48,6 +51,7 @@ const HomeScreen = props => {
     </TouchableOpacity>
   );
   const filterByCategory = category => {
+    if (!category) return;
     const newData = data.filter(pr => pr.category === category);
     setFilterData(newData);
   };
@@ -79,7 +83,7 @@ const HomeScreen = props => {
       }
     }
     setSearchedData(data);
-    if (searchString.length == 0) filterByCategory(categories[0].id);
+    if (searchString.length == 0) filterByCategory(categories[0]?.id);
   };
 
   return (
@@ -114,7 +118,7 @@ const HomeScreen = props => {
           {searchQuery.length == 0 && (
             <View style={styles.dropdown}>
               <UiDropdown
-                titleDropdown={categories[0].categoryName}
+                titleDropdown={categories[0]?.name}
                 items={categories}
                 filter={filterByCategory}
               />
@@ -157,6 +161,7 @@ const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(addProductAction(product)),
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
+  getCategories: () => dispatch(getCategoriesAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

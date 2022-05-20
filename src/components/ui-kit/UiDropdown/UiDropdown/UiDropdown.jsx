@@ -22,10 +22,10 @@ const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
             filter(selectedItem.id);
           }}
           buttonTextAfterSelection={selectedItem => {
-            return selectedItem.categoryName;
+            return selectedItem.name;
           }}
           rowTextForSelection={item => {
-            return item.categoryName;
+            return item.name;
           }}
           buttonStyle={styles.buttonDropdownStyle}
           buttonTextStyle={styles.buttonDropdownTextStyle}
