@@ -25,7 +25,9 @@ const UiSearch = props => {
           value={props.value}
           onChangeText={props.onInputChangeHandler}
         />
-        <TouchableOpacity onPress={() => props.onInputChangeHandler('')}>
+        <TouchableOpacity
+          disabled={props.value?.length == 0}
+          onPress={() => props.onInputChangeHandler('')}>
           <UiIcon
             iconName={'close'}
             iconSize={18}

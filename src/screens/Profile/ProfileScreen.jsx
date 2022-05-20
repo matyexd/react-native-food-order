@@ -9,7 +9,7 @@ const ProfileScreen = props => {
     {
       id: 1,
       text: 'О приложении',
-      icon: 'settings',
+      icon: 'info',
       navigate: () => console.log('О приложении'),
     },
     {
