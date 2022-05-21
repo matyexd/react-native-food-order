@@ -1,7 +1,7 @@
 import {all} from 'redux-saga/effects';
 import {loginWatcher} from './authSaga';
-import {categoriesWatcher} from './menuSaga';
+import {categoriesWatcher, menuWatcher} from './menuSaga';
 
 export function* rootSaga() {
-  yield all([loginWatcher(), categoriesWatcher()]);
+  yield all([loginWatcher(), categoriesWatcher(), menuWatcher()]);
 }

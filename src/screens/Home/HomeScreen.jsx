@@ -16,9 +16,16 @@ import {
 } from '../../store/actions/basketActions';
 import {connect} from 'react-redux';
 import {categoriesFetch, menuFetch} from './../../http/menuService';
-import {getCategoriesAction} from '../../store/actions/menuActions';
+import {
+  getCategoriesAction,
+  getMenuActions,
+} from '../../store/actions/menuActions';
 
 const HomeScreen = props => {
+  console.log('====================================');
+  console.log(props.products.products);
+  console.log('====================================');
+
   const categories = props.categories.categories;
   const data = props.products.products;
 
@@ -30,9 +37,10 @@ const HomeScreen = props => {
 
   useEffect(() => {
     props.getCategories();
+    props.getMenu('2022-12-13');
     filterByCategory(categories[0]?.id);
   }, []);
-  console.log(categories);
+
   const onPressCardHandler = obj => {
     setItem(obj);
     setVisible(true);
@@ -41,6 +49,8 @@ const HomeScreen = props => {
   const closeModalCallback = () => {
     setVisible(false);
   };
+
+  // menuFetch({date: '2022-12-13'});
 
   const renderItem = ({item}) => (
     <TouchableOpacity
@@ -52,7 +62,7 @@ const HomeScreen = props => {
   );
   const filterByCategory = category => {
     if (!category) return;
-    const newData = data.filter(pr => pr.category === category);
+    const newData = data.filter(pr => pr.category_id === category);
     setFilterData(newData);
   };
 
@@ -162,6 +172,7 @@ const mapDispatchToProps = dispatch => ({
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
   getCategories: () => dispatch(getCategoriesAction()),
+  getMenu: date => dispatch(getMenuActions(date)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

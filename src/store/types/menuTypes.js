@@ -1,3 +1,6 @@
 export const GET_CATEGORIES = 'menu/GET_CATEGORIES';
 export const GET_CATEGORIES_SUCCEED = 'menu/GET_CATEGORIES_SUCCEED';
 export const GET_CATEGORIES_FAILED = 'menu/GET_CATEGORIES_FAILED';
+export const GET_MENU = 'menu/GET_MENU';
+export const GET_MENU_SUCCEED = 'menu/GET_MENU_SUCCEED';
+export const GET_MENU_FAILED = 'menu/GET_MENU_FAILED';
