@@ -22,10 +22,6 @@ import {
 } from '../../store/actions/menuActions';
 
 const HomeScreen = props => {
-  console.log('====================================');
-  console.log(props.products.products);
-  console.log('====================================');
-
   const categories = props.categories.categories;
   const data = props.products.products;
 
@@ -38,8 +34,11 @@ const HomeScreen = props => {
   useEffect(() => {
     props.getCategories();
     props.getMenu('2022-12-13');
-    filterByCategory(categories[0]?.id);
   }, []);
+
+  useEffect(() => {
+    filterByCategory(categories[0]?.id);
+  }, [props.categories, props.products]);
 
   const onPressCardHandler = obj => {
     setItem(obj);
@@ -50,8 +49,6 @@ const HomeScreen = props => {
     setVisible(false);
   };
 
-  // menuFetch({date: '2022-12-13'});
-
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.card}
@@ -61,6 +58,7 @@ const HomeScreen = props => {
     </TouchableOpacity>
   );
   const filterByCategory = category => {
+    console.log(category);
     if (!category) return;
     const newData = data.filter(pr => pr.category_id === category);
     setFilterData(newData);
