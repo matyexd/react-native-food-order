@@ -1,14 +1,25 @@
-export const isWorkingDay = async date => {
+import axios from 'axios';
+
+export const isDayOff = async date => {
   const yyyy = date.getFullYear();
-  const mm = date.getMonth() > 9 ? date.getMonth() : '0' + date.getMonth();
-  const dd = date.getDate();
-  const isDayOff = await fetch(`https://isdayoff.ru/${yyyy}${mm}${dd}`);
-  console.log(isDayOff);
+  const mm =
+    date.getMonth() + 1 > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+  const dd = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+  const isDayOff = await axios.get(`https://isdayoff.ru/${yyyy}${mm}${dd}`);
+
+  return isDayOff.data;
 };
 
-export const getNextWorkingDay = () => {
+export const getNextWorkingDay = async () => {
   const today = Date.now();
-  console.log(today);
   const date = new Date(today);
-  isWorkingDay(date);
+  date.setDate(date.getDate() + 1);
+
+  for (let i = 0; i < 30; i++) {
+    const ido = await isDayOff(date);
+    if (!ido) {
+      return date;
+    }
+    date.setDate(date.getDate() + 1);
+  }
 };

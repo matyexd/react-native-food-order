@@ -15,10 +15,10 @@ import {
   changeProductCountAction,
 } from '../../store/actions/basketActions';
 import {connect} from 'react-redux';
-import {isWorkingDay} from '../../utils/utilits';
+import {getNextWorkingDay, isDayOff} from '../../utils/utilits';
 
 const HomeScreen = props => {
-  isWorkingDay('2022-22-05');
+  getNextWorkingDay();
   const categories = props.categories.categories;
   const data = props.products.products;
 
