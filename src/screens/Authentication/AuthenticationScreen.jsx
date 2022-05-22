@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TextInput, Keyboard} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  Keyboard,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './AuthenticationScreenStyle';
 import {connect} from 'react-redux';
@@ -70,7 +77,7 @@ const AuthenticationScreen = props => {
           />
         </View>
 
-        <View style={styles.inputData}>
+        <KeyboardAvoidingView style={styles.inputData} behavior={'padding'}>
           <View style={loginError ? styles.inputError : styles.input}>
             <TextInput
               style={styles.inputText}
@@ -98,7 +105,7 @@ const AuthenticationScreen = props => {
           <View style={styles.button}>
             <UiButton text="Войти" onPress={() => handleLogin()} />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </UiContainer>
   );

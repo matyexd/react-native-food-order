@@ -11,7 +11,7 @@ function* loginWorker({payload}) {
     const data = yield call(loginFetch, payload);
     yield put(setAuthSuccessAction(data.data.data.access_token));
   } catch (e) {
-    console.log(e);
+    console.log(e.response.data);
     yield put(setAuthFailAction(e.response.data.errors));
     // setAuthFailAction(e.response.data.error.login);
   }
