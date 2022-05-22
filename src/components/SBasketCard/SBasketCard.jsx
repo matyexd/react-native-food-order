@@ -12,8 +12,6 @@ const SBasketCard = props => {
     console.log('Нажата кнопка');
   };
 
-  //const [counterValue, setCounterValue] = useState(1);
-
   return (
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">

@@ -6,7 +6,7 @@ import {styles} from './UiDropdownStyle';
 import {Shadow} from 'react-native-shadow-2';
 import {width} from '../../../../utils/Responsive';
 
-const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
+const UiDropdown = ({titleDropdown = 'Выберите категорию', items, filter}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Shadow
@@ -22,10 +22,10 @@ const UiDropdown = ({titleDropdown = 'Select', items, filter}) => {
             filter(selectedItem.id);
           }}
           buttonTextAfterSelection={selectedItem => {
-            return selectedItem.categoryName;
+            return selectedItem.name;
           }}
           rowTextForSelection={item => {
-            return item.categoryName;
+            return item.name;
           }}
           buttonStyle={styles.buttonDropdownStyle}
           buttonTextStyle={styles.buttonDropdownTextStyle}
