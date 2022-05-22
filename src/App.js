@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {CommonActions, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
@@ -20,6 +20,33 @@ import RNBootSplash from 'react-native-bootsplash';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const ProfileStack = routeName => {
+  return (
+    <Stack.Navigator initialRouteName="ProfileMain">
+      <Stack.Screen
+        name="ProfileMain"
+        component={ProfileScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{headerShown: false}}
+        listeners={({navigation, route}) => ({
+          blur: () => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [{name: 'ProfileMain'}],
+              }),
+            );
+          },
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const TabNavigator = () => {
   return (
     <Tab.Navigator
@@ -27,7 +54,7 @@ const TabNavigator = () => {
       initialRouteName="Home">
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileStack}
         options={{headerShown: false}}
       />
       <Tab.Screen
@@ -75,11 +102,6 @@ const App = () => {
             <Stack.Screen
               name="TabNavigator"
               component={TabNavigator}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="History"
-              component={HistoryScreen}
               options={{headerShown: false}}
             />
           </Stack.Navigator>
