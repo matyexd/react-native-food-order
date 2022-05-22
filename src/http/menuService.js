@@ -1,7 +1,7 @@
 import $api from '.';
 import {data} from '../temp/menu';
 
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 export const categoriesFetch = async () => {
   if (DEBUG_MODE)
