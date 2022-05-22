@@ -2,6 +2,12 @@ import React, {useState} from 'react';
 import {View, Text, Image, TextInput, Keyboard} from 'react-native';
 import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './AuthenticationScreenStyle';
+import {connect} from 'react-redux';
+import {
+  addProductAction,
+  changeProductCountAction,
+} from '../../store/actions/basketActions';
+import {loginAction} from '../../store/actions/authAction';
 
 const AuthenticationScreen = props => {
   const [login, setLogin] = useState('');
@@ -30,6 +36,7 @@ const AuthenticationScreen = props => {
     }
 
     if (password && login) {
+      props.login(login, password);
       props.navigation.navigate('Splash');
       // alert('что');
     }
@@ -77,4 +84,13 @@ const AuthenticationScreen = props => {
   );
 };
 
-export default AuthenticationScreen;
+const mapStateToProps = store => ({});
+
+const mapDispatchToProps = dispatch => ({
+  login: (login, password) => dispatch(loginAction(login, password)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AuthenticationScreen);

@@ -3,14 +3,24 @@ import {View, Text, Image} from 'react-native';
 import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 import {ModalLogout} from '../../components/ModalLogout';
+import {connect} from 'react-redux';
+import $api from '../../http';
+import {logoutAction} from '../../store/actions/authAction';
 
 const ProfileScreen = props => {
+  async function testApi() {
+    const response = await $api
+      .get('/user')
+      .then(response => response.data.data);
+    console.log(response);
+  }
+
   const data = [
     {
       id: 1,
       text: 'О приложении',
       icon: 'info',
-      navigate: () => console.log('О приложении'),
+      navigate: () => testApi(),
     },
     {
       id: 2,
@@ -24,6 +34,11 @@ const ProfileScreen = props => {
 
   const closeModalCallback = () => {
     setVisible(false);
+  };
+
+  const handleLogout = () => {
+    props.logout();
+    props.navigation.navigate('Auth');
   };
 
   return (
@@ -55,10 +70,16 @@ const ProfileScreen = props => {
       <ModalLogout
         isVisible={visible}
         closeModal={closeModalCallback}
-        handleLogout={() => props.navigation.navigate('Auth')}
+        handleLogout={() => handleLogout()}
       />
     </>
   );
 };
 
-export default ProfileScreen;
+const mapStateToProps = state => ({authUser: state.authUser});
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

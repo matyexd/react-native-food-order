@@ -13,6 +13,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Provider} from 'react-redux';
 import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
+import {rootSaga} from './sagas';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,7 +42,8 @@ const TabNavigator = () => {
   );
 };
 const App = () => {
-  const {store, persistor} = reduxStore();
+  const {store, persistor, sagaMiddleware} = reduxStore();
+  sagaMiddleware.run(rootSaga);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
