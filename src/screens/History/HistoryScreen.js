@@ -1,6 +1,7 @@
 import React from 'react';
 import {UiContainer} from '../../components/ui-kit';
 import {styles} from './HistoryScreenStyle';
+import {View, Text, Image} from 'react-native';
 
 const HistoryScreen = () => {
   return (

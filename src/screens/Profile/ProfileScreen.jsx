@@ -33,7 +33,7 @@ const ProfileScreen = props => {
       id: 3,
       text: 'История заказов',
       icon: 'info',
-      navigate: () => testApi(),
+      navigate: () => goToHistory(),
     },
   ];
 

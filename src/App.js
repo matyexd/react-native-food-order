@@ -8,6 +8,7 @@ import {
   BasketScreen,
   CustomTabs,
   SplashScreenAfterAuth,
+  HistoryScreen,
 } from './screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Provider} from 'react-redux';
@@ -76,12 +77,12 @@ const App = () => {
               component={TabNavigator}
               options={{headerShown: false}}
             />
+            <Stack.Screen
+              name="History"
+              component={HistoryScreen}
+              options={{headerShown: false}}
+            />
           </Stack.Navigator>
-          <Stack.Screen
-            name="History"
-            component={AuthenticationScreen}
-            options={{headerShown: false}}
-          />
         </NavigationContainer>
       </PersistGate>
     </Provider>
