@@ -9,7 +9,6 @@ import {
 function* loginWorker({payload}) {
   try {
     const data = yield call(loginFetch, payload);
-    console.log(data.data.data.access_token);
     yield put(setAuthSuccessAction(data.data.data.access_token));
   } catch (e) {
     console.log(e);
