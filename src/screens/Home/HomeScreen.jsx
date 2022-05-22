@@ -79,7 +79,6 @@ const HomeScreen = props => {
 
   const onSearchChangeHandler = searchString => {
     setSearchQuery(searchString);
-
     const data = [];
     for (let i = 0; i < props.products.products.length; i++) {
       if (

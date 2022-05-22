@@ -70,6 +70,7 @@ export const styles = StyleSheet.create({
   },
   counter: {
     flexGrow: 1,
+    justifyContent: 'center',
   },
   button: {
     flexGrow: 3,
