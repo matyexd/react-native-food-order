@@ -65,6 +65,11 @@ const App = () => {
               options={{headerShown: false}}
             />
           </Stack.Navigator>
+          <Stack.Screen
+            name="History"
+            component={AuthenticationScreen}
+            options={{headerShown: false}}
+          />
         </NavigationContainer>
       </PersistGate>
     </Provider>

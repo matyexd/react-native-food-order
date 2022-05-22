@@ -28,6 +28,13 @@ const ProfileScreen = props => {
       icon: 'logout',
       navigate: () => setVisible(true),
     },
+
+    {
+      id: 3,
+      text: 'История заказов',
+      icon: 'info',
+      navigate: () => testApi(),
+    },
   ];
 
   const [visible, setVisible] = useState(false);
@@ -36,6 +43,9 @@ const ProfileScreen = props => {
     setVisible(false);
   };
 
+  const goToHistory = () => {
+    props.navigation.navigate('History');
+  };
   const handleLogout = () => {
     props.logout();
     props.navigation.navigate('Auth');
@@ -58,7 +68,6 @@ const ProfileScreen = props => {
               <View key={button.id} style={styles.button}>
                 <UiProfileButton
                   text={button.text}
-                  // style={styles.button}
                   iconName={button.icon}
                   onPress={button.navigate}
                 />
