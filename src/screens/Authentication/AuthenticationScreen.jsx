@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TextInput, Keyboard} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  Keyboard,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './AuthenticationScreenStyle';
 import {connect} from 'react-redux';
@@ -7,23 +14,24 @@ import {
   addProductAction,
   changeProductCountAction,
 } from '../../store/actions/basketActions';
-import {loginAction} from '../../store/actions/authAction';
+import {
+  clearAuthUserStoreAction,
+  loginAction,
+} from '../../store/actions/authAction';
 
 const AuthenticationScreen = props => {
+  const {user, isAuth, isLoading, errors} = props.userAuth;
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const [loginError, setLoginError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const onChangeLogin = val => {
+  const onFocusInput = () => {
     setLoginError('');
-    setLogin(val);
-  };
-
-  const onChangePassword = val => {
     setPasswordError('');
-    setPassword(val);
+    props.clearAuthUserStore();
   };
 
   const handleLogin = () => {
@@ -36,11 +44,28 @@ const AuthenticationScreen = props => {
     }
 
     if (password && login) {
+      setLoginError('');
+      setPasswordError('');
       props.login(login, password);
-      props.navigation.navigate('Splash');
       // alert('что');
     }
   };
+
+  useEffect(() => {
+    console.log(errors);
+    if (
+      !isLoading &&
+      errors.login.length === 0 &&
+      errors.password.length === 0 &&
+      isAuth
+    ) {
+      props.navigation.navigate('Splash');
+    } else if (errors.login.length !== 0) {
+      setLoginError('Неверный логин');
+    } else if (errors.password.length !== 0) {
+      setPasswordError('Неверный пароль');
+    }
+  }, [props.userAuth]);
 
   return (
     <UiContainer>
@@ -52,13 +77,14 @@ const AuthenticationScreen = props => {
           />
         </View>
 
-        <View style={styles.inputData}>
+        <KeyboardAvoidingView style={styles.inputData} behavior={'padding'}>
           <View style={loginError ? styles.inputError : styles.input}>
             <TextInput
               style={styles.inputText}
               placeholder="Логин"
               placeholderTextColor="#999999"
-              onChangeText={val => onChangeLogin(val)}
+              onChangeText={val => setLogin(val)}
+              onFocus={() => onFocusInput()}
               value={login}
             />
           </View>
@@ -69,7 +95,8 @@ const AuthenticationScreen = props => {
               placeholder="Пароль"
               placeholderTextColor="#999999"
               secureTextEntry={true}
-              onChangeText={val => onChangePassword(val)}
+              onChangeText={val => setPassword(val)}
+              onFocus={() => onFocusInput()}
               value={password}
             />
           </View>
@@ -78,16 +105,19 @@ const AuthenticationScreen = props => {
           <View style={styles.button}>
             <UiButton text="Войти" onPress={() => handleLogin()} />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </UiContainer>
   );
 };
 
-const mapStateToProps = store => ({});
+const mapStateToProps = store => ({
+  userAuth: store.authUser,
+});
 
 const mapDispatchToProps = dispatch => ({
   login: (login, password) => dispatch(loginAction(login, password)),
+  clearAuthUserStore: () => dispatch(clearAuthUserStoreAction()),
 });
 
 export default connect(

@@ -3,7 +3,7 @@ import HomeScreen from './Home/HomeScreen';
 import AuthenticationScreen from './Authentication/AuthenticationScreen';
 import ProfileScreen from './Profile/ProfileScreen';
 import CustomTabs from './CustomTabs';
-import SplashScreen from './Splash/SplashScreen';
+import SplashScreenAfterAuth from './Splash/SplashScreen';
 
 export {
   BasketScreen,
@@ -11,5 +11,5 @@ export {
   AuthenticationScreen,
   ProfileScreen,
   CustomTabs,
-  SplashScreen,
+  SplashScreenAfterAuth,
 };
