@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -15,6 +15,7 @@ import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
 import {rootSaga} from './sagas';
 import RNBootSplash from 'react-native-bootsplash';
+import {retrieveUserSession} from './storage';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,9 +44,14 @@ const TabNavigator = () => {
   );
 };
 const App = () => {
+  const [initialRouteName, setInitialRouteName] = useState('Auth');
+
   useEffect(() => {
     const init = async () => {
-      console.log('[eq');
+      const token = await retrieveUserSession('token');
+      if (token) {
+        // проверка логина
+      }
     };
 
     init().finally(async () => {

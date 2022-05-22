@@ -8,19 +8,12 @@ import $api from '../../http';
 import {logoutAction} from '../../store/actions/authAction';
 
 const ProfileScreen = props => {
-  async function testApi() {
-    const response = await $api
-      .get('/user')
-      .then(response => response.data.data);
-    console.log(response);
-  }
-
   const data = [
     {
       id: 1,
       text: 'О приложении',
       icon: 'info',
-      navigate: () => testApi(),
+      navigate: () => console.log('о приложении'),
     },
     {
       id: 2,
