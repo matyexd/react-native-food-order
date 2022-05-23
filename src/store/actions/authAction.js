@@ -3,6 +3,7 @@ import {
   AUTH_SUCCESS,
   AUTH_LOGIN,
   AUTH_LOGOUT,
+  AUTH_CLEAR_STORE,
 } from '../types/authTypes';
 import $api from '../../http';
 
@@ -28,8 +29,12 @@ export const logoutAction = () => ({
 export const loginFetch = ({login, password}) => {
   return $api
     .post('/login', {login: login, password: password})
-    .then(response => response.data);
+    .then(data => data);
 };
+
+export const clearAuthUserStoreAction = () => ({
+  type: AUTH_CLEAR_STORE,
+});
 
 export const checkAuthFetch = () => {
   return $api.get('/user');

@@ -4,7 +4,7 @@ import {styles} from './SplashScreenStyle';
 
 import {UIActivityIndicator} from 'react-native-indicators';
 
-const SplashScreen = props => {
+const SplashScreenAfterAuth = props => {
   useEffect(() => {
     setTimeout(async () => {
       props.navigation.navigate('TabNavigator');
@@ -26,4 +26,4 @@ const SplashScreen = props => {
   );
 };
 
-export default SplashScreen;
+export default SplashScreenAfterAuth;
