@@ -22,6 +22,7 @@ import {
 } from '../../store/actions/menuActions';
 
 const HomeScreen = props => {
+  getNextWorkingDay();
   const categories = props.categories.categories;
   const data = props.products.products;
 
