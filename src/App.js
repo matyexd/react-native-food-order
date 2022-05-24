@@ -32,7 +32,6 @@ const ProfileStack = routeName => {
       <Stack.Screen
         name="History"
         component={HistoryScreen}
-        // component={OrderScreen}
         options={{headerShown: false}}
         listeners={({navigation, route}) => ({
           blur: () => {

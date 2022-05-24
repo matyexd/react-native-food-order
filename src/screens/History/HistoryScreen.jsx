@@ -49,12 +49,8 @@ const HistoryScreen = props => {
     <>
       <UiContainerWP>
         <View style={styles.title}>
-          <TouchableOpacity style={styles.titleIcon}>
-            <UiIcon
-              iconName="arrowLeft"
-              iconColor="#333333"
-              onPress={goToProfile}
-            />
+          <TouchableOpacity onPress={goToProfile} style={styles.titleIcon}>
+            <UiIcon iconName="arrowLeft" iconColor="#333333" />
           </TouchableOpacity>
           <Text style={styles.titleText}>История заказов</Text>
         </View>
