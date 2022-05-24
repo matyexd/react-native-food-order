@@ -24,16 +24,15 @@ const ProfileScreen = props => {
     },
     {
       id: 2,
+      text: 'История заказов',
+      icon: 'history',
+      navigate: () => goToHistory(),
+    },
+    {
+      id: 3,
       text: 'Выход',
       icon: 'logout',
       navigate: () => setVisible(true),
-    },
-
-    {
-      id: 3,
-      text: 'История заказов',
-      icon: 'info',
-      navigate: () => goToHistory(),
     },
   ];
 

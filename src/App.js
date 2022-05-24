@@ -16,6 +16,7 @@ import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
 import {rootSaga} from './sagas';
 import RNBootSplash from 'react-native-bootsplash';
+import OrderScreen from './screens/Order/OrderScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,6 +32,7 @@ const ProfileStack = routeName => {
       <Stack.Screen
         name="History"
         component={HistoryScreen}
+        // component={OrderScreen}
         options={{headerShown: false}}
         listeners={({navigation, route}) => ({
           blur: () => {

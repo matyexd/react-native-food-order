@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {fonts} from '../../theme/Fonts';
 import {height, sp, width} from '../../utils/Responsive';
-
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
