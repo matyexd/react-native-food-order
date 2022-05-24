@@ -1,47 +1,47 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {UiContainer, UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {styles} from './HistoryScreenStyle';
 import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import {height, width} from '../../utils/Responsive';
 import {HistoryCard, HistoryCardDay} from '../../components';
+import {getHistoryAction} from '../../store/actions/historyAction';
+import {connect} from 'react-redux';
+import {formatDate} from '../../utils/utilits';
 
 const HistoryScreen = props => {
-  const data = [
-    {
-      id: 1,
-      date: '24.05.2022',
-      price: 230,
-    },
-    {
-      id: 2,
-      date: '23.05.2022',
-      price: 225,
-    },
-    {
-      id: 3,
-      date: '22.05.2022',
-      price: 202,
-    },
-    {
-      id: 4,
-      date: '21.05.2022',
-      price: 196,
-    },
-    {
-      id: 5,
-      date: '20.05.2022',
-      price: 215,
-    },
-  ];
+  const getToday = () => {
+    const today = new Date();
+    const mm =
+      today.getMonth() + 1 > 8
+        ? today.getMonth() + 1
+        : '0' + (today.getMonth() + 1);
+    const dd = today.getDate() > 9 ? today.getDate() : '0' + today.getDate();
+    const formatedDate = `${today.getFullYear()}-${mm}-${dd}`;
+    return formatedDate;
+  };
+
+  useEffect(() => {
+    props.getHistory();
+  }, []);
+
+  const todayOrder = props.history.orders.find(
+    order => order.date_order == getToday(),
+  );
 
   const goToProfile = () => {
     props.navigation.navigate('ProfileMain');
   };
+
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
-      <HistoryCard price={item.price} date={item.date} />
+      <HistoryCard price={item.cost} date={formatDate(item.date_order)} />
     </View>
   );
+
+  const filterOrders = props.history.orders.filter(
+    order => order.date_order != getToday(),
+  );
+
   return (
     <>
       <UiContainerWP>
@@ -51,15 +51,20 @@ const HistoryScreen = props => {
           </TouchableOpacity>
           <Text style={styles.titleText}>История заказов</Text>
         </View>
-        <View style={styles.cardOnDay}>
-          <HistoryCardDay price="250" date="25.05.2022" />
-        </View>
+        {todayOrder && (
+          <View style={styles.cardOnDay}>
+            <HistoryCardDay
+              price={todayOrder.cost}
+              date={formatDate(todayOrder.date_order)}
+            />
+          </View>
+        )}
         <FlatList
           contentContainerStyle={{
             paddingHorizontal: width(20),
             paddingTop: height(12),
           }}
-          data={data}
+          data={filterOrders}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
@@ -67,5 +72,12 @@ const HistoryScreen = props => {
     </>
   );
 };
+const mapStateToProps = store => ({
+  history: store.history,
+});
 
-export default HistoryScreen;
+const mapDispatchToProps = dispatch => ({
+  getHistory: () => dispatch(getHistoryAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryScreen);

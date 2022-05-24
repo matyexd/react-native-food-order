@@ -196,3 +196,36 @@ export const data = [
     gramm: '15',
   },
 ];
+
+export const orders = [
+  {
+    id: 1,
+    cost: 210,
+    date_order: '2022-05-18',
+  },
+  {
+    id: 2,
+    cost: 212,
+    date_order: '2022-05-19',
+  },
+  {
+    id: 3,
+    cost: 214,
+    date_order: '2022-05-20',
+  },
+  {
+    id: 4,
+    cost: 230,
+    date_order: '2022-05-21',
+  },
+  {
+    id: 5,
+    cost: 220,
+    date_order: '2022-05-22',
+  },
+  {
+    id: 6,
+    cost: 216,
+    date_order: '2022-05-24',
+  },
+];
