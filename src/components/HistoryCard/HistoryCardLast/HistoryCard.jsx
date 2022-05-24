@@ -8,7 +8,7 @@ const HistoryCard = props => {
   return (
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
-        <TouchableOpacity style={styles.container}>
+        <View style={styles.container}>
           <Text style={styles.dateText}>{props.date}</Text>
           <View style={styles.price}>
             <Text style={styles.priceText}>{props.price}</Text>
@@ -19,7 +19,7 @@ const HistoryCard = props => {
               style={styles.priceIcon}
             />
           </View>
-        </TouchableOpacity>
+        </View>
       </Shadow>
     </>
   );

@@ -15,6 +15,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import reduxStore from './../store/configureStore';
 
 import {rootSaga} from './sagas';
+import OrderScreen from '../screens/Order/OrderScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,6 +88,11 @@ const AppNavigation = () => {
         <Stack.Screen
           name="TabNavigator"
           component={TabNavigator}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="OrderScreen"
+          component={OrderScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

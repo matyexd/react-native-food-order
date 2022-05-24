@@ -5,7 +5,8 @@ import {UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {height, width} from '../../utils/Responsive';
 import {styles} from './OrderScreenStyle';
 
-const OrderScreen = () => {
+const OrderScreen = props => {
+  const products = props.route.params.params.products;
   const data = [
     {
       id: 1,
@@ -57,6 +58,10 @@ const OrderScreen = () => {
   const goToProfile = () => {
     props.navigation.navigate('ProfileMain');
   };
+
+  console.log('====================================');
+  console.log(props.route.params);
+  console.log('====================================');
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
       <OrderCard
@@ -73,21 +78,21 @@ const OrderScreen = () => {
     <>
       <UiContainerWP>
         <View style={styles.title}>
-          <TouchableOpacity style={styles.titleIcon}>
-            <UiIcon
-              iconName="arrowLeft"
-              iconColor="#333333"
-              onPress={goToProfile}
-            />
+          <TouchableOpacity
+            style={styles.titleIcon}
+            onPress={() => props.navigation.navigate('History')}>
+            <UiIcon iconName="arrowLeft" iconColor="#333333" />
           </TouchableOpacity>
-          <Text style={styles.titleText}>Заказ на 18.05.2022</Text>
+          <Text style={styles.titleText}>
+            Заказ на {props.route.params.params.orderDate}
+          </Text>
         </View>
         <FlatList
           contentContainerStyle={{
             paddingHorizontal: width(20),
             paddingTop: height(12),
           }}
-          data={data}
+          data={products}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />

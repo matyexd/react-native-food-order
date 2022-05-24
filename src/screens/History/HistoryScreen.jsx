@@ -33,9 +33,20 @@ const HistoryScreen = props => {
   };
 
   const renderItem = ({item}) => (
-    <View style={styles.card} key={item.id}>
+    <TouchableOpacity
+      style={styles.card}
+      key={item.id}
+      onPress={() =>
+        props.navigation.navigate('OrderScreen', {
+          // screen: 'OrderScreen',
+          params: {
+            products: item.products,
+            orderDate: formatDate(item.date_order),
+          },
+        })
+      }>
       <HistoryCard price={item.cost} date={formatDate(item.date_order)} />
-    </View>
+    </TouchableOpacity>
   );
 
   const filterOrders = props.history.orders.filter(
