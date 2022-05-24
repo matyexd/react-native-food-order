@@ -4,6 +4,9 @@ import {
   AUTH_LOGOUT,
   AUTH_LOGIN,
   AUTH_CLEAR_STORE,
+  AUTH_CHECK,
+  AUTH_CHECK_SUCCESS,
+  AUTH_CHECK_FAIL,
 } from '../types/authTypes';
 import {removeUserSession, storeUserSession} from '../../storage';
 
@@ -19,7 +22,10 @@ export const authUserReducer = (state = initialState, action) => {
     case AUTH_LOGIN:
       return {
         ...state,
+        user: {},
+        isAuth: false,
         isLoading: true,
+        errors: {login: [], password: []},
       };
     case AUTH_SUCCESS:
       storeUserSession('token', action.payload);
@@ -27,7 +33,7 @@ export const authUserReducer = (state = initialState, action) => {
         ...state,
         user: {},
         isAuth: true,
-        isLoading: false,
+        isLoading: true,
         errors: {login: [], password: []},
       };
     case AUTH_LOGOUT:
@@ -57,6 +63,35 @@ export const authUserReducer = (state = initialState, action) => {
         isAuth: false,
         isLoading: false,
         errors: {login: [], password: []},
+      };
+
+    case AUTH_CHECK:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case AUTH_CHECK_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: {
+          id: action.payload.data.id,
+          email: action.payload.data.email,
+          name: action.payload.data.name,
+          floor: action.payload.data.floor,
+        },
+        isAuth: true,
+        isLoading: false,
+        errors: {login: [], password: []},
+      };
+    case AUTH_CHECK_FAIL:
+      return {
+        ...state,
+        user: {},
+        isAuth: false,
+        isLoading: false,
+        errors: {login: [], password: [], otherErrors: [action.payload]},
       };
 
     default:

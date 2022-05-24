@@ -15,6 +15,7 @@ import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
 import {rootSaga} from './sagas';
 import RNBootSplash from 'react-native-bootsplash';
+import $api from './http';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,13 +44,22 @@ const TabNavigator = () => {
   );
 };
 const App = () => {
+  const [initialNavigator, setInitialNavigator] = useState('Auth');
+  const [initialNavigatorLoading, setInitialNavigatorLoading] = useState(true);
+
   useEffect(() => {
     const init = async () => {
-      console.log('[eq');
+      try {
+        const data = await $api.get('/user');
+        console.log(data);
+        await setInitialNavigator('TabNavigator');
+      } catch (e) {
+        console.log(e);
+      }
     };
-
     init().finally(async () => {
       await RNBootSplash.hide({fade: true});
+      await setInitialNavigatorLoading(false);
       console.log('Bootsplash has been hidden successfully');
     });
   }, []);
@@ -59,25 +69,27 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName={'TabNavigator'}>
-            <Stack.Screen
-              name="Auth"
-              component={AuthenticationScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="Splash"
-              component={SplashScreenAfterAuth}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="TabNavigator"
-              component={TabNavigator}
-              options={{headerShown: false}}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        {!initialNavigatorLoading && (
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName={initialNavigator}>
+              <Stack.Screen
+                name="Auth"
+                component={AuthenticationScreen}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="Splash"
+                component={SplashScreenAfterAuth}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="TabNavigator"
+                component={TabNavigator}
+                options={{headerShown: false}}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        )}
       </PersistGate>
     </Provider>
   );

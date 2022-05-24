@@ -15,12 +15,15 @@ import {
   changeProductCountAction,
 } from '../../store/actions/basketActions';
 import {
+  checkLogin,
   clearAuthUserStoreAction,
   loginAction,
 } from '../../store/actions/authAction';
 
 const AuthenticationScreen = props => {
   const {user, isAuth, isLoading, errors} = props.userAuth;
+  const [successFetching, setSuccessFetching] = useState(false);
+  const [disableButton, setDisableButton] = useState(true);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -44,6 +47,7 @@ const AuthenticationScreen = props => {
     }
 
     if (password && login) {
+      setDisableButton(false);
       setLoginError('');
       setPasswordError('');
       props.login(login, password);
@@ -52,18 +56,21 @@ const AuthenticationScreen = props => {
   };
 
   useEffect(() => {
-    console.log(errors);
-    if (
-      !isLoading &&
-      errors.login.length === 0 &&
-      errors.password.length === 0 &&
-      isAuth
-    ) {
-      props.navigation.navigate('Splash');
+    if (errors.login.length === 0 && errors.password.length === 0 && isAuth) {
+      if (!successFetching) {
+        props.getUserInfo();
+        setSuccessFetching(true);
+      }
+      if (Object.keys(user).length !== 0) {
+        console.log(props.userAuth);
+        props.navigation.navigate('Splash');
+      }
     } else if (errors.login.length !== 0) {
       setLoginError('Неверный логин');
+      setDisableButton(true);
     } else if (errors.password.length !== 0) {
       setPasswordError('Неверный пароль');
+      setDisableButton(true);
     }
   }, [props.userAuth]);
 
@@ -103,7 +110,11 @@ const AuthenticationScreen = props => {
           <Text style={styles.loginError}>{passwordError}</Text>
 
           <View style={styles.button}>
-            <UiButton text="Войти" onPress={() => handleLogin()} />
+            <UiButton
+              disabled={!disableButton}
+              text={isLoading ? 'Загрузка...' : 'Войти'}
+              onPress={() => handleLogin()}
+            />
           </View>
         </KeyboardAvoidingView>
       </View>
@@ -118,6 +129,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   login: (login, password) => dispatch(loginAction(login, password)),
   clearAuthUserStore: () => dispatch(clearAuthUserStoreAction()),
+  getUserInfo: () => dispatch(checkLogin()),
 });
 
 export default connect(
