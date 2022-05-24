@@ -5,7 +5,7 @@ import {UiMainButton} from './UiButton';
 import {UiCounter} from './UiCounter';
 import {UiProfileButton} from './UiButton';
 import {UiDropdown} from './UiDropdown';
-import {UiContainer, UiContainerHome} from './UiContainer';
+import {UiContainer, UiContainerHome, UiContainerWP} from './UiContainer';
 
 export {
   UiMainButton,
@@ -17,4 +17,5 @@ export {
   UiProfileButton,
   UiContainer,
   UiContainerHome,
+  UiContainerWP,
 };

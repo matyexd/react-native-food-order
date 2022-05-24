@@ -1,8 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, FlatList} from 'react-native';
-import OrderCard from '../../components/OrderCard/OrderCard';
-import {UiIcon} from '../../components/ui-kit';
-import {UiContainerWP} from '../../components/ui-kit/UiContainer';
+import {OrderCard} from '../../components';
+import {UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {height, width} from '../../utils/Responsive';
 import {styles} from './OrderScreenStyle';
 

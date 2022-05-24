@@ -1,12 +1,9 @@
 import React from 'react';
-import {UiContainer, UiIcon} from '../../components/ui-kit';
+import {UiContainer, UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {styles} from './HistoryScreenStyle';
 import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
-
 import {height, width} from '../../utils/Responsive';
-import {UiContainerWP} from '../../components/ui-kit/UiContainer';
-import HistoryCard from '../../components/HistoryCard/HistoryCardLast/HistoryCard';
-import HistoryCardDay from '../../components/HistoryCard/HistoryCardToday/HistoryCardDay';
+import {HistoryCard, HistoryCardDay} from '../../components';
 
 const HistoryScreen = props => {
   const data = [

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
-import SDishCard from '../../components/SDishCard';
 import {
   UiIcon,
   UiSearch,
@@ -8,7 +7,6 @@ import {
   UiContainerHome,
 } from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
-import InfoModal from '../../components/SModal/SModal';
 import {height, width} from '../../utils/Responsive';
 import {
   addProductAction,
@@ -20,6 +18,7 @@ import {
   getCategoriesAction,
   getMenuActions,
 } from '../../store/actions/menuActions';
+import {SDishCard, SModal} from '../../components';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;
@@ -145,7 +144,7 @@ const HomeScreen = props => {
         </View>
       </UiContainerHome>
       {visible && (
-        <InfoModal
+        <SModal
           product={item}
           addToBasket={addProductCallback}
           isVisible={visible}
