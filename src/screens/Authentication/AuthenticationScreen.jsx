@@ -6,6 +6,7 @@ import {
   TextInput,
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './AuthenticationScreenStyle';
@@ -19,6 +20,7 @@ import {
   clearAuthUserStoreAction,
   loginAction,
 } from '../../store/actions/authAction';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const AuthenticationScreen = props => {
   const {user, isAuth, isLoading, errors} = props.userAuth;
@@ -84,7 +86,9 @@ const AuthenticationScreen = props => {
           />
         </View>
 
-        <KeyboardAvoidingView style={styles.inputData} behavior={'padding'}>
+        <View
+          style={styles.inputData}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <View style={loginError ? styles.inputError : styles.input}>
             <TextInput
               style={styles.inputText}
@@ -110,13 +114,17 @@ const AuthenticationScreen = props => {
           <Text style={styles.loginError}>{passwordError}</Text>
 
           <View style={styles.button}>
-            <UiButton
-              disabled={!disableButton}
-              text={isLoading ? 'Загрузка...' : 'Войти'}
-              onPress={() => handleLogin()}
-            />
+            {isLoading ? (
+              <UIActivityIndicator color={'#AAAAAA'} size={20} />
+            ) : (
+              <UiButton
+                disabled={!disableButton}
+                text={isLoading ? 'Загрузка...' : 'Войти'}
+                onPress={() => handleLogin()}
+              />
+            )}
           </View>
-        </KeyboardAvoidingView>
+        </View>
       </View>
     </UiContainer>
   );
