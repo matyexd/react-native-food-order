@@ -4,7 +4,6 @@ import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 import {ModalLogout} from '../../components/ModalLogout';
 import {connect} from 'react-redux';
-import $api from '../../http';
 import {logoutAction} from '../../store/actions/authAction';
 
 const ProfileScreen = props => {
@@ -41,6 +40,7 @@ const ProfileScreen = props => {
   };
   const handleLogout = () => {
     props.logout();
+
     props.navigation.navigate('Auth');
   };
 
