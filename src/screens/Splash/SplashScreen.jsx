@@ -13,10 +13,8 @@ const SplashScreenAfterAuth = props => {
   useEffect(() => {
     setTimeout(async () => {
       props.navigation.navigate('TabNavigator');
-    }, 1000);
+    }, 500);
   }, []);
-
-  console.log(props.userAuth);
 
   return (
     <View style={styles.container}>

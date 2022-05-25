@@ -44,6 +44,8 @@ const ProfileScreen = props => {
     props.navigation.navigate('Auth');
   };
 
+  console.log(props.authUser);
+
   return (
     <>
       <UiContainer>
@@ -53,8 +55,8 @@ const ProfileScreen = props => {
         <View style={styles.ava}>
           <Image source={require('./../../assets/img/ava.png')} />
         </View>
-        <Text style={styles.name}>Сергей</Text>
-        <Text style={styles.info}>7 этаж</Text>
+        <Text style={styles.name}>{props.authUser.user.name}</Text>
+        <Text style={styles.info}>{props.authUser.user.floor}</Text>
         <View style={styles.data1}>
           {data.map(button => {
             return (

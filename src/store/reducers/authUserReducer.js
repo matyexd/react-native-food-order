@@ -36,7 +36,6 @@ export const authUserReducer = (state = initialState, action) => {
         ...state,
         user: {},
         isAuth: true,
-        isLoading: false,
         errorCheckAuth: '',
         errors: {login: [], password: []},
       };
@@ -71,7 +70,6 @@ export const authUserReducer = (state = initialState, action) => {
         user: {},
         isAuth: false,
         errors: {login: [], password: []},
-        isLoading: true,
       };
 
     case AUTH_CHECK:
@@ -92,6 +90,7 @@ export const authUserReducer = (state = initialState, action) => {
         },
         isLoadingSplash: false,
         isAuth: true,
+        isLoading: false,
         errors: {login: [], password: []},
         errorCheckAuth: '',
       };
@@ -100,6 +99,7 @@ export const authUserReducer = (state = initialState, action) => {
         ...state,
         user: {},
         isAuth: false,
+        isLoading: false,
         isLoadingSplash: false,
         errors: {login: [], password: []},
         errorCheckAuth: action.payload,
