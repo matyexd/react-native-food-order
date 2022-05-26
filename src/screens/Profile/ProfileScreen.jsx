@@ -4,23 +4,15 @@ import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 import {ModalLogout} from '../../components/ModalLogout';
 import {connect} from 'react-redux';
-import $api from '../../http';
 import {logoutAction} from '../../store/actions/authAction';
 
 const ProfileScreen = props => {
-  async function testApi() {
-    const response = await $api
-      .get('/user')
-      .then(response => response.data.data);
-    console.log(response);
-  }
-
   const data = [
     {
       id: 1,
       text: 'О приложении',
       icon: 'info',
-      navigate: () => testApi(),
+      navigate: () => console.log('о приложении'),
     },
     {
       id: 2,
@@ -48,8 +40,11 @@ const ProfileScreen = props => {
   };
   const handleLogout = () => {
     props.logout();
+
     props.navigation.navigate('Auth');
   };
+
+  console.log(props.authUser);
 
   return (
     <>
@@ -60,8 +55,8 @@ const ProfileScreen = props => {
         <View style={styles.ava}>
           <Image source={require('./../../assets/img/ava.png')} />
         </View>
-        <Text style={styles.name}>Сергей</Text>
-        <Text style={styles.info}>7 этаж</Text>
+        <Text style={styles.name}>{props.authUser.user.name}</Text>
+        <Text style={styles.info}>{props.authUser.user.floor}</Text>
         <View style={styles.data1}>
           {data.map(button => {
             return (

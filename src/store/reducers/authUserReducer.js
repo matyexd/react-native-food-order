@@ -4,14 +4,19 @@ import {
   AUTH_LOGOUT,
   AUTH_LOGIN,
   AUTH_CLEAR_STORE,
+  AUTH_CHECK,
+  AUTH_CHECK_SUCCESS,
+  AUTH_CHECK_FAIL,
 } from '../types/authTypes';
 import {removeUserSession, storeUserSession} from '../../storage';
 
 const initialState = {
   user: {},
   isAuth: false,
+  isLoadingSplash: true,
   isLoading: false,
   errors: {login: [], password: []},
+  errorCheckAuth: '',
 };
 
 export const authUserReducer = (state = initialState, action) => {
@@ -19,7 +24,11 @@ export const authUserReducer = (state = initialState, action) => {
     case AUTH_LOGIN:
       return {
         ...state,
+        user: {},
+        isAuth: false,
         isLoading: true,
+        errorCheckAuth: '',
+        errors: {login: [], password: []},
       };
     case AUTH_SUCCESS:
       storeUserSession('token', action.payload);
@@ -27,15 +36,7 @@ export const authUserReducer = (state = initialState, action) => {
         ...state,
         user: {},
         isAuth: true,
-        isLoading: false,
-        errors: {login: [], password: []},
-      };
-    case AUTH_LOGOUT:
-      removeUserSession('token');
-      return {
-        user: {},
-        isAuth: false,
-        isLoading: false,
+        errorCheckAuth: '',
         errors: {login: [], password: []},
       };
 
@@ -49,14 +50,59 @@ export const authUserReducer = (state = initialState, action) => {
           login: action.payload?.login || [],
           password: action.payload?.password || [],
         },
+        errorCheckAuth: '',
+      };
+
+    case AUTH_LOGOUT:
+      removeUserSession('token');
+      return {
+        ...state,
+        user: {},
+        isAuth: false,
+        isLoading: false,
+        isLoadingSplash: false,
+        errors: {login: [], password: []},
       };
 
     case AUTH_CLEAR_STORE:
       return {
+        ...state,
+        user: {},
+        isAuth: false,
+        errors: {login: [], password: []},
+      };
+
+    case AUTH_CHECK:
+      return {
+        ...state,
+        isLoadingSplash: true,
+      };
+
+    case AUTH_CHECK_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: {
+          id: action.payload.data.id,
+          email: action.payload.data.email,
+          name: action.payload.data.name,
+          floor: action.payload.data.floor,
+        },
+        isLoadingSplash: false,
+        isAuth: true,
+        isLoading: false,
+        errors: {login: [], password: []},
+        errorCheckAuth: '',
+      };
+    case AUTH_CHECK_FAIL:
+      return {
+        ...state,
         user: {},
         isAuth: false,
         isLoading: false,
+        isLoadingSplash: false,
         errors: {login: [], password: []},
+        errorCheckAuth: action.payload,
       };
 
     default:
