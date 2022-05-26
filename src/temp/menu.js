@@ -332,7 +332,7 @@ export const orders = [
   {
     id: 6,
     cost: 216,
-    date_order: '2022-05-24',
+    date_order: '2022-05-26',
     products: [
       {
         id: 1,
