@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
-import SBasketCard from '../../components/SBasketCard';
 import {UiIcon, UiButton} from '../../components/ui-kit';
 import {styles} from './BasketScreenStyle';
 import {connect} from 'react-redux';
@@ -9,6 +8,7 @@ import {
   changeProductCountAction,
   deleteProductAction,
 } from '../../store/actions/basketActions';
+import {SBasketCard} from '../../components';
 
 const BasketScreen = props => {
   const setProductCount = (product, count) => {

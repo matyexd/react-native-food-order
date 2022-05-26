@@ -9,6 +9,7 @@ import {
   CustomTabs,
   SplashScreenAfterAuth,
   HistoryScreen,
+  OrderScreen,
 } from './../screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
@@ -93,7 +94,6 @@ const AppNavigation = props => {
             component={AuthenticationScreen}
             options={{headerShown: false}}
           />
-
           <Stack.Screen
             name="Splash"
             component={SplashScreenAfterAuth}
@@ -102,6 +102,11 @@ const AppNavigation = props => {
           <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderScreen"
+            component={OrderScreen}
             options={{headerShown: false}}
           />
         </Stack.Navigator>

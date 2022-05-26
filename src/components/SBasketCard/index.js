@@ -1,3 +1,3 @@
 import SBasketCard from './SBasketCard';
 
-export default SBasketCard;
+export {SBasketCard};

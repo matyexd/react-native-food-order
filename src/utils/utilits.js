@@ -23,3 +23,8 @@ export const getNextWorkingDay = async () => {
     date.setDate(date.getDate() + 1);
   }
 };
+
+export const formatDate = dateStr => {
+  const dateArr = dateStr.split('-');
+  return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
+};

@@ -1,34 +1,36 @@
-import {GET_MENU, GET_MENU_FAILED, GET_MENU_SUCCEED} from '../types/menuTypes';
+import {
+  GET_HISTORY,
+  GET_HISTORY_FAILED,
+  GET_HISTORY_SUCCEED,
+} from '../types/historyTypes';
 
 const initialState = {
-  products: [],
+  orders: [],
   loading: false,
   error: false,
 };
 
-export const productsReducer = (state = initialState, action) => {
+export const historyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MENU:
+    case GET_HISTORY:
       return {
         ...state,
         loading: true,
         error: false,
       };
-
-    case GET_MENU_SUCCEED:
+    case GET_HISTORY_SUCCEED:
       return {
         ...state,
-        products: [...action.payload],
+        orders: [...action.payload],
         loading: false,
         error: false,
       };
-    case GET_MENU_FAILED:
+    case GET_HISTORY_FAILED:
       return {
         ...state,
         loading: false,
         error: true,
       };
-
     default:
       return state;
   }

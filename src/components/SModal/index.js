@@ -1,3 +1,3 @@
-import SModal from './SModal';
+import InfoModal from './SModal';
 
-export default SModal;
+export {InfoModal as SModal};

@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     marginBottom: height(16),
   },
   card: {
-    flex: 1,
     marginBottom: height(8),
   },
   titleIcon: {

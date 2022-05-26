@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, Image} from 'react-native';
 import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
-import {ModalLogout} from '../../components/ModalLogout';
 import {connect} from 'react-redux';
 import {logoutAction} from '../../store/actions/authAction';
+import {ModalLogout} from '../../components';
 
 const ProfileScreen = props => {
   const data = [
@@ -16,16 +16,15 @@ const ProfileScreen = props => {
     },
     {
       id: 2,
+      text: 'История заказов',
+      icon: 'history',
+      navigate: () => goToHistory(),
+    },
+    {
+      id: 3,
       text: 'Выход',
       icon: 'logout',
       navigate: () => setVisible(true),
-    },
-
-    {
-      id: 3,
-      text: 'История заказов',
-      icon: 'info',
-      navigate: () => goToHistory(),
     },
   ];
 

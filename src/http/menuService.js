@@ -1,7 +1,7 @@
 import $api from '.';
 import {data} from '../temp/menu';
 
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 export const categoriesFetch = async () => {
   if (DEBUG_MODE)
@@ -28,10 +28,10 @@ export const categoriesFetch = async () => {
 export const menuFetch = async args => {
   if (DEBUG_MODE) return data;
 
-  const result = await $api.get('/get-menu', {
-    params: {
-      date: args.date,
-    },
+  const result = await $api.get('admin/get-dishes', {
+    // params: {
+    //   date: args.date,
+    // },
   });
   return result.data.data;
 };

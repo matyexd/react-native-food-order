@@ -4,7 +4,6 @@ import {height, sp, width} from '../../utils/Responsive';
 export const styles = StyleSheet.create({
   main: {
     flex: 1,
-    //paddingHorizontal: width(20),
     paddingTop: height(12),
     paddingBottom: height(12),
     backgroundColor: 'white',
