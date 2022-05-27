@@ -2,7 +2,7 @@ import {GET_MENU, GET_MENU_FAILED, GET_MENU_SUCCEED} from '../types/menuTypes';
 
 const initialState = {
   products: [],
-  loading: false,
+  loading: true,
   error: false,
 };
 

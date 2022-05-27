@@ -17,6 +17,7 @@ const initialState = {
   isLoading: false,
   errors: {login: [], password: []},
   errorCheckAuth: '',
+  isWasLogin: false,
 };
 
 export const authUserReducer = (state = initialState, action) => {
@@ -38,6 +39,7 @@ export const authUserReducer = (state = initialState, action) => {
         isAuth: true,
         errorCheckAuth: '',
         errors: {login: [], password: []},
+        isWasLogin: true,
       };
 
     case AUTH_FAIL:

@@ -32,7 +32,7 @@ const HomeScreen = props => {
 
   useEffect(() => {
     props.getCategories();
-    props.getMenu('2022-12-13');
+    // props.getMenu('2022-12-13');
   }, []);
 
   useEffect(() => {

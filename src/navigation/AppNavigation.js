@@ -15,6 +15,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 import {checkLogin} from '../store/actions/authAction';
 import {connect} from 'react-redux';
+import useUploadData from '../hooks/useUploadData';
+import {getMenuActions} from '../store/actions/menuActions';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -66,24 +68,57 @@ const TabNavigator = () => {
 };
 
 const AppNavigation = props => {
-  useEffect(() => {
-    const init = async () => {
-      props.checkIsAuthUser();
-    };
+  const [loadingBootSplash, setLoadingBootSplash] = useState(true);
+  const isUploadData = useUploadData(props.userAuth, props.products);
 
-    init().finally(async () => {
-      await RNBootSplash.hide({fade: true});
-      console.log('Bootsplash has been hidden successfully');
-    });
+  useEffect(() => {
+    // const init = async () => {
+    props.checkIsAuthUser();
+    // };
+
+    // init().finally(async () => {
+    //   await RNBootSplash.hide({fade: true});
+    //   console.log('Bootsplash has been hidden successfully');
+    // });
   }, []);
 
-  console.log(props.userAuth);
+  useEffect(() => {
+    RNBootSplash.getVisibilityStatus().then(status => {
+      if (status === 'hidden') {
+        setLoadingBootSplash(false);
+      } else {
+        setLoadingBootSplash(true);
+      }
+    });
+
+    if (loadingBootSplash && props.userAuth.isAuth) {
+      // Вызываем подгрузку данных
+      props.getMenu('2022-12-13');
+    }
+    if (isUploadData) {
+      RNBootSplash.hide({fade: true});
+    }
+  }, [props.userAuth, isUploadData]);
+
+  const splashAuthUser = () => {
+    if (props.userAuth.isWasLogin) {
+      return 'Splash';
+    } else {
+      return 'TabNavigator';
+    }
+  };
+
+  const splashNotAuthUser = () => {
+    return 'Auth';
+  };
 
   return (
     !props.userAuth.isLoadingSplash && (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={!props.userAuth.isAuth ? 'Auth' : 'Splash'}>
+          initialRouteName={
+            !props.userAuth.isAuth ? splashNotAuthUser() : splashAuthUser()
+          }>
           <Stack.Screen
             name="Auth"
             component={AuthenticationScreen}
@@ -107,10 +142,12 @@ const AppNavigation = props => {
 
 const mapStateToProps = store => ({
   userAuth: store.authUser,
+  products: store.products,
 });
 
 const mapDispatchToProps = dispatch => ({
   checkIsAuthUser: () => dispatch(checkLogin()),
+  getMenu: date => dispatch(getMenuActions(date)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation);
