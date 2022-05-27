@@ -8,7 +8,7 @@ const HistoryCardDay = props => {
   return (
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
-        <TouchableOpacity style={styles.container}>
+        <View style={styles.container}>
           <Text style={styles.order}>Заказ на сегодня</Text>
           <Text style={styles.dateText}>{props.date}</Text>
           <View style={styles.footer}>
@@ -23,7 +23,7 @@ const HistoryCardDay = props => {
             </View>
             <UiButton text="Отменить" />
           </View>
-        </TouchableOpacity>
+        </View>
       </Shadow>
     </>
   );

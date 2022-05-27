@@ -31,16 +31,11 @@ const ProfileStack = routeName => {
         name="History"
         component={HistoryScreen}
         options={{headerShown: false}}
-        listeners={({navigation, route}) => ({
-          blur: () => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 1,
-                routes: [{name: 'ProfileMain'}],
-              }),
-            );
-          },
-        })}
+      />
+      <Stack.Screen
+        name="OrderScreen"
+        component={OrderScreen}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -54,7 +49,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
-        options={{headerShown: false}}
+        options={{headerShown: false, unmountOnBlur: true}}
       />
       <Tab.Screen
         name="Home"
@@ -102,11 +97,6 @@ const AppNavigation = props => {
           <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="OrderScreen"
-            component={OrderScreen}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
