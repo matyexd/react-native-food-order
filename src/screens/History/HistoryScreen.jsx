@@ -63,12 +63,21 @@ const HistoryScreen = props => {
           <Text style={styles.titleText}>История заказов</Text>
         </View>
         {todayOrder && (
-          <View style={styles.cardOnDay}>
+          <TouchableOpacity
+            style={styles.cardOnDay}
+            onPress={() =>
+              props.navigation.navigate('OrderScreen', {
+                params: {
+                  products: todayOrder.products,
+                  orderDate: formatDate(todayOrder.date_order),
+                },
+              })
+            }>
             <HistoryCardDay
               price={todayOrder.cost}
               date={formatDate(todayOrder.date_order)}
             />
-          </View>
+          </TouchableOpacity>
         )}
         <FlatList
           contentContainerStyle={{

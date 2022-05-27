@@ -55,13 +55,6 @@ const OrderScreen = props => {
     },
   ];
 
-  const goToProfile = () => {
-    props.navigation.navigate('ProfileMain');
-  };
-
-  console.log('====================================');
-  console.log(props.route.params);
-  console.log('====================================');
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
       <OrderCard

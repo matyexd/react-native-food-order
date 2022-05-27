@@ -307,7 +307,7 @@ export const orders = [
   {
     id: 5,
     cost: 220,
-    date_order: '2022-05-22',
+    date_order: '2022-05-28',
     products: [
       {
         id: 1,
@@ -332,7 +332,7 @@ export const orders = [
   {
     id: 6,
     cost: 216,
-    date_order: '2022-05-26',
+    date_order: '2022-05-27',
     products: [
       {
         id: 1,
@@ -346,7 +346,7 @@ export const orders = [
       {
         id: 2,
         name: 'Винегрет овощной',
-        date: '23.05.2022',
+        date: '27.05.2022',
         price: 225,
         gramm: '220/12',
         calories: '300',
