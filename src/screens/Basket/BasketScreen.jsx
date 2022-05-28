@@ -6,11 +6,18 @@ import {connect} from 'react-redux';
 import {height, width} from '../../utils/Responsive';
 import {
   changeProductCountAction,
+  clearBasketAction,
   deleteProductAction,
 } from '../../store/actions/basketActions';
 import {SBasketCard} from '../../components';
+import {createOrderRequest} from '../../http/orderService';
+import {getNextWorkingDay} from '../../utils/utilits';
 
 const BasketScreen = props => {
+  const getOrderDate = async () => {
+    const orderDate = await getNextWorkingDay();
+    return orderDate;
+  };
   const setProductCount = (product, count) => {
     props.changeCount(product, count);
   };
@@ -28,7 +35,19 @@ const BasketScreen = props => {
       />
     </View>
   );
-
+  const createOrder = async () => {
+    const date = await getOrderDate();
+    const basket = props.products.products.map(product => {
+      return {
+        quantity: product.count,
+        dish_id: product.product.id,
+      };
+    });
+    const res = await createOrderRequest(basket, date);
+    if (res) {
+      console.log('success');
+    }
+  };
   return (
     <>
       <View style={styles.main}>
@@ -68,6 +87,7 @@ const BasketScreen = props => {
           text="Оформить заказ"
           disabled={props.products.totalCost > 230 ? true : false}
           style={props.products.totalCost > 230 ? styles.buttonDisable : {}}
+          onPress={createOrder}
         />
       </View>
     </>
@@ -80,5 +100,6 @@ const mapDispatchToProps = dispatch => ({
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
   deleteProduct: product => dispatch(deleteProductAction(product)),
+  clearBasket: () => dispatch(clearBasketAction()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen);
