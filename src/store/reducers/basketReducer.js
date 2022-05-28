@@ -1,6 +1,7 @@
 import {
   ADD_PRODUCT_TO_BASKET,
   CHANGE_PRODUCT_COUNT,
+  CLEAR_BASKET,
   DELETE_PRODUCT_FROM_BASKET,
 } from '../types/basketTypes';
 
@@ -54,6 +55,12 @@ export const basketReducer = (state = initialState, action) => {
         totalCost,
       };
     }
+    case CLEAR_BASKET:
+      return {
+        ...state,
+        products: [],
+        totalCost: 0,
+      };
     default:
       return state;
   }

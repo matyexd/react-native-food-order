@@ -18,7 +18,8 @@ export const getNextWorkingDay = async () => {
   for (let i = 0; i < 30; i++) {
     const ido = await isDayOff(date);
     if (!ido) {
-      return date;
+      const ndate = date.toISOString().split('T')[0];
+      return ndate;
     }
     date.setDate(date.getDate() + 1);
   }

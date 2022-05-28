@@ -28,6 +28,6 @@ export const categoriesFetch = async () => {
 export const menuFetch = async args => {
   if (DEBUG_MODE) return data;
 
-  const result = await $api.get('admin/get-dishes');
+  const result = await $api.get('/admin/get-dishes');
   return result.data.data;
 };

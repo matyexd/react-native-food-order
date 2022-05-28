@@ -7,6 +7,7 @@ import {HistoryCard, HistoryCardDay} from '../../components';
 import {getHistoryAction} from '../../store/actions/historyAction';
 import {connect} from 'react-redux';
 import {formatDate} from '../../utils/utilits';
+import {orderFetch} from '../../http/historyService';
 
 const HistoryScreen = props => {
   const getToday = () => {
@@ -21,13 +22,16 @@ const HistoryScreen = props => {
   };
 
   useEffect(() => {
-    props.getHistory();
+    props.getHistory(props.user.user.id);
   }, []);
-
   const todayOrder = props.history.orders.find(
-    order => order.date_order == getToday(),
+    order => order.date_order == '2022-05-29',
+    //  == getToday(),
   );
 
+  const deleteOrderCallback = () => {
+    props.getHistory(props.user.user.id);
+  };
   const goToProfile = () => {
     props.navigation.navigate('ProfileMain');
   };
@@ -38,7 +42,6 @@ const HistoryScreen = props => {
       key={item.id}
       onPress={() =>
         props.navigation.navigate('OrderScreen', {
-          // screen: 'OrderScreen',
           params: {
             products: item.products,
             orderDate: formatDate(item.date_order),
@@ -75,7 +78,10 @@ const HistoryScreen = props => {
             }>
             <HistoryCardDay
               price={todayOrder.cost}
-              date={formatDate(todayOrder.date_order)}
+              // date={formatDate(todayOrder.date_order)}
+              id={todayOrder.id}
+              date="2022-05-29"
+              deleteOrderCallback={deleteOrderCallback}
             />
           </TouchableOpacity>
         )}
@@ -94,10 +100,11 @@ const HistoryScreen = props => {
 };
 const mapStateToProps = store => ({
   history: store.history,
+  user: store.authUser,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getHistory: () => dispatch(getHistoryAction()),
+  getHistory: userId => dispatch(getHistoryAction(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryScreen);
