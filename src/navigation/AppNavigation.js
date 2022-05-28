@@ -109,8 +109,11 @@ const AppNavigation = props => {
   };
 
   const splashNotAuthUser = () => {
+    RNBootSplash.hide({fade: true});
     return 'Auth';
   };
+
+  console.log(props.userAuth);
 
   return (
     !props.userAuth.isLoadingSplash && (
