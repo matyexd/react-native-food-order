@@ -3,12 +3,11 @@ import {AUTH_CHECK, AUTH_LOGIN} from '../store/types/authTypes';
 import {
   checkLogin,
   checkLoginFail,
-  loginFetch,
   checkLoginSuccess,
   setAuthFailAction,
   setAuthSuccessAction,
-  checkAuthFetch,
 } from '../store/actions/authAction';
+import {checkAuthFetch, loginFetch} from '../http/authUserService';
 
 function* loginWorker({payload}) {
   try {

@@ -43,16 +43,6 @@ export const checkLoginFail = payload => ({
   payload: payload,
 });
 
-export const loginFetch = ({login, password}) => {
-  return $api
-    .post('/login', {login: login, password: password})
-    .then(data => data);
-};
-
 export const clearAuthUserStoreAction = () => ({
   type: AUTH_CLEAR_STORE,
 });
-
-export const checkAuthFetch = () => {
-  return $api.get('/user');
-};
