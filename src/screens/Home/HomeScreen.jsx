@@ -19,6 +19,7 @@ import {
   getMenuActions,
 } from '../../store/actions/menuActions';
 import {SDishCard, SModal} from '../../components';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;
@@ -29,11 +30,6 @@ const HomeScreen = props => {
   const [filterData, setFilterData] = useState(data);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedData, setSearchedData] = useState(data);
-
-  useEffect(() => {
-    props.getCategories();
-    props.getMenu('2022-12-13');
-  }, []);
 
   useEffect(() => {
     filterByCategory(categories[0]?.id);
@@ -132,15 +128,19 @@ const HomeScreen = props => {
           )}
         </View>
         <View style={styles.mainList}>
-          <FlatList
-            contentContainerStyle={{
-              paddingHorizontal: width(20),
-              paddingTop: height(12),
-            }}
-            data={searchQuery.length > 0 ? searchedData : filterData}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
+          {props.products.loading ? (
+            <UIActivityIndicator color={'#AAAAAA'} size={30} />
+          ) : (
+            <FlatList
+              contentContainerStyle={{
+                paddingHorizontal: width(20),
+                paddingTop: height(12),
+              }}
+              data={searchQuery.length > 0 ? searchedData : filterData}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          )}
         </View>
       </UiContainerHome>
       {visible && (
@@ -167,8 +167,6 @@ const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(addProductAction(product)),
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
-  getCategories: () => dispatch(getCategoriesAction()),
-  getMenu: date => dispatch(getMenuActions(date)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -3,20 +3,17 @@ import {AUTH_CHECK, AUTH_LOGIN} from '../store/types/authTypes';
 import {
   checkLogin,
   checkLoginFail,
-  loginFetch,
   checkLoginSuccess,
   setAuthFailAction,
   setAuthSuccessAction,
-  checkAuthFetch,
 } from '../store/actions/authAction';
+import {checkAuthFetch, loginFetch} from '../http/authUserService';
 
 function* loginWorker({payload}) {
   try {
     const data = yield call(loginFetch, payload);
-    console.log(data);
     yield put(setAuthSuccessAction(data.data.data.access_token));
   } catch (e) {
-    console.log(e.response.data);
     yield put(setAuthFailAction(e.response.data.errors));
     // setAuthFailAction(e.response.data.error.login);
   }
