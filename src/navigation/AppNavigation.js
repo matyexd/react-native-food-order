@@ -16,7 +16,10 @@ import RNBootSplash from 'react-native-bootsplash';
 import {checkLogin} from '../store/actions/authAction';
 import {connect} from 'react-redux';
 import useUploadData from '../hooks/useUploadData';
-import {getMenuActions} from '../store/actions/menuActions';
+import {
+  getCategoriesAction,
+  getMenuActions,
+} from '../store/actions/menuActions';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,7 +72,11 @@ const TabNavigator = () => {
 
 const AppNavigation = props => {
   const [loadingBootSplash, setLoadingBootSplash] = useState(true);
-  const isUploadData = useUploadData(props.userAuth, props.products);
+  const isUploadData = useUploadData(
+    props.userAuth,
+    props.products,
+    props.categories,
+  );
 
   useEffect(() => {
     // const init = async () => {
@@ -94,6 +101,7 @@ const AppNavigation = props => {
     if (loadingBootSplash && props.userAuth.isAuth) {
       // Вызываем подгрузку данных
       props.getMenu('2022-12-13');
+      props.getCategories();
     }
     if (isUploadData) {
       RNBootSplash.hide({fade: true});
@@ -146,11 +154,13 @@ const AppNavigation = props => {
 const mapStateToProps = store => ({
   userAuth: store.authUser,
   products: store.products,
+  categories: store.categories,
 });
 
 const mapDispatchToProps = dispatch => ({
   checkIsAuthUser: () => dispatch(checkLogin()),
   getMenu: date => dispatch(getMenuActions(date)),
+  getCategories: () => dispatch(getCategoriesAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation);

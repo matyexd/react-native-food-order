@@ -9,14 +9,22 @@ import {
   clearAuthUserStoreAction,
   loginAction,
 } from '../../store/actions/authAction';
-import {getMenuActions} from '../../store/actions/menuActions';
+import {
+  getCategoriesAction,
+  getMenuActions,
+} from '../../store/actions/menuActions';
 import useUploadData from '../../hooks/useUploadData';
 
 const SplashScreenAfterAuth = props => {
-  const isUploadData = useUploadData(props.userAuth, props.products);
+  const isUploadData = useUploadData(
+    props.userAuth,
+    props.products,
+    props.categories,
+  );
 
   useEffect(() => {
     props.getMenu('2022-12-13');
+    props.getCategories();
   }, []);
 
   useEffect(() => {
@@ -62,11 +70,13 @@ const SplashScreenAfterAuth = props => {
 };
 
 const mapStateToProps = store => ({
+  categories: store.categories,
   userAuth: store.authUser,
   products: store.products,
 });
 
 const mapDispatchToProps = dispatch => ({
+  getCategories: () => dispatch(getCategoriesAction()),
   getUserInfo: () => dispatch(checkLogin()),
   getMenu: date => dispatch(getMenuActions(date)),
 });
