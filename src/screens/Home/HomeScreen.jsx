@@ -20,6 +20,7 @@ import {
 } from '../../store/actions/menuActions';
 import {SDishCard, SModal} from '../../components';
 import {UIActivityIndicator} from 'react-native-indicators';
+import {CommonActions} from '@react-navigation/native';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;

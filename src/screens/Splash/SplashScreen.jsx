@@ -14,6 +14,7 @@ import {
   getMenuActions,
 } from '../../store/actions/menuActions';
 import useUploadData from '../../hooks/useUploadData';
+import {CommonActions} from '@react-navigation/native';
 
 const SplashScreenAfterAuth = props => {
   const isUploadData = useUploadData(
@@ -29,7 +30,13 @@ const SplashScreenAfterAuth = props => {
 
   useEffect(() => {
     if (isUploadData) {
-      props.navigation.navigate('TabNavigator');
+      props.navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{name: 'TabNavigator'}],
+        }),
+      );
+      // props.navigation.navigate('TabNavigator');
     }
   }, [isUploadData]);
 
