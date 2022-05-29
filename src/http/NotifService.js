@@ -33,14 +33,27 @@ const NotifService = () => {
     };
   };
 
+  const createDefaultChannels = () => {
+    PushNotification.createChannel(
+      {
+        channelId: 'default-channel-id', // (required)
+        channelName: `Default channel`, // (required)
+        channelDescription: 'A default channel', // (optional) default: undefined.
+        soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+        importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+      },
+      created =>
+        console.log(`createChannel 'default-channel-id' returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+    );
+  };
+
   const showNotification = (id, title, message, data = {}, options = {}) => {
     PushNotification.localNotification({
-      ..._buildAndroidNotification(id, title, message, data, options),
-      title: title || '',
-      message: message || '',
-      playSound: options.playSound || false,
-      soundName: options.soundName || 'default',
-      userInteraction: false,
+      ..._buildAndroidNotification(id),
+      channelId: 'default-channel-id',
+      title: 'Local Notification', // (optional)
+      message: 'My Notification Message', // (required)
     });
   };
 
@@ -52,7 +65,13 @@ const NotifService = () => {
     PushNotification.unregister();
   };
 
-  return {configure, showNotification, cancelAllLocalNotification, unregister};
+  return {
+    configure,
+    createDefaultChannels,
+    showNotification,
+    cancelAllLocalNotification,
+    unregister,
+  };
 };
 
 export default NotifService;

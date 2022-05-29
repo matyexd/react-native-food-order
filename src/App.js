@@ -12,24 +12,21 @@ import NotifService from './http/NotifService';
 const App = () => {
   const {store, persistor, sagaMiddleware} = reduxStore();
   sagaMiddleware.run(rootSaga);
-  const {configure, showNotification} = NotifService();
+  const {configure, createDefaultChannels, showNotification} = NotifService();
 
   const getPushData = async message => {
-    PushNotification.localNotification({
-      channelId: 'channel-id',
-      message: message.notification.body,
-      title: message.notification.title,
-    });
+    showNotification(
+      message.messageId,
+      message.notification.title,
+      message.notification.body,
+      {},
+    );
     console.log(message);
   };
 
-  const getToken = async () => {
-    const token = await messaging().getToken();
-    console.log('token', token);
-  };
-
   useEffect(() => {
-    getToken();
+    createDefaultChannels();
+    configure();
   }, []);
 
   messaging().onMessage(getPushData);
