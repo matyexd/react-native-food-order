@@ -14,7 +14,7 @@ const OrderCard = props => {
               <View style={{flex: 1}}>
                 <Text style={styles.header}>{props.name}</Text>
                 <Text style={styles.calorie}>
-                  {props.gramm}гр {props.calories}Ккал
+                  {props.weight}гр {props.calories}Ккал
                 </Text>
               </View>
             </View>

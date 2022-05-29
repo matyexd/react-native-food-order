@@ -1,59 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TouchableOpacity, Text, View, FlatList} from 'react-native';
+import {connect} from 'react-redux';
 import {OrderCard} from '../../components';
 import {UiContainerWP, UiIcon} from '../../components/ui-kit';
+import {getOrderAction} from '../../store/actions/historyAction';
 import {height, width} from '../../utils/Responsive';
 import {styles} from './OrderScreenStyle';
 
 const OrderScreen = props => {
-  const products = props.route.params.params.products;
-  const data = [
-    {
-      id: 1,
-      name: 'Винегрет овощной',
-      date: '24.05.2022',
-      price: 230,
-      gramm: '220/12',
-      calories: '300',
-      image: require('./../../assets/img/salat.png'),
-    },
-    {
-      id: 2,
-      name: 'Винегрет овощной',
-      date: '23.05.2022',
-      price: 225,
-      gramm: '220/12',
-      calories: '300',
-      image: require('./../../assets/img/salat.png'),
-    },
-    {
-      id: 3,
-      name: 'Винегрет овощной',
-      date: '22.05.2022',
-      price: 202,
-      gramm: '220/12',
-      calories: '300',
-      image: require('./../../assets/img/salat.png'),
-    },
-    {
-      id: 4,
-      name: 'Винегрет овощной',
-      date: '21.05.2022',
-      price: 196,
-      gramm: '220/12',
-      calories: '300',
-      image: require('./../../assets/img/salat.png'),
-    },
-    {
-      id: 5,
-      name: 'Винегрет овощной',
-      date: '20.05.2022',
-      price: 215,
-      gramm: '220/12',
-      calories: '300',
-      image: require('./../../assets/img/salat.png'),
-    },
-  ];
+  console.log(props.route.params.params.products[0].dishes);
+  const products = props.route.params.params.products[0].dishes;
+  // useEffect(() => {
+  //   props.getOrder(props.route.params.params.orderId);
+  // }, []);
 
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
@@ -62,7 +21,7 @@ const OrderScreen = props => {
         date={item.date}
         name={item.name}
         calories={item.calories}
-        gramm={item.gramm}
+        weight={item.weight}
         image={item.image}
       />
     </View>
@@ -93,5 +52,11 @@ const OrderScreen = props => {
     </>
   );
 };
-
+// const mapStateToProps = store => ({
+//   order: store.order,
+// });
+// const mapDispatchToProps = dispatch => ({
+//   getOrder: orderId => dispatch(getOrderAction(orderId)),
+// });
+// export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);
 export default OrderScreen;

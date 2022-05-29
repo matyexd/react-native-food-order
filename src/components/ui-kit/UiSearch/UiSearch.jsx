@@ -6,6 +6,9 @@ import {Shadow} from 'react-native-shadow-2';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const UiSearch = props => {
+  const onInputChange = () => {
+    props.onInputChangeHandler('');
+  };
   return (
     <Shadow
       viewStyle={{alignSelf: 'stretch'}}
@@ -27,7 +30,7 @@ const UiSearch = props => {
         />
         <TouchableOpacity
           disabled={props.value?.length == 0}
-          onPress={() => props.onInputChangeHandler('')}>
+          onPress={onInputChange}>
           <UiIcon
             iconName={'close'}
             iconSize={18}
