@@ -7,10 +7,12 @@ import {rootSaga} from './sagas';
 import AppNavigation from './navigation/AppNavigation';
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
+import NotifService from './http/NotifService';
 
 const App = () => {
   const {store, persistor, sagaMiddleware} = reduxStore();
   sagaMiddleware.run(rootSaga);
+  const {configure, showNotification} = NotifService();
 
   const getPushData = async message => {
     PushNotification.localNotification({
