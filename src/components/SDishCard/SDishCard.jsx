@@ -17,7 +17,7 @@ const SDishCard = props => {
         <View style={styles.info}>
           <Text style={styles.header}>{product.name}</Text>
           <Text style={styles.calorie}>
-            {product.gramm}гр {product.calorie}Ккал
+            {product.weight}гр {product.calories}Ккал
           </Text>
           <View style={{flex: 1, justifyContent: 'flex-end'}}>
             <View style={styles.about}>

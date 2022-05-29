@@ -14,7 +14,7 @@ const useUploadData = (userAuth, products, categories) => {
         count++;
       }
       if (count === 2) {
-        console.log(products);
+        // console.log(products);
         setIsLoadingData(true);
       }
     }

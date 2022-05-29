@@ -8,8 +8,8 @@ import {Button} from 'react-native-paper';
 const SBasketCard = props => {
   const {product, count, setCount, deleteProduct} = props;
 
-  const onPressHandler = () => {
-    console.log('Нажата кнопка');
+  const onPressDeleteHandler = () => {
+    deleteProduct(product);
   };
 
   return (
@@ -22,12 +22,12 @@ const SBasketCard = props => {
               <View style={{flex: 1}}>
                 <Text style={styles.header}>{product.name}</Text>
                 <Text style={styles.calorie}>
-                  {product.gramm}гр {product.calorie}Ккал
+                  {product.weight}гр {product.calories}Ккал
                 </Text>
               </View>
               <TouchableOpacity
                 style={styles.trash}
-                onPress={() => deleteProduct(product)}>
+                onPress={onPressDeleteHandler}>
                 <UiIcon
                   iconName="trash"
                   iconColor="#000"

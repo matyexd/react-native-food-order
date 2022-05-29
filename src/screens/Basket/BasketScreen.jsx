@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {UiIcon, UiButton} from '../../components/ui-kit';
 import {styles} from './BasketScreenStyle';
@@ -12,8 +12,19 @@ import {
 import {SBasketCard} from '../../components';
 import {createOrderRequest} from '../../http/orderService';
 import {getNextWorkingDay} from '../../utils/utilits';
+import ModalMessageFailed from '../../components/ModalMessage/ModalMessageFailed/ModalMessageFailed';
+import ModalMessageSuccess from '../../components/ModalMessage/ModalMessageSuccess/ModalMessageSuccess';
 
 const BasketScreen = props => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const setModalVisibleCallback = visible => {
+    setModalVisible(visible);
+  };
+
+  const [modalFailedVisible, setModalFailedVisible] = useState(false);
+  const setModalFailedVisibleCallback = visible => {
+    setModalFailedVisible(visible);
+  };
   const getOrderDate = async () => {
     const orderDate = await getNextWorkingDay();
     return orderDate;
@@ -44,8 +55,12 @@ const BasketScreen = props => {
       };
     });
     const res = await createOrderRequest(basket, date);
-    if (res) {
-      console.log('success');
+    if (res?.status > 199 && res.status < 300) {
+      console.log(res.status);
+      props.clearBasket();
+      setModalVisible(true);
+    } else {
+      setModalFailedVisible(true);
     }
   };
   return (
@@ -85,11 +100,27 @@ const BasketScreen = props => {
       <View style={styles.button}>
         <UiButton
           text="Оформить заказ"
-          disabled={props.products.totalCost > 230 ? true : false}
-          style={props.products.totalCost > 230 ? styles.buttonDisable : {}}
+          disabled={
+            props.products.totalCost > 230 || props.products.totalCost == 0
+              ? true
+              : false
+          }
+          style={
+            props.products.totalCost > 230 || props.products.totalCost == 0
+              ? styles.buttonDisable
+              : {}
+          }
           onPress={createOrder}
         />
       </View>
+      <ModalMessageSuccess
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisibleCallback}
+      />
+      <ModalMessageFailed
+        modalVisible={modalFailedVisible}
+        setModalVisible={setModalFailedVisibleCallback}
+      />
     </>
   );
 };

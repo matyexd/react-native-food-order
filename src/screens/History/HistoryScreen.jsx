@@ -25,7 +25,7 @@ const HistoryScreen = props => {
     props.getHistory(props.user.user.id);
   }, []);
   const todayOrder = props.history.orders.find(
-    order => order.date_order == '2022-05-29',
+    order => order.date_order == '2022-05-30',
     //  == getToday(),
   );
 
@@ -43,8 +43,10 @@ const HistoryScreen = props => {
       onPress={() =>
         props.navigation.navigate('OrderScreen', {
           params: {
-            products: item.products,
+            // products: item.products,
+            products: props.history.orders,
             orderDate: formatDate(item.date_order),
+            orderId: props.user.user.id,
           },
         })
       }>
@@ -71,8 +73,10 @@ const HistoryScreen = props => {
             onPress={() =>
               props.navigation.navigate('OrderScreen', {
                 params: {
-                  products: todayOrder.products,
+                  products: props.history.orders,
+                  // products: todayOrder.products,
                   orderDate: formatDate(todayOrder.date_order),
+                  id: props.user.user.id,
                 },
               })
             }>

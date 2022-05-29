@@ -11,7 +11,10 @@ const InfoModal = props => {
   const addProductHandler = () => {
     addToBasket(product);
   };
-
+  const addProduct = () => {
+    addProductHandler(product);
+    setProductCount(product, counterValue);
+  };
   return (
     <Modal
       useNativeDriverForBackdrop={true}
@@ -32,7 +35,7 @@ const InfoModal = props => {
             <View>
               <Text style={styles.header}>{product?.name}</Text>
               <Text style={styles.gramm}>
-                {product?.gramm} гр {product?.calorie} Ккал
+                {product?.weight} гр {product?.calories} Ккал
               </Text>
             </View>
           </View>
@@ -61,13 +64,7 @@ const InfoModal = props => {
               />
             </View>
             <View style={styles.button}>
-              <UiMainButton
-                text="Добавить"
-                onPress={() => {
-                  addProductHandler(product);
-                  setProductCount(product, counterValue);
-                }}
-              />
+              <UiMainButton text="Добавить" onPress={addProduct} />
             </View>
           </View>
         </View>
