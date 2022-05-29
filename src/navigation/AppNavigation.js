@@ -121,8 +121,6 @@ const AppNavigation = props => {
     return 'Auth';
   };
 
-  console.log(props.userAuth);
-
   return (
     !props.userAuth.isLoadingSplash && (
       <NavigationContainer>

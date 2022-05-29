@@ -54,7 +54,6 @@ const HomeScreen = props => {
     </TouchableOpacity>
   );
   const filterByCategory = category => {
-    console.log(category);
     if (!category) return;
     const newData = data.filter(pr => pr.category_id === category);
     setFilterData(newData);

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import RNBootSplash from 'react-native-bootsplash';
 
 const useUploadData = (userAuth, products, categories) => {
   const [isLoadingData, setIsLoadingData] = useState(false);
@@ -14,7 +13,6 @@ const useUploadData = (userAuth, products, categories) => {
         count++;
       }
       if (count === 2) {
-        console.log(products);
         setIsLoadingData(true);
       }
     }

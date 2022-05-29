@@ -57,8 +57,6 @@ const SplashScreenAfterAuth = props => {
   //   }
   // }, [props.userAuth]);
 
-  console.log(123);
-
   return (
     <View style={styles.container}>
       <View style={styles.logo}>

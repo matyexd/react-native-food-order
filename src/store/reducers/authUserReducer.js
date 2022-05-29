@@ -81,7 +81,6 @@ export const authUserReducer = (state = initialState, action) => {
       };
 
     case AUTH_CHECK_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         user: {
