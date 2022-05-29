@@ -8,8 +8,8 @@ import {height, width} from '../../utils/Responsive';
 import {styles} from './OrderScreenStyle';
 
 const OrderScreen = props => {
-  console.log(props.route.params.params.products[0].dishes);
-  const products = props.route.params.params.products[0].dishes;
+  console.log(props.route.params.params.products.dishes);
+  const products = props.route.params.params.products.dishes;
   // useEffect(() => {
   //   props.getOrder(props.route.params.params.orderId);
   // }, []);
@@ -23,6 +23,7 @@ const OrderScreen = props => {
         calories={item.calories}
         weight={item.weight}
         image={item.image}
+        quantity={item.quantity}
       />
     </View>
   );

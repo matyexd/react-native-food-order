@@ -44,7 +44,7 @@ const HistoryScreen = props => {
         props.navigation.navigate('OrderScreen', {
           params: {
             // products: item.products,
-            products: props.history.orders,
+            products: item,
             orderDate: formatDate(item.date_order),
             orderId: props.user.user.id,
           },
@@ -53,11 +53,11 @@ const HistoryScreen = props => {
       <HistoryCard price={item.cost} date={formatDate(item.date_order)} />
     </TouchableOpacity>
   );
-
   const filterOrders = props.history.orders.filter(
     order => order.date_order != getToday(),
   );
 
+  console.log(filterOrders);
   return (
     <>
       <UiContainerWP>
