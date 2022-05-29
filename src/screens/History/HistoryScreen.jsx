@@ -8,6 +8,7 @@ import {getHistoryAction} from '../../store/actions/historyAction';
 import {connect} from 'react-redux';
 import {formatDate} from '../../utils/utilits';
 import {orderFetch} from '../../http/historyService';
+import {orders} from '../../temp/menu';
 
 const HistoryScreen = props => {
   const getToday = () => {
@@ -57,7 +58,6 @@ const HistoryScreen = props => {
     order => order.date_order != getToday(),
   );
 
-  console.log(filterOrders);
   return (
     <>
       <UiContainerWP>
@@ -73,7 +73,7 @@ const HistoryScreen = props => {
             onPress={() =>
               props.navigation.navigate('OrderScreen', {
                 params: {
-                  products: props.history.orders,
+                  products: props.history.orders[0],
                   // products: todayOrder.products,
                   orderDate: formatDate(todayOrder.date_order),
                   id: props.user.user.id,

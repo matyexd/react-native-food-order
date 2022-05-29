@@ -8,7 +8,6 @@ import {height, width} from '../../utils/Responsive';
 import {styles} from './OrderScreenStyle';
 
 const OrderScreen = props => {
-  console.log(props.route.params.params.products.dishes);
   const products = props.route.params.params.products.dishes;
   // useEffect(() => {
   //   props.getOrder(props.route.params.params.orderId);
