@@ -21,7 +21,9 @@ const OrderCard = props => {
             <View style={styles.infoPrice}>
               <View style={styles.about}>
                 <View style={styles.price}>
-                  <Text style={styles.count}>{props.price}</Text>
+                  <Text style={styles.count}>
+                    {props.price * props.quantity}
+                  </Text>
                   <UiIcon
                     iconName="ruble"
                     iconColor="#333333"
