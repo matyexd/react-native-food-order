@@ -6,6 +6,7 @@ import CustomTabs from './CustomTabs';
 import SplashScreenAfterAuth from './Splash/SplashScreen';
 import HistoryScreen from './History/HistoryScreen';
 import OrderScreen from './Order/OrderScreen';
+import AboutAppScreen from './AboutApp/AboutAppScreen';
 
 export {
   BasketScreen,
@@ -16,4 +17,5 @@ export {
   SplashScreenAfterAuth,
   HistoryScreen,
   OrderScreen,
+  AboutAppScreen,
 };
