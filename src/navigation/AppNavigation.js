@@ -10,6 +10,7 @@ import {
   SplashScreenAfterAuth,
   HistoryScreen,
   OrderScreen,
+  AboutAppScreen,
 } from './../screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
@@ -40,6 +41,11 @@ const ProfileStack = routeName => {
       <Stack.Screen
         name="OrderScreen"
         component={OrderScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={'AboutApp'}
+        component={AboutAppScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -12,7 +12,7 @@ const ProfileScreen = props => {
       id: 1,
       text: 'О приложении',
       icon: 'info',
-      navigate: () => console.log('о приложении'),
+      navigate: () => goToAboutApp(),
     },
     {
       id: 2,
@@ -32,6 +32,10 @@ const ProfileScreen = props => {
 
   const closeModalCallback = () => {
     setVisible(false);
+  };
+
+  const goToAboutApp = () => {
+    props.navigation.navigate('AboutApp');
   };
 
   const goToHistory = () => {
