@@ -43,8 +43,6 @@ const ProfileScreen = props => {
     props.navigation.navigate('Auth');
   };
 
-  console.log(props.authUser);
-
   return (
     <>
       <UiContainer>

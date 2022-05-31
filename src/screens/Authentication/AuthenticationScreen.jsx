@@ -64,7 +64,6 @@ const AuthenticationScreen = props => {
         setSuccessFetching(true);
       }
       if (Object.keys(user).length !== 0) {
-        console.log(props.userAuth);
         props.navigation.navigate('Splash');
       }
     } else if (errors.login.length !== 0) {

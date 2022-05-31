@@ -28,6 +28,7 @@ function* checkAuthWorker() {
     const data = yield call(checkAuthFetch);
     yield put(checkLoginSuccess(data.data));
   } catch (e) {
+    console.log();
     yield put(checkLoginFail(e.response.data.errors));
   }
 }
