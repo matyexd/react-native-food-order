@@ -1,20 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
-import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
+import {View, Text, Image, TextInput, KeyboardAvoidingView} from 'react-native';
+import {UiButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './AuthenticationScreenStyle';
 import {connect} from 'react-redux';
-import {
-  addProductAction,
-  changeProductCountAction,
-} from '../../store/actions/basketActions';
 import {
   checkLogin,
   clearAuthUserStoreAction,

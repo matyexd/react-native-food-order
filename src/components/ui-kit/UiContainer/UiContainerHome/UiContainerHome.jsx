@@ -1,9 +1,9 @@
 import React from 'react';
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {styles} from './UiContainerHomeStyle';
 
 const UiContainerHome = ({children}) => {
-  return <View style={styles.container}>{children}</View>;
+  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
 };
 
 export default UiContainerHome;

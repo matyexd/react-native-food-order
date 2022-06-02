@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, SafeAreaView} from 'react-native';
 import {UiIcon, UiButton} from '../../components/ui-kit';
 import {styles} from './BasketScreenStyle';
 import {connect} from 'react-redux';
@@ -65,7 +65,7 @@ const BasketScreen = props => {
   };
   return (
     <>
-      <View style={styles.main}>
+      <SafeAreaView style={styles.main}>
         <View style={styles.header}>
           <Text style={styles.limitLabel}>Корзина</Text>
           <View style={styles.limitPrice}>
@@ -96,7 +96,7 @@ const BasketScreen = props => {
             keyExtractor={item => item.product.id + 'b'}
           />
         </View>
-      </View>
+      </SafeAreaView>
       <View style={styles.button}>
         <UiButton
           text="Оформить заказ"
