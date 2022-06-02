@@ -5,6 +5,7 @@ import {styles} from './ProfileScreenStyle';
 import {connect} from 'react-redux';
 import {logoutAction} from '../../store/actions/authAction';
 import {ModalLogout} from '../../components';
+import {CommonActions} from '@react-navigation/native';
 
 const ProfileScreen = props => {
   const data = [
@@ -44,7 +45,12 @@ const ProfileScreen = props => {
   const handleLogout = () => {
     props.logout();
 
-    props.navigation.navigate('Auth');
+    props.navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{name: 'Auth'}],
+      }),
+    );
   };
 
   return (

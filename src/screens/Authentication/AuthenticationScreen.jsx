@@ -41,10 +41,10 @@ const AuthenticationScreen = props => {
 
   const handleLogin = () => {
     if (!login) {
-      setLoginError('Введите Ваш логин');
+      setLoginError('Введите логин');
     }
     if (!password) {
-      setPasswordError('Введите Ваш пароль');
+      setPasswordError('Введите пароль');
       return;
     }
 
@@ -58,7 +58,13 @@ const AuthenticationScreen = props => {
   };
 
   useEffect(() => {
-    if (errors.login.length === 0 && errors.password.length === 0 && isAuth) {
+    console.log(errors);
+    if (
+      errors.login.length === 0 &&
+      errors.password.length === 0 &&
+      isAuth &&
+      errors.generalError.length === 0
+    ) {
       if (!successFetching) {
         props.getUserInfo();
         setSuccessFetching(true);
@@ -67,10 +73,13 @@ const AuthenticationScreen = props => {
         props.navigation.navigate('Splash');
       }
     } else if (errors.login.length !== 0) {
-      setLoginError('Неверный логин');
+      setLoginError('Неверно введен логин');
       setDisableButton(true);
     } else if (errors.password.length !== 0) {
-      setPasswordError('Неверный пароль');
+      setPasswordError('Неверно введен пароль');
+      setDisableButton(true);
+    } else if (errors.generalError.length !== 0) {
+      setLoginError('Неверный логин или пароль');
       setDisableButton(true);
     }
   }, [props.userAuth]);
@@ -85,9 +94,7 @@ const AuthenticationScreen = props => {
           />
         </View>
 
-        <View
-          style={styles.inputData}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={styles.inputData} behavior={'padding'}>
           <View style={loginError ? styles.inputError : styles.input}>
             <TextInput
               style={styles.inputText}
@@ -123,7 +130,7 @@ const AuthenticationScreen = props => {
               />
             )}
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </UiContainer>
   );

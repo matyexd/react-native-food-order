@@ -15,7 +15,7 @@ const initialState = {
   isAuth: false,
   isLoadingSplash: true,
   isLoading: false,
-  errors: {login: [], password: []},
+  errors: {login: [], password: [], generalError: []},
   errorCheckAuth: '',
   isWasLogin: false,
 };
@@ -29,7 +29,7 @@ export const authUserReducer = (state = initialState, action) => {
         isAuth: false,
         isLoading: true,
         errorCheckAuth: '',
-        errors: {login: [], password: []},
+        errors: {login: [], password: [], generalError: []},
       };
     case AUTH_SUCCESS:
       storeUserSession('token', action.payload);
@@ -38,11 +38,12 @@ export const authUserReducer = (state = initialState, action) => {
         user: {},
         isAuth: true,
         errorCheckAuth: '',
-        errors: {login: [], password: []},
+        errors: {login: [], password: [], generalError: []},
         isWasLogin: true,
       };
 
     case AUTH_FAIL:
+      console.log(action.payload);
       return {
         ...state,
         user: {},
@@ -51,6 +52,10 @@ export const authUserReducer = (state = initialState, action) => {
         errors: {
           login: action.payload?.login || [],
           password: action.payload?.password || [],
+          generalError:
+            action.payload[0] === 'These credentials do not match our records.'
+              ? action.payload
+              : [],
         },
         errorCheckAuth: '',
       };
@@ -63,7 +68,7 @@ export const authUserReducer = (state = initialState, action) => {
         isAuth: false,
         isLoading: false,
         isLoadingSplash: false,
-        errors: {login: [], password: []},
+        errors: {login: [], password: [], generalError: []},
       };
 
     case AUTH_CLEAR_STORE:
@@ -71,7 +76,7 @@ export const authUserReducer = (state = initialState, action) => {
         ...state,
         user: {},
         isAuth: false,
-        errors: {login: [], password: []},
+        errors: {login: [], password: [], generalError: []},
       };
 
     case AUTH_CHECK:
@@ -92,7 +97,7 @@ export const authUserReducer = (state = initialState, action) => {
         isLoadingSplash: false,
         isAuth: true,
         isLoading: false,
-        errors: {login: [], password: []},
+        errors: {login: [], password: [], generalError: []},
         errorCheckAuth: '',
       };
     case AUTH_CHECK_FAIL:
@@ -102,7 +107,7 @@ export const authUserReducer = (state = initialState, action) => {
         isAuth: false,
         isLoading: false,
         isLoadingSplash: false,
-        errors: {login: [], password: []},
+        errors: {login: [], password: [], generalError: []},
         errorCheckAuth: action.payload,
       };
 

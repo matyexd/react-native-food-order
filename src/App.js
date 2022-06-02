@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {Alert} from 'react-native';
 import {Provider} from 'react-redux';
 import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
