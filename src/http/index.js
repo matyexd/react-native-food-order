@@ -1,11 +1,12 @@
 import axios from 'axios';
 import {retrieveUserSession} from '../storage';
+import {API_URL} from '@env';
 
-export const API_URL = `https://food-order-2.academy.smartworld.team/api/api`;
+export const BASE_API_URL = API_URL;
 
 const $api = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
+  baseURL: BASE_API_URL,
 });
 
 $api.interceptors.request.use(async config => {
