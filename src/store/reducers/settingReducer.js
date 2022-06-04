@@ -1,38 +1,35 @@
 import {
-  GET_ORDER,
-  GET_ORDER_FAILED,
-  GET_ORDER_SUCCEED,
-} from '../types/historyTypes';
+  GET_MAX_PRICE,
+  GET_MAX_PRICE_FAILED,
+  GET_MAX_PRICE_SUCCESS,
+} from '../types/settingTypes';
 
 const initialState = {
-  order: {},
+  maxPrice: {},
   loading: false,
   error: false,
 };
-
-export const orderReducer = (state = initialState, action) => {
+export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ORDER:
+    case GET_MAX_PRICE:
       return {
         ...state,
         loading: true,
         error: false,
       };
-
-    case GET_ORDER_SUCCEED:
+    case GET_MAX_PRICE_SUCCESS:
       return {
         ...state,
-        order: action.payload,
+        maxPrice: action.payload.max_price,
         loading: false,
         error: false,
       };
-    case GET_ORDER_FAILED:
+    case GET_MAX_PRICE_FAILED:
       return {
         ...state,
         loading: false,
         error: true,
       };
-
     default:
       return state;
   }

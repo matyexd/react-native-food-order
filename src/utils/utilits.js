@@ -26,6 +26,15 @@ export const getNextWorkingDay = async () => {
 };
 
 export const formatDate = dateStr => {
+  console.log(dateStr);
   const dateArr = dateStr.split('-');
   return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
+};
+
+export const getTomorrow = () => {
+  const today = Date.now();
+  const date = new Date(today);
+  date.setDate(date.getDate() + 1);
+  const ndate = date.toISOString().split('T')[0];
+  return ndate;
 };

@@ -23,9 +23,6 @@ export function* historyWatcher() {
 }
 
 export function* fetchOrder(args) {
-  console.log('====================================');
-  console.log(11222);
-  console.log('====================================');
   try {
     const data = yield call(orderFetch, args.orderId);
     yield put({type: GET_ORDER_SUCCEED, payload: data});

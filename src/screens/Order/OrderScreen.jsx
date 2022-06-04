@@ -5,13 +5,13 @@ import {OrderCard} from '../../components';
 import {UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {getOrderAction} from '../../store/actions/historyAction';
 import {height, width} from '../../utils/Responsive';
+import {formatDate} from '../../utils/utilits';
 import {styles} from './OrderScreenStyle';
 
 const OrderScreen = props => {
-  const products = props.route.params.params.products.dishes;
-  // useEffect(() => {
-  //   props.getOrder(props.route.params.params.orderId);
-  // }, []);
+  useEffect(() => {
+    props.getOrder(props.route.params.orderId);
+  }, []);
 
   const renderItem = ({item}) => (
     <View style={styles.card} key={item.id}>
@@ -22,7 +22,7 @@ const OrderScreen = props => {
         calories={item.calories}
         weight={item.weight}
         image={item.image}
-        quantity={item.quantity}
+        quantity={item.pivot.quantity}
       />
     </View>
   );
@@ -36,7 +36,7 @@ const OrderScreen = props => {
             <UiIcon iconName="arrowLeft" iconColor="#333333" />
           </TouchableOpacity>
           <Text style={styles.titleText}>
-            Заказ на {props.route.params.params.orderDate}
+            Заказ на {formatDate(props?.order?.order?.date_order)}
           </Text>
         </View>
         <FlatList
@@ -44,7 +44,7 @@ const OrderScreen = props => {
             paddingHorizontal: width(20),
             paddingTop: height(12),
           }}
-          data={products}
+          data={props.order.order.dishes}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
@@ -52,11 +52,10 @@ const OrderScreen = props => {
     </>
   );
 };
-// const mapStateToProps = store => ({
-//   order: store.order,
-// });
-// const mapDispatchToProps = dispatch => ({
-//   getOrder: orderId => dispatch(getOrderAction(orderId)),
-// });
-// export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);
-export default OrderScreen;
+const mapStateToProps = store => ({
+  order: store.order,
+});
+const mapDispatchToProps = dispatch => ({
+  getOrder: orderId => dispatch(getOrderAction(orderId)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);

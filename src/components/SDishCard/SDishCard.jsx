@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TouchableOpacity, Text, View, Image} from 'react-native';
 import {UiIcon, UiMainButton} from '../ui-kit';
 import {styles} from './SDishCardStyle';
@@ -11,34 +11,41 @@ const SDishCard = props => {
   };
 
   return (
-    <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
-      <View style={styles.container}>
-        <Image style={styles.img} source={product.image} />
-        <View style={styles.info}>
-          <Text style={styles.header}>{product.name}</Text>
-          <Text style={styles.calorie}>
-            {product.weight}гр {product.calories}Ккал
-          </Text>
-          <View style={{flex: 1, justifyContent: 'flex-end'}}>
-            <View style={styles.about}>
-              <View style={styles.price}>
-                <Text style={styles.count}>{product.price}</Text>
-                <UiIcon
-                  iconName="ruble"
-                  iconColor="#333333"
-                  iconSize={24}
-                  style={styles.icon}
+    <TouchableOpacity onPress={props.onPress} style={props.style}>
+      <Shadow
+        viewStyle={{
+          alignSelf: 'stretch',
+        }}
+        startColor="#00000015">
+        <View style={styles.container}>
+          <Image style={styles.img} source={product.image} />
+          <View style={styles.info}>
+            <Text style={styles.header}>{product.name}</Text>
+            <Text style={styles.calorie}>
+              {product.weight}гр {product.calories}Ккал
+            </Text>
+            <View style={{flex: 1, justifyContent: 'flex-end'}}>
+              <View style={styles.about}>
+                <View style={styles.price}>
+                  <Text style={styles.count}>{product.price}</Text>
+                  <UiIcon
+                    iconName="ruble"
+                    iconColor="#333333"
+                    iconSize={24}
+                    style={styles.icon}
+                  />
+                </View>
+                <UiMainButton
+                  text="Добавить"
+                  onPress={onPressAddProductHandler}
+                  disabled={props.disabled}
                 />
               </View>
-              <UiMainButton
-                text="Добавить"
-                onPress={onPressAddProductHandler}
-              />
             </View>
           </View>
         </View>
-      </View>
-    </Shadow>
+      </Shadow>
+    </TouchableOpacity>
   );
 };
 

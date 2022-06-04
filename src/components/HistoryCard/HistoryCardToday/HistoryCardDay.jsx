@@ -10,14 +10,12 @@ const HistoryCardDay = props => {
     deleteOrder(props.id);
     props.deleteOrderCallback();
   };
-
   return (
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
         <View style={styles.container}>
           <Text style={styles.order}>Заказ на завтра</Text>
-          <Text style={styles.dateText}>30.05.2022</Text>
-          {/* <Text style={styles.dateText}>{props.date}</Text> */}
+          <Text style={styles.dateText}>{props.date}</Text>
           <View style={styles.footer}>
             <View style={styles.price}>
               <Text style={styles.priceText}>{props.price}</Text>
