@@ -11,24 +11,25 @@ import {
 } from '../../store/actions/basketActions';
 import {SBasketCard} from '../../components';
 import {createOrderRequest} from '../../http/orderService';
-import {getNextWorkingDay} from '../../utils/utilits';
+import {getNextWorkingDay, getTomorrow} from '../../utils/utilits';
 import ModalMessageFailed from '../../components/ModalMessage/ModalMessageFailed/ModalMessageFailed';
 import ModalMessageSuccess from '../../components/ModalMessage/ModalMessageSuccess/ModalMessageSuccess';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const BasketScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const setModalVisibleCallback = visible => {
     setModalVisible(visible);
   };
-
+  const [isLoading, setIsLoading] = useState(false);
   const [modalFailedVisible, setModalFailedVisible] = useState(false);
   const setModalFailedVisibleCallback = visible => {
     setModalFailedVisible(visible);
   };
-  const getOrderDate = async () => {
-    const orderDate = await getNextWorkingDay();
-    return orderDate;
-  };
+  // const getOrderDate = async () => {
+  //   const orderDate = await getNextWorkingDay();
+  //   return orderDate;
+  // };
   const setProductCount = (product, count) => {
     props.changeCount(product, count);
   };
@@ -47,7 +48,8 @@ const BasketScreen = props => {
     </View>
   );
   const createOrder = async () => {
-    const date = await getOrderDate();
+    setIsLoading(true);
+    const date = await getTomorrow();
     const basket = props.products.products.map(product => {
       return {
         quantity: product.count,
@@ -56,13 +58,14 @@ const BasketScreen = props => {
     });
     const res = await createOrderRequest(basket, date);
     if (res?.status > 199 && res.status < 300) {
-      console.log(res.status);
       props.clearBasket();
       setModalVisible(true);
     } else {
       setModalFailedVisible(true);
     }
+    setIsLoading(false);
   };
+
   return (
     <>
       <View style={styles.main}>
@@ -71,7 +74,7 @@ const BasketScreen = props => {
           <View style={styles.limitPrice}>
             <Text
               style={
-                props.products.totalCost > 230
+                props.products.totalCost > props.maxPrice
                   ? styles.limitCountRed
                   : styles.limitCount
               }>
@@ -79,7 +82,9 @@ const BasketScreen = props => {
             </Text>
             <UiIcon
               iconName="ruble"
-              iconColor={props.products.totalCost > 230 ? 'red' : '#333333'}
+              iconColor={
+                props.products.totalCost > props.maxPrice ? 'red' : '#333333'
+              }
               style={styles.icon}
               iconSize={24}
             />
@@ -101,16 +106,19 @@ const BasketScreen = props => {
         <UiButton
           text="Оформить заказ"
           disabled={
-            props.products.totalCost > 230 || props.products.totalCost == 0
+            props.products.totalCost > props.maxPrice ||
+            props.products.totalCost == 0
               ? true
               : false
           }
           style={
-            props.products.totalCost > 230 || props.products.totalCost == 0
+            props.products.totalCost > props.maxPrice ||
+            props.products.totalCost == 0
               ? styles.buttonDisable
               : {}
           }
           onPress={createOrder}
+          isLoading={isLoading}
         />
       </View>
       <ModalMessageSuccess
@@ -125,12 +133,16 @@ const BasketScreen = props => {
   );
 };
 
-const mapStateToProps = state => ({products: state.basket});
+const mapStateToProps = store => ({
+  products: store.basket,
+  maxPrice: store.setting.maxPrice,
+});
 
 const mapDispatchToProps = dispatch => ({
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
   deleteProduct: product => dispatch(deleteProductAction(product)),
   clearBasket: () => dispatch(clearBasketAction()),
+  getMaxPrice: () => dispatch(getMaxPriceAction()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen);

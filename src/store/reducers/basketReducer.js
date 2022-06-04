@@ -70,6 +70,7 @@ function addOrCreateProduct(products, product) {
   if (products.length > 0) {
     for (let i = 0; i < products.length; i++) {
       if (products[i].product.id === product.id) {
+        if (products[i].count > 8) return products;
         products[i].count = products[i].count + 1;
         return products;
       }

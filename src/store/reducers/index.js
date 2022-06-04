@@ -5,6 +5,7 @@ import {categoriesReducer} from './categoriesReducer';
 import {authUserReducer} from './authUserReducer';
 import {historyReducer} from './historyReducer';
 import {orderReducer} from './orderReducer';
+import {settingsReducer} from './settingReducer';
 
 export const rootReducer = combineReducers({
   basket: basketReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   authUser: authUserReducer,
   history: historyReducer,
   order: orderReducer,
+  setting: settingsReducer,
 });

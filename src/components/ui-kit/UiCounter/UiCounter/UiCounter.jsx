@@ -12,7 +12,9 @@ const UiCounter = ({value, setCounterValue, isVertical = false}) => {
   };
 
   const handlerPlus = () => {
-    setCounterValue(value + 1);
+    if (value < 9) {
+      setCounterValue(value + 1);
+    }
   };
 
   return (
