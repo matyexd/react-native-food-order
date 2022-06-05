@@ -22,7 +22,7 @@ const OrderCard = props => {
               <View style={styles.about}>
                 <View style={styles.price}>
                   <Text style={styles.count}>
-                    {props.price * props.quantity}
+                    {parseFloat(props.price) * props.quantity}
                   </Text>
                   <UiIcon
                     iconName="ruble"

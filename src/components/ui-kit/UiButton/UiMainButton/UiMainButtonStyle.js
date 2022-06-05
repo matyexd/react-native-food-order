@@ -15,4 +15,19 @@ export const styles = StyleSheet.create({
     color: 'white',
     ...fonts.SecondaryText,
   },
+  mainButtonDisable: {
+    backgroundColor: '#fff',
+    borderColor: '#333333',
+    borderWidth: width(1),
+    borderRadius: width(8),
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: width(20),
+    paddingVertical: height(8),
+    flexDirection: 'row',
+  },
+  mainButtonTextDisable: {
+    color: '#333333',
+    ...fonts.SecondaryText,
+  },
 });

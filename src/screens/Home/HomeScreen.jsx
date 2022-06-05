@@ -21,6 +21,7 @@ import {
 import {SDishCard, SModal} from '../../components';
 import {UIActivityIndicator} from 'react-native-indicators';
 import {CommonActions} from '@react-navigation/native';
+import {getMaxPriceAction} from '../../store/actions/settingAction';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;
@@ -36,6 +37,9 @@ const HomeScreen = props => {
     filterByCategory(categories[0]?.id);
   }, [props.categories, props.products]);
 
+  useEffect(() => {
+    props.getMaxPrice();
+  }, []);
   const onPressCardHandler = obj => {
     setItem(obj);
     setVisible(true);
@@ -46,12 +50,14 @@ const HomeScreen = props => {
   };
 
   const renderItem = ({item}) => (
-    <TouchableOpacity
+    <SDishCard
+      product={item}
+      addToBasket={addProductCallback}
       style={styles.card}
       key={item.id}
-      onPress={() => onPressCardHandler(item)}>
-      <SDishCard product={item} addToBasket={addProductCallback} />
-    </TouchableOpacity>
+      onPress={() => onPressCardHandler(item)}
+      disabled={!!props.basket.products.find(p => item.id == p.product.id)}
+    />
   );
   const filterByCategory = category => {
     if (!category) return;
@@ -96,7 +102,7 @@ const HomeScreen = props => {
           <View style={styles.limitPrice}>
             <Text
               style={
-                props.basket.totalCost > 230
+                props.basket.totalCost > props.maxPrice
                   ? styles.limitCountRed
                   : styles.limitCount
               }>
@@ -104,7 +110,9 @@ const HomeScreen = props => {
             </Text>
             <UiIcon
               iconName="ruble"
-              iconColor={props.basket.totalCost > 230 ? 'red' : '#333333'}
+              iconColor={
+                props.basket.totalCost > props.maxPrice ? 'red' : '#333333'
+              }
               style={styles.icon}
               iconSize={24}
             />
@@ -161,12 +169,14 @@ const mapStateToProps = store => ({
   products: store.products,
   categories: store.categories,
   basket: store.basket,
+  maxPrice: store.setting.maxPrice,
 });
 
 const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(addProductAction(product)),
   changeCount: (product, count) =>
     dispatch(changeProductCountAction(product, count)),
+  getMaxPrice: () => dispatch(getMaxPriceAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

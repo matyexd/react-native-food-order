@@ -2,8 +2,8 @@ import $api from '.';
 
 export const createOrderRequest = async (basket, date, id) => {
   const data = {
-    // date_order: date,
-    date_order: '2022-05-30',
+    date_order: date,
+    // date_order: '2022-05-30',
     baskets: basket,
   };
 

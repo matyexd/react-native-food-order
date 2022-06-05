@@ -10,10 +10,7 @@ export const historyFetch = async userId => {
   return orders.data.data;
 };
 
-// export const orderFetch = async userId => {
-//   const order = await $api.get(`/get-orders/${userId}`);
-//   console.log('====================================');
-//   console.log(order.data.data + 'kgkgkgkgk');
-//   console.log('====================================');
-//   return order.data.data;
-// };
+export const orderFetch = async orderId => {
+  const order = await $api.get(`/get-order/${orderId}`);
+  return order.data.data;
+};
