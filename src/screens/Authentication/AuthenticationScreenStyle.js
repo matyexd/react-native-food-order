@@ -64,4 +64,14 @@ export const styles = StyleSheet.create({
     marginTop: height(3),
     marginBottom: height(6),
   },
+
+  generalErrorText: {
+    ...fonts.PrimaryText,
+    color: 'red',
+  },
+
+  generalError: {
+    alignItems: 'center',
+    marginBottom: height(20),
+  },
 });

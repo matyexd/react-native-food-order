@@ -21,9 +21,12 @@ const AuthenticationScreen = props => {
   const [loginError, setLoginError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
+  const [generalError, setGeneralError] = useState('');
+
   const onFocusInput = () => {
     setLoginError('');
     setPasswordError('');
+    setGeneralError('');
     props.clearAuthUserStore();
   };
 
@@ -67,7 +70,7 @@ const AuthenticationScreen = props => {
       setPasswordError('Неверно введен пароль');
       setDisableButton(true);
     } else if (errors.generalError.length !== 0) {
-      setLoginError('Неверный логин или пароль');
+      setGeneralError('Неверный логин или пароль');
       setDisableButton(true);
     }
   }, [props.userAuth]);
@@ -83,7 +86,15 @@ const AuthenticationScreen = props => {
         </View>
 
         <KeyboardAvoidingView style={styles.inputData} behavior={'padding'}>
-          <View style={loginError ? styles.inputError : styles.input}>
+          {generalError.length > 0 && (
+            <View style={styles.generalError}>
+              <Text style={styles.generalErrorText}>{generalError}</Text>
+            </View>
+          )}
+          <View
+            style={
+              loginError || generalError ? styles.inputError : styles.input
+            }>
             <TextInput
               style={styles.inputText}
               placeholder="Логин"
@@ -94,7 +105,10 @@ const AuthenticationScreen = props => {
             />
           </View>
           <Text style={styles.loginError}>{loginError}</Text>
-          <View style={passwordError ? styles.inputError : styles.input}>
+          <View
+            style={
+              passwordError || generalError ? styles.inputError : styles.input
+            }>
             <TextInput
               style={styles.inputText}
               placeholder="Пароль"
