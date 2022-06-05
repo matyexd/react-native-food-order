@@ -9,4 +9,11 @@ export const styles = StyleSheet.create({
     paddingBottom: height(12),
     backgroundColor: 'white',
   },
+  containerIOS: {
+    flex: 1,
+    paddingHorizontal: width(20),
+    paddingTop: height(40),
+    paddingBottom: height(12),
+    backgroundColor: 'white',
+  }
 });

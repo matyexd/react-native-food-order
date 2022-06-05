@@ -1,9 +1,14 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Platform, View} from 'react-native';
 import {styles} from './UiContainerStyle';
 
 const UiContainer = ({children}) => {
-  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
+  return (
+    Platform.OS === 'android' ? 
+    <SafeAreaView style={styles.container}>{children}</SafeAreaView> 
+    : 
+    <View style={styles.containerIOS}>{children}</View>
+  )
 };
 
 export default UiContainer;

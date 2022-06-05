@@ -14,10 +14,10 @@ const App = () => {
   const {store, persistor, sagaMiddleware} = reduxStore();
   sagaMiddleware.run(rootSaga);
 
-  useEffect(() => {
-    requestUserPermission();
-    NotificationListner;
-  }, []);
+  // useEffect(() => {
+  //   requestUserPermission();
+  //   NotificationListner;
+  // }, []);
 
   return (
     <Provider store={store}>

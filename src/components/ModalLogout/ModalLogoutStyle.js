@@ -5,8 +5,8 @@ import {height, width, sp} from '../../utils/Responsive';
 export const styles = StyleSheet.create({
   modalLogout: {
     justifyContent: 'flex-end',
-    marginBottom: height(10),
-    marginHorizontal: width(10),
+    marginBottom: height(15),
+    marginHorizontal: width(20),
   },
   buttonCancel: {
     marginTop: height(10),
