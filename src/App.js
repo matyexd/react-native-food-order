@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {Alert} from 'react-native';
 import {Provider} from 'react-redux';
 import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
@@ -9,6 +8,7 @@ import {
   NotificationListner,
   requestUserPermission,
 } from './utils/pushNotificationHelper';
+import {StatusBar} from 'react-native';
 
 const App = () => {
   const {store, persistor, sagaMiddleware} = reduxStore();
@@ -22,6 +22,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <StatusBar backgroundColor={'black'} />
         <AppNavigation />
       </PersistGate>
     </Provider>

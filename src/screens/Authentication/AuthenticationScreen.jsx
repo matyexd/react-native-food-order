@@ -1,20 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
-import {UiButton, UiMainButton, UiContainer} from '../../components/ui-kit';
+import {View, Text, Image, TextInput, KeyboardAvoidingView} from 'react-native';
+import {UiButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './AuthenticationScreenStyle';
 import {connect} from 'react-redux';
-import {
-  addProductAction,
-  changeProductCountAction,
-} from '../../store/actions/basketActions';
 import {
   checkLogin,
   clearAuthUserStoreAction,
@@ -33,18 +21,21 @@ const AuthenticationScreen = props => {
   const [loginError, setLoginError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
+  const [generalError, setGeneralError] = useState('');
+
   const onFocusInput = () => {
     setLoginError('');
     setPasswordError('');
+    setGeneralError('');
     props.clearAuthUserStore();
   };
 
   const handleLogin = () => {
     if (!login) {
-      setLoginError('Введите Ваш логин');
+      setLoginError('Введите логин');
     }
     if (!password) {
-      setPasswordError('Введите Ваш пароль');
+      setPasswordError('Введите пароль');
       return;
     }
 
@@ -58,7 +49,13 @@ const AuthenticationScreen = props => {
   };
 
   useEffect(() => {
-    if (errors.login.length === 0 && errors.password.length === 0 && isAuth) {
+    console.log(errors);
+    if (
+      errors.login.length === 0 &&
+      errors.password.length === 0 &&
+      isAuth &&
+      errors.generalError.length === 0
+    ) {
       if (!successFetching) {
         props.getUserInfo();
         setSuccessFetching(true);
@@ -67,10 +64,13 @@ const AuthenticationScreen = props => {
         props.navigation.navigate('Splash');
       }
     } else if (errors.login.length !== 0) {
-      setLoginError('Неверный логин');
+      setLoginError('Неверно введен логин');
       setDisableButton(true);
     } else if (errors.password.length !== 0) {
-      setPasswordError('Неверный пароль');
+      setPasswordError('Неверно введен пароль');
+      setDisableButton(true);
+    } else if (errors.generalError.length !== 0) {
+      setGeneralError('Неверный логин или пароль');
       setDisableButton(true);
     }
   }, [props.userAuth]);
@@ -85,10 +85,16 @@ const AuthenticationScreen = props => {
           />
         </View>
 
-        <View
-          style={styles.inputData}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <View style={loginError ? styles.inputError : styles.input}>
+        <KeyboardAvoidingView style={styles.inputData} behavior={'padding'}>
+          {generalError.length > 0 && (
+            <View style={styles.generalError}>
+              <Text style={styles.generalErrorText}>{generalError}</Text>
+            </View>
+          )}
+          <View
+            style={
+              loginError || generalError ? styles.inputError : styles.input
+            }>
             <TextInput
               style={styles.inputText}
               placeholder="Логин"
@@ -99,7 +105,10 @@ const AuthenticationScreen = props => {
             />
           </View>
           <Text style={styles.loginError}>{loginError}</Text>
-          <View style={passwordError ? styles.inputError : styles.input}>
+          <View
+            style={
+              passwordError || generalError ? styles.inputError : styles.input
+            }>
             <TextInput
               style={styles.inputText}
               placeholder="Пароль"
@@ -123,7 +132,7 @@ const AuthenticationScreen = props => {
               />
             )}
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </UiContainer>
   );
