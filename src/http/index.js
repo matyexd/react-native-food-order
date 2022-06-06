@@ -19,9 +19,9 @@ $api.interceptors.request.use(async config => {
 //   config => {
 //     return config;
 //   },
-//   // error => {
-//   //   console.log(error);
-//   // },
+//   error => {
+//     console.log(error);
+//   },
 // );
 
 export default $api;

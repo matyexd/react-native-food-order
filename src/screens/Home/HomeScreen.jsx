@@ -20,8 +20,11 @@ import {
 } from '../../store/actions/menuActions';
 import {SDishCard, SModal} from '../../components';
 import {UIActivityIndicator} from 'react-native-indicators';
-import {CommonActions} from '@react-navigation/native';
 import {getMaxPriceAction} from '../../store/actions/settingAction';
+import {
+  NotificationListner,
+  requestUserPermission,
+} from '../../utils/pushNotificationHelper';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;
@@ -39,6 +42,7 @@ const HomeScreen = props => {
 
   useEffect(() => {
     props.getMaxPrice();
+    requestUserPermission();
   }, []);
   const onPressCardHandler = obj => {
     setItem(obj);

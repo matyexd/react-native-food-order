@@ -62,6 +62,7 @@ export const authUserReducer = (state = initialState, action) => {
 
     case AUTH_LOGOUT:
       removeUserSession('token');
+      removeUserSession('fcmtoken');
       return {
         ...state,
         user: {},

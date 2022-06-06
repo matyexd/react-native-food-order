@@ -3,21 +3,17 @@ import {Provider} from 'react-redux';
 import reduxStore from './store/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
 import {rootSaga} from './sagas';
+import {Platform} from 'react-native';
 import AppNavigation from './navigation/AppNavigation';
-import {
-  NotificationListner,
-  requestUserPermission,
-} from './utils/pushNotificationHelper';
 import {StatusBar} from 'react-native';
-
+import {NotificationListner} from './utils/pushNotificationHelper';
 const App = () => {
   const {store, persistor, sagaMiddleware} = reduxStore();
   sagaMiddleware.run(rootSaga);
 
-  // useEffect(() => {
-  //   requestUserPermission();
-  //   NotificationListner;
-  // }, []);
+  useEffect(() => {
+    NotificationListner();
+  }, []);
 
   return (
     <Provider store={store}>

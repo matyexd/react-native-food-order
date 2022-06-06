@@ -6,6 +6,8 @@ import {connect} from 'react-redux';
 import {logoutAction} from '../../store/actions/authAction';
 import {ModalLogout} from '../../components';
 import {CommonActions} from '@react-navigation/native';
+import {deleteTokenFromServer} from '../../http/notifService';
+import {retrieveUserSession} from '../../storage';
 
 const ProfileScreen = props => {
   const data = [
@@ -42,16 +44,25 @@ const ProfileScreen = props => {
   const goToHistory = () => {
     props.navigation.navigate('History');
   };
-  const handleLogout = () => {
-    props.logout();
 
-    props.navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [{name: 'Auth'}],
-      }),
-    );
-  };
+  async function handleLogout() {
+    try {
+      let fcmtoken = await retrieveUserSession('fcmtoken');
+      fcmtoken = await JSON.parse(fcmtoken);
+      await deleteTokenFromServer(fcmtoken.fcmTokenId);
+      console.log('delete FCM token from server success');
+    } catch (e) {
+      console.log(e);
+    } finally {
+      props.logout();
+      props.navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{name: 'Auth'}],
+        }),
+      );
+    }
+  }
 
   return (
     <>
