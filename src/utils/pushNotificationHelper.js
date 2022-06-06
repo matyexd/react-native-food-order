@@ -1,5 +1,10 @@
 import messaging from '@react-native-firebase/messaging';
 import {retrieveUserSession, storeUserSession} from '../storage';
+import {
+  attachTokenOnServer,
+  getToken,
+  getTokenFromServer,
+} from '../http/notifService';
 
 export async function requestUserPermission() {
   const authStatus = await messaging().requestPermission();
@@ -14,18 +19,47 @@ export async function requestUserPermission() {
 }
 
 async function GetFCMToken() {
-  let fcmtoken = await retrieveUserSession('fcmtoken');
-  console.log('old token', fcmtoken);
-  if (!fcmtoken) {
-    try {
-      const fcmtoken = await messaging().getToken();
-      if (fcmtoken) {
-        console.log('new token', fcmtoken);
-        storeUserSession('fcmtoken', fcmtoken);
-      }
-    } catch (e) {
-      console.log('error in fcmtoken', e);
+  try {
+    // смотрим, есть ли токен на сервере
+    let dataTokenFromServer = await getTokenFromServer();
+    // получаем токен с локального хранилища
+    let fcmtoken = await retrieveUserSession('fcmtoken');
+    fcmtoken = JSON.parse(fcmtoken);
+
+    if (
+      (!dataTokenFromServer.data.length && !fcmtoken) ||
+      (dataTokenFromServer.data.length && !fcmtoken) ||
+      (dataTokenFromServer.data.length &&
+        fcmtoken &&
+        !dataTokenFromServer.data.find(
+          item =>
+            item.id === fcmtoken.fcmTokenId &&
+            item.fcm_token === fcmtoken.fcmToken,
+        ))
+    ) {
+      let fcmToken = await messaging().getToken();
+      let newDataTokenFromServer = await attachTokenOnServer(fcmToken);
+      storeUserSession(
+        'fcmtoken',
+        JSON.stringify({
+          fcmToken: fcmToken,
+          fcmTokenId: newDataTokenFromServer.data.id,
+        }),
+      );
+    } else if (!dataTokenFromServer.data.length && fcmtoken) {
+      await attachTokenOnServer(fcmtoken.fcmToken);
+      storeUserSession(
+        'fcmtoken',
+        JSON.stringify({
+          fcmToken: fcmtoken.fcmToken,
+          fcmTokenId: fcmtoken.fcmTokenId,
+        }),
+      );
     }
+
+    console.log('Current fcm data: ', await retrieveUserSession('fcmtoken'));
+  } catch (e) {
+    console.log('error in fcmtoken', e);
   }
 }
 
@@ -48,10 +82,6 @@ export const NotificationListner = () => {
         );
       }
     });
-
-  // messaging().setBackgroundMessageHandler(async remoteMessage => {
-  //   console.log('Message handled in the background!', remoteMessage);
-  // });
 
   messaging().onMessage(async remoteMessage => {
     console.log('notification on froground state.........', remoteMessage);
