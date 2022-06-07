@@ -42,6 +42,7 @@ const ProfileStack = routeName => {
         name="OrderScreen"
         component={OrderScreen}
         options={{headerShown: false}}
+        unmountOnBlur={true}
       />
       <Stack.Screen
         name={'AboutApp'}

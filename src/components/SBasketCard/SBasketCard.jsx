@@ -4,6 +4,7 @@ import {UiButton, UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 import {Shadow} from 'react-native-shadow-2';
 import {styles} from './SBasketCardStyle';
 import {Button} from 'react-native-paper';
+import {API_PICT} from '@env';
 
 const SBasketCard = props => {
   const {product, count, setCount, deleteProduct} = props;
@@ -16,13 +17,17 @@ const SBasketCard = props => {
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
         <View style={styles.container}>
-          <Image style={styles.img} source={product.image} />
+          <Image
+            style={styles.img}
+            source={{uri: `${API_PICT}${product.image}`}}
+          />
           <View style={styles.info}>
             <View style={styles.gramm}>
               <View style={{flex: 1}}>
                 <Text style={styles.header}>{product.name}</Text>
                 <Text style={styles.calorie}>
-                  {product.weight}гр {product.calories}Ккал
+                  {product.apiece ? '1шт' : product.weight + 'гр'}{' '}
+                  {product.calories}Ккал
                 </Text>
               </View>
               <TouchableOpacity
