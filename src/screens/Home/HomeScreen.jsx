@@ -25,6 +25,7 @@ import {
   NotificationListner,
   requestUserPermission,
 } from '../../utils/pushNotificationHelper';
+import {API_PICT} from '@env';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;

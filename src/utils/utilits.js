@@ -26,6 +26,7 @@ export const getNextWorkingDay = async () => {
 };
 
 export const formatDate = dateStr => {
+  if (!dateStr) return;
   const dateArr = dateStr.split('-');
   return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
 };

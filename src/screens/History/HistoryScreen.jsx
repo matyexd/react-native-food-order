@@ -30,9 +30,8 @@ const HistoryScreen = props => {
       key={item.id}
       onPress={() =>
         props.navigation.navigate('OrderScreen', {
-          // products: item.products,
           products: item,
-          orderDate: formatDate(item.date_order),
+          orderDate: item.date_order,
           orderId: item.id,
         })
       }>
@@ -58,7 +57,7 @@ const HistoryScreen = props => {
               props.navigation.navigate('OrderScreen', {
                 products: props.history.orders[0],
                 // products: nextOrder.products,
-                orderDate: formatDate(nextOrder.date_order),
+                orderDate: nextOrder.date_order,
                 orderId: nextOrder.id,
               })
             }>
@@ -66,7 +65,6 @@ const HistoryScreen = props => {
               price={nextOrder.cost}
               date={formatDate(nextOrder.date_order)}
               id={nextOrder.id}
-              // date="2022-05-29"
               deleteOrderCallback={deleteOrderCallback}
             />
           </TouchableOpacity>

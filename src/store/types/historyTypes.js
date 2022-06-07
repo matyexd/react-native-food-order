@@ -4,3 +4,4 @@ export const GET_HISTORY_FAILED = 'history/GET_HISTORY_FAILED';
 export const GET_ORDER = 'history/GET_ORDER';
 export const GET_ORDER_SUCCEED = 'history/GET_ORDER_SUCCEED';
 export const GET_ORDER_FAILED = 'history/GET_ORDER_FAILED';
+export const CLEAR_ORDER = 'history/CLEAR_ORDER';

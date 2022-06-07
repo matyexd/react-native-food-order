@@ -3,15 +3,13 @@ import {TouchableOpacity, Text, View, Image} from 'react-native';
 import {UiIcon, UiMainButton} from '../ui-kit';
 import {styles} from './SDishCardStyle';
 import {Shadow} from 'react-native-shadow-2';
-
+import {API_PICT} from '@env';
 const SDishCard = props => {
   const {product, addToBasket} = props;
   const onPressAddProductHandler = () => {
     addToBasket(product);
   };
-  console.log('====================================');
-  console.log(product);
-  console.log('====================================');
+
   return (
     <TouchableOpacity onPress={props.onPress} style={props.style}>
       <Shadow
@@ -20,11 +18,15 @@ const SDishCard = props => {
         }}
         startColor="#00000015">
         <View style={styles.container}>
-          <Image style={styles.img} source={product.image} />
+          <Image
+            style={styles.img}
+            source={{uri: `${API_PICT}${product.image}`}}
+          />
           <View style={styles.info}>
             <Text style={styles.header}>{product.name}</Text>
             <Text style={styles.calorie}>
-              {product.weight}гр {product.calories}Ккал
+              {product.apiece ? '1шт' : product.weight + 'гр'}{' '}
+              {product.calories}Ккал
             </Text>
             <View style={{flex: 1, justifyContent: 'flex-end'}}>
               <View style={styles.about}>

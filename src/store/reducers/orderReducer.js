@@ -1,4 +1,5 @@
 import {
+  CLEAR_ORDER,
   GET_ORDER,
   GET_ORDER_FAILED,
   GET_ORDER_SUCCEED,
@@ -31,6 +32,14 @@ export const orderReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: true,
+      };
+
+    case CLEAR_ORDER:
+      return {
+        ...state,
+        order: {},
+        loading: false,
+        error: false,
       };
 
     default:

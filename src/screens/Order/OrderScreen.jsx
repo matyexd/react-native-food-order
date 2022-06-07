@@ -1,9 +1,13 @@
 import React, {useEffect} from 'react';
 import {TouchableOpacity, Text, View, FlatList} from 'react-native';
+import {UIActivityIndicator} from 'react-native-indicators';
 import {connect} from 'react-redux';
 import {OrderCard} from '../../components';
 import {UiContainerWP, UiIcon} from '../../components/ui-kit';
-import {getOrderAction} from '../../store/actions/historyAction';
+import {
+  clearOrderAction,
+  getOrderAction,
+} from '../../store/actions/historyAction';
 import {height, width} from '../../utils/Responsive';
 import {formatDate} from '../../utils/utilits';
 import {styles} from './OrderScreenStyle';
@@ -11,6 +15,9 @@ import {styles} from './OrderScreenStyle';
 const OrderScreen = props => {
   useEffect(() => {
     props.getOrder(props.route.params.orderId);
+    return () => {
+      props.clearOrder();
+    };
   }, []);
 
   const renderItem = ({item}) => (
@@ -36,7 +43,7 @@ const OrderScreen = props => {
             <UiIcon iconName="arrowLeft" iconColor="#333333" />
           </TouchableOpacity>
           <Text style={styles.titleText}>
-            Заказ на {formatDate(props?.order?.order?.date_order)}
+            Заказ на {formatDate(props.route.params.orderDate)}
           </Text>
         </View>
         {props.order.loading ? (
@@ -61,5 +68,6 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => ({
   getOrder: orderId => dispatch(getOrderAction(orderId)),
+  clearOrder: () => dispatch(clearOrderAction()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);
