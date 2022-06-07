@@ -39,15 +39,19 @@ const OrderScreen = props => {
             Заказ на {formatDate(props?.order?.order?.date_order)}
           </Text>
         </View>
-        <FlatList
-          contentContainerStyle={{
-            paddingHorizontal: width(20),
-            paddingTop: height(12),
-          }}
-          data={props.order.order.dishes}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+        {props.order.loading ? (
+          <UIActivityIndicator color={'#AAAAAA'} size={30} />
+        ) : (
+          <FlatList
+            contentContainerStyle={{
+              paddingHorizontal: width(20),
+              paddingTop: height(12),
+            }}
+            data={props.order.order.dishes}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        )}
       </UiContainerWP>
     </>
   );

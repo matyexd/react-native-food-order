@@ -9,7 +9,9 @@ const SDishCard = props => {
   const onPressAddProductHandler = () => {
     addToBasket(product);
   };
-
+  console.log('====================================');
+  console.log(product);
+  console.log('====================================');
   return (
     <TouchableOpacity onPress={props.onPress} style={props.style}>
       <Shadow

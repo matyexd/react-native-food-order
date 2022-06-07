@@ -8,6 +8,7 @@ import {getHistoryAction} from '../../store/actions/historyAction';
 import {connect} from 'react-redux';
 import {formatDate, getTomorrow} from '../../utils/utilits';
 import {orderFetch} from '../../http/historyService';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const HistoryScreen = props => {
   useEffect(() => {
@@ -41,7 +42,6 @@ const HistoryScreen = props => {
   const filterOrders = props.history.orders.filter(
     order => order.date_order != getTomorrow(),
   );
-
   return (
     <>
       <UiContainerWP>
@@ -71,15 +71,19 @@ const HistoryScreen = props => {
             />
           </TouchableOpacity>
         )}
-        <FlatList
-          contentContainerStyle={{
-            paddingHorizontal: width(20),
-            paddingTop: height(12),
-          }}
-          data={filterOrders}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+        {props.history.loading ? (
+          <UIActivityIndicator color={'#AAAAAA'} size={30} />
+        ) : (
+          <FlatList
+            contentContainerStyle={{
+              paddingHorizontal: width(20),
+              paddingTop: height(12),
+            }}
+            data={filterOrders}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        )}
       </UiContainerWP>
     </>
   );
