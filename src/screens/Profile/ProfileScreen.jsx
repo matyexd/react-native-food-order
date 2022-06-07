@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Platform} from 'react-native';
 import {UiProfileButton, UiContainer} from '../../components/ui-kit';
 import {styles} from './ProfileScreenStyle';
 import {connect} from 'react-redux';
@@ -46,22 +46,23 @@ const ProfileScreen = props => {
   };
 
   async function handleLogout() {
-    try {
-      let fcmtoken = await retrieveUserSession('fcmtoken');
-      fcmtoken = await JSON.parse(fcmtoken);
-      await deleteTokenFromServer(fcmtoken.fcmTokenId);
-      console.log('delete FCM token from server success');
-    } catch (e) {
-      console.log(e);
-    } finally {
-      props.logout();
-      props.navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [{name: 'Auth'}],
-        }),
-      );
+    if (Platform.OS !== 'ios') {
+      try {
+        let fcmtoken = await retrieveUserSession('fcmtoken');
+        fcmtoken = await JSON.parse(fcmtoken);
+        await deleteTokenFromServer(fcmtoken.fcmTokenId);
+        console.log('delete FCM token from server success');
+      } catch (e) {
+        console.log(e);
+      }
     }
+    props.logout();
+    props.navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{name: 'Auth'}],
+      }),
+    );
   }
 
   return (

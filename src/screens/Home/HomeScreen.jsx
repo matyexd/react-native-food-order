@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, Platform} from 'react-native';
 import {
   UiIcon,
   UiSearch,
@@ -42,7 +42,9 @@ const HomeScreen = props => {
 
   useEffect(() => {
     props.getMaxPrice();
-    requestUserPermission();
+    if (Platform.OS !== 'ios') {
+      requestUserPermission();
+    }
   }, []);
   const onPressCardHandler = obj => {
     setItem(obj);

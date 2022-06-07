@@ -12,7 +12,9 @@ const App = () => {
   sagaMiddleware.run(rootSaga);
 
   useEffect(() => {
-    NotificationListner();
+    if (Platform.OS !== 'ios') {
+      NotificationListner();
+    }
   }, []);
 
   return (
