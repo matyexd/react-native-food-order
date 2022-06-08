@@ -3,7 +3,7 @@ import Modal from 'react-native-modal';
 import {View, Text} from 'react-native';
 import {styles} from './ModalMessageFailedStyle';
 
-const ModalMessageFailed = ({modalVisible, setModalVisible}) => {
+const ModalMessageFailed = ({modalVisible, setModalVisible, text}) => {
   const showModal = () => {
     setTimeout(() => {
       setModalVisible(false);
@@ -18,10 +18,10 @@ const ModalMessageFailed = ({modalVisible, setModalVisible}) => {
       backdropColor={'white'}
       backdropOpacity={0.1}
       onModalShow={showModal}>
-      <View style={styles.modal}>
-        <Text style={styles.modalText}>
-          Заказ не отправлен, попробуйте позже
-        </Text>
+      <View style={styles.back}>
+        <View style={styles.modal}>
+          <Text style={styles.modalText}>{text}</Text>
+        </View>
       </View>
     </Modal>
   );
