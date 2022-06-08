@@ -26,10 +26,7 @@ const BasketScreen = props => {
   const setModalFailedVisibleCallback = visible => {
     setModalFailedVisible(visible);
   };
-  // const getOrderDate = async () => {
-  //   const orderDate = await getNextWorkingDay();
-  //   return orderDate;
-  // };
+  const [textError, setTextError] = useState();
   const setProductCount = (product, count) => {
     props.changeCount(product, count);
   };
@@ -57,11 +54,22 @@ const BasketScreen = props => {
       };
     });
     const res = await createOrderRequest(basket, date);
+    console.log(res, '25235234');
     if (res?.status > 199 && res.status < 300) {
       props.clearBasket();
       setModalVisible(true);
-    } else {
+      setTextError('Заказ успешно отправлен');
+    } else if (
+      res?.data?.errors &&
+      res?.data?.errors[0] == 'Order has been created'
+    ) {
+      // console.log(res?.data);
       setModalFailedVisible(true);
+      setTextError('Заказ уже был создан');
+    } else {
+      // console.log(1);
+      setModalFailedVisible(true);
+      setTextError('Заказ не отправлен, попробуйте позже');
     }
     setIsLoading(false);
   };
@@ -124,10 +132,12 @@ const BasketScreen = props => {
       <ModalMessageSuccess
         modalVisible={modalVisible}
         setModalVisible={setModalVisibleCallback}
+        text={textError}
       />
       <ModalMessageFailed
         modalVisible={modalFailedVisible}
         setModalVisible={setModalFailedVisibleCallback}
+        text={textError}
       />
     </>
   );

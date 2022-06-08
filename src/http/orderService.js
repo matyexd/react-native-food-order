@@ -9,6 +9,7 @@ export const createOrderRequest = async (basket, date, id) => {
 
   const result = await $api.post('/create-order', data).catch(e => {
     console.log(e, e?.response);
+    return e.response;
   });
   return result;
 };
