@@ -3,7 +3,7 @@ import Modal from 'react-native-modal';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {styles} from './SModalStyle';
 import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
-
+import {API_PICT} from '@env';
 const InfoModal = props => {
   const {isVisible, product, closeModal, addToBasket, setProductCount, count} =
     props;
@@ -29,13 +29,17 @@ const InfoModal = props => {
       onBackdropPress={closeModal}
       backdropOpacity={0.6}>
       <View style={styles.modal}>
-        <Image source={product?.image} style={styles.image} />
+        <Image
+          source={{uri: `${API_PICT}${product?.image}`}}
+          style={styles.image}
+        />
         <View style={styles.container}>
           <View style={styles.about}>
             <View>
               <Text style={styles.header}>{product?.name}</Text>
               <Text style={styles.gramm}>
-                {product?.weight} гр {product?.calories} Ккал
+                {product.apiece ? '1шт' : product.weight + 'гр'}{' '}
+                {product.calories}Ккал
               </Text>
             </View>
           </View>

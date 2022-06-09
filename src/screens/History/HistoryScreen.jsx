@@ -8,6 +8,7 @@ import {getHistoryAction} from '../../store/actions/historyAction';
 import {connect} from 'react-redux';
 import {formatDate, getTomorrow} from '../../utils/utilits';
 import {orderFetch} from '../../http/historyService';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const HistoryScreen = props => {
   useEffect(() => {
@@ -29,9 +30,8 @@ const HistoryScreen = props => {
       key={item.id}
       onPress={() =>
         props.navigation.navigate('OrderScreen', {
-          // products: item.products,
           products: item,
-          orderDate: formatDate(item.date_order),
+          orderDate: item.date_order,
           orderId: item.id,
         })
       }>
@@ -41,7 +41,6 @@ const HistoryScreen = props => {
   const filterOrders = props.history.orders.filter(
     order => order.date_order != getTomorrow(),
   );
-
   return (
     <>
       <UiContainerWP>
@@ -58,7 +57,7 @@ const HistoryScreen = props => {
               props.navigation.navigate('OrderScreen', {
                 products: props.history.orders[0],
                 // products: nextOrder.products,
-                orderDate: formatDate(nextOrder.date_order),
+                orderDate: nextOrder.date_order,
                 orderId: nextOrder.id,
               })
             }>
@@ -66,20 +65,23 @@ const HistoryScreen = props => {
               price={nextOrder.cost}
               date={formatDate(nextOrder.date_order)}
               id={nextOrder.id}
-              // date="2022-05-29"
               deleteOrderCallback={deleteOrderCallback}
             />
           </TouchableOpacity>
         )}
-        <FlatList
-          contentContainerStyle={{
-            paddingHorizontal: width(20),
-            paddingTop: height(12),
-          }}
-          data={filterOrders}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+        {props.history.loading ? (
+          <UIActivityIndicator color={'#AAAAAA'} size={30} />
+        ) : (
+          <FlatList
+            contentContainerStyle={{
+              paddingHorizontal: width(20),
+              paddingTop: height(12),
+            }}
+            data={filterOrders}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        )}
       </UiContainerWP>
     </>
   );

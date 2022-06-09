@@ -3,18 +3,23 @@ import {TouchableOpacity, Text, View, Image} from 'react-native';
 import {UiButton, UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 import {Shadow} from 'react-native-shadow-2';
 import {styles} from './OrderCardStyle';
+import {API_PICT} from '@env';
 const OrderCard = props => {
   return (
     <>
       <Shadow viewStyle={{alignSelf: 'stretch'}} startColor="#00000015">
         <View style={styles.container}>
-          <Image style={styles.img} source={props.image} />
+          <Image
+            style={styles.img}
+            source={{uri: `${API_PICT}${props.image}`}}
+          />
           <View style={styles.info}>
             <View style={styles.gramm}>
               <View style={{flex: 1}}>
                 <Text style={styles.header}>{props.name}</Text>
                 <Text style={styles.calorie}>
-                  {props.weight}гр {props.calories}Ккал
+                  {props.apiece ? '1шт' : props.weight + 'гр'} {props.calories}
+                  Ккал
                 </Text>
               </View>
             </View>
