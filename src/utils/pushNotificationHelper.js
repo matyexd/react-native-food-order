@@ -26,9 +26,14 @@ async function GetFCMToken() {
     let fcmtoken = await retrieveUserSession('fcmtoken');
     fcmtoken = JSON.parse(fcmtoken);
 
+    console.log(dataTokenFromServer);
+    console.log(fcmtoken);
+    let fcmToken = await messaging().getToken();
     if (
       (!dataTokenFromServer.data.length && !fcmtoken) ||
-      (dataTokenFromServer.data.length && !fcmtoken) ||
+      (dataTokenFromServer.data.length &&
+        !fcmtoken &&
+        !dataTokenFromServer.data.find(item => item.fcm_token === fcmToken)) ||
       (dataTokenFromServer.data.length &&
         fcmtoken &&
         !dataTokenFromServer.data.find(
@@ -37,7 +42,6 @@ async function GetFCMToken() {
             item.fcm_token === fcmtoken.fcmToken,
         ))
     ) {
-      let fcmToken = await messaging().getToken();
       let newDataTokenFromServer = await attachTokenOnServer(fcmToken);
       storeUserSession(
         'fcmtoken',
@@ -53,6 +57,20 @@ async function GetFCMToken() {
         JSON.stringify({
           fcmToken: fcmtoken.fcmToken,
           fcmTokenId: fcmtoken.fcmTokenId,
+        }),
+      );
+    } else if (
+      dataTokenFromServer.data.length &&
+      dataTokenFromServer.data.find(item => item.fcm_token === fcmToken)
+    ) {
+      let tok = dataTokenFromServer.data.find(
+        item => item.fcm_token === fcmToken,
+      );
+      storeUserSession(
+        'fcmtoken',
+        JSON.stringify({
+          fcmToken: tok.fcm_token,
+          fcmTokenId: tok.id,
         }),
       );
     }

@@ -30,6 +30,7 @@ const OrderScreen = props => {
         weight={item.weight}
         image={item.image}
         quantity={item.pivot.quantity}
+        apiece={item.apiece}
       />
     </View>
   );
