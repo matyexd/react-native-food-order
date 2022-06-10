@@ -26,6 +26,7 @@ import {
   requestUserPermission,
 } from '../../utils/pushNotificationHelper';
 import {API_PICT} from '@env';
+import {useDebouncedCallback} from 'use-debounce';
 
 const HomeScreen = props => {
   const categories = props.categories.categories;
@@ -84,9 +85,7 @@ const HomeScreen = props => {
       props.basket.products.find(p => p.product.id == item?.id)?.count || 1;
     return count;
   };
-
-  const onSearchChangeHandler = searchString => {
-    setSearchQuery(searchString);
+  const debounce = useDebouncedCallback(searchString => {
     const data = [];
     for (let i = 0; i < props.products.products.length; i++) {
       if (
@@ -98,6 +97,10 @@ const HomeScreen = props => {
       }
     }
     setSearchedData(data);
+  }, 1000);
+  const onSearchChangeHandler = searchString => {
+    setSearchQuery(searchString);
+    debounce(searchString);
     if (searchString.length == 0) filterByCategory(categories[0]?.id);
   };
 

@@ -10,24 +10,13 @@ const HistoryCardDay = props => {
   let isMounted;
 
   const deleteOrd = () => {
-    // if (isMounted) {
     deleteOrder(props.id);
     props.deleteOrderCallback();
-    // setModalVisible(true);
-    // setTextError('Заказ был удален');
-    // }
   };
   const [modalVisible, setModalVisible] = useState(false);
   const setModalVisibleCallback = visible => {
     setModalVisible(visible);
   };
-
-  // useEffect(() => {
-  //   isMounted = true;
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, []);
 
   const [textError, setTextError] = useState();
   return (
