@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import UiIcon from '../UiIcon';
 import {styles} from './UiSearchStyle';
 import {Shadow} from 'react-native-shadow-2';
@@ -29,7 +29,7 @@ const UiSearch = props => {
           onChangeText={props.onInputChangeHandler}
         />
         <TouchableOpacity
-          disabled={props.value?.length == 0}
+          disabled={props.value?.length === 0}
           onPress={onInputChange}>
           <UiIcon
             iconName={'close'}

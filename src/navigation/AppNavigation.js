@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {CommonActions, NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity, Platform} from 'react-native';
+import {View, Text, FlatList, Platform} from 'react-native';
 import {
   UiIcon,
   UiSearch,
@@ -13,19 +13,12 @@ import {
   changeProductCountAction,
 } from '../../store/actions/basketActions';
 import {connect} from 'react-redux';
-import {categoriesFetch, menuFetch} from './../../http/menuService';
-import {
-  getCategoriesAction,
-  getMenuActions,
-} from '../../store/actions/menuActions';
 import {SDishCard, SModal} from '../../components';
 import {UIActivityIndicator} from 'react-native-indicators';
 import {getMaxPriceAction} from '../../store/actions/settingAction';
 import {
-  NotificationListner,
   requestUserPermission,
 } from '../../utils/pushNotificationHelper';
-import {API_PICT} from '@env';
 import {useDebouncedCallback} from 'use-debounce';
 
 const HomeScreen = props => {
@@ -64,7 +57,7 @@ const HomeScreen = props => {
       style={styles.card}
       key={item.id}
       onPress={() => onPressCardHandler(item)}
-      disabled={!!props.basket.products.find(p => item.id == p.product.id)}
+      disabled={!!props.basket.find(p => item.id == p.product.id)}
     />
   );
   const filterByCategory = category => {
@@ -82,7 +75,7 @@ const HomeScreen = props => {
 
   const getProductsCount = () => {
     const count =
-      props.basket.products.find(p => p.product.id == item?.id)?.count || 1;
+      props.basket.find(p => p.product.id == item?.id)?.count || 1;
     return count;
   };
   const debounce = useDebouncedCallback(searchString => {
@@ -112,16 +105,16 @@ const HomeScreen = props => {
           <View style={styles.limitPrice}>
             <Text
               style={
-                props.basket.totalCost > props.maxPrice
+                props.totalCost > props.maxPrice
                   ? styles.limitCountRed
                   : styles.limitCount
               }>
-              {props.basket.totalCost}
+              {props.totalCost}
             </Text>
             <UiIcon
               iconName="ruble"
               iconColor={
-                props.basket.totalCost > props.maxPrice ? 'red' : '#333333'
+                props.totalCost > props.maxPrice ? 'red' : '#333333'
               }
               style={styles.icon}
               iconSize={24}
@@ -178,7 +171,8 @@ const HomeScreen = props => {
 const mapStateToProps = store => ({
   products: store.products,
   categories: store.categories,
-  basket: store.basket,
+  basket: store.basket.products,
+  totalCost:store.basket.totalCost,
   maxPrice: store.setting.maxPrice,
 });
 
