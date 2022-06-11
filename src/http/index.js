@@ -28,12 +28,10 @@ $api.interceptors.request.use(async config => {
 
 $api.interceptors.response.use(
   config => {
-    // console.log(config);
     return config;
   },
   async error => {
     const originalRequest = error.config;
-    console.log(error.config._isRetry);
     if (
       error.response.status === 401 &&
       error.config &&
@@ -41,9 +39,9 @@ $api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
+        console.log('Refresh');
         const response = await $refresh_api.post('/refresh');
-        console.log(response);
-        await storeUserSession('token', response.data.access_token);
+        await storeUserSession('token', response.data.data.access_token);
         return $api.request(originalRequest);
       } catch (e) {
         console.log(e);

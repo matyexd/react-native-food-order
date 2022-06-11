@@ -54,7 +54,6 @@ const BasketScreen = props => {
       };
     });
     const res = await createOrderRequest(basket, date);
-    console.log(res, '25235234');
     if (res?.status > 199 && res.status < 300) {
       props.clearBasket();
       setModalVisible(true);
@@ -63,11 +62,9 @@ const BasketScreen = props => {
       res?.data?.errors &&
       res?.data?.errors[0] == 'Order has been created'
     ) {
-      // console.log(res?.data);
       setModalFailedVisible(true);
       setTextError('Заказ уже был создан');
     } else {
-      // console.log(1);
       setModalFailedVisible(true);
       setTextError('Заказ не отправлен, попробуйте позже');
     }
