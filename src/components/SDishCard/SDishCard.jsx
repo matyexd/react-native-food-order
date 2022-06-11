@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {TouchableOpacity, Text, View, Image} from 'react-native';
 import {UiIcon, UiMainButton} from '../ui-kit';
 import {styles} from './SDishCardStyle';

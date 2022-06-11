@@ -1,33 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {styles} from './HistoryCardDayStyle';
 import {Shadow} from 'react-native-shadow-2';
-import {TouchableOpacity, Text, View, Image} from 'react-native';
-import {UiButton, UiIcon, UiMainButton} from '../../ui-kit';
+import { Text, View} from 'react-native';
+import {UiButton, UiIcon} from '../../ui-kit';
 import {deleteOrder} from '../../../http/orderService';
-import ModalMessageSuccess from '../../ModalMessage/ModalMessageSuccess/ModalMessageSuccess';
 
 const HistoryCardDay = props => {
   let isMounted;
 
   const deleteOrd = () => {
-    // if (isMounted) {
     deleteOrder(props.id);
     props.deleteOrderCallback();
-    // setModalVisible(true);
-    // setTextError('Заказ был удален');
-    // }
   };
   const [modalVisible, setModalVisible] = useState(false);
   const setModalVisibleCallback = visible => {
     setModalVisible(visible);
   };
-
-  // useEffect(() => {
-  //   isMounted = true;
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, []);
 
   const [textError, setTextError] = useState();
   return (
@@ -50,11 +38,6 @@ const HistoryCardDay = props => {
           </View>
         </View>
       </Shadow>
-      <ModalMessageSuccess
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisibleCallback}
-        text={textError}
-      />
     </>
   );
 };

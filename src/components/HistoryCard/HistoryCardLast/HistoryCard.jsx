@@ -1,7 +1,7 @@
 import React from 'react';
 import {styles} from './HistoryCardStyle';
 import {Shadow} from 'react-native-shadow-2';
-import {TouchableOpacity, Text, View, Image} from 'react-native';
+import {Text, View} from 'react-native';
 import {UiIcon} from '../../ui-kit';
 
 const HistoryCard = props => {

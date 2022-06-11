@@ -1,21 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {UiContainer, UiContainerWP, UiIcon} from '../../components/ui-kit';
+import React, {useEffect} from 'react';
+import { UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {styles} from './HistoryScreenStyle';
-import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {height, width} from '../../utils/Responsive';
 import {HistoryCard, HistoryCardDay} from '../../components';
 import {getHistoryAction} from '../../store/actions/historyAction';
 import {connect} from 'react-redux';
 import {formatDate, getTomorrow} from '../../utils/utilits';
-import {orderFetch} from '../../http/historyService';
 import {UIActivityIndicator} from 'react-native-indicators';
 
 const HistoryScreen = props => {
   useEffect(() => {
-    props.getHistory(props.user.user.id);
+    props.getHistory(props.user.id);
   }, []);
-  const nextOrder = props.history.orders.find(
-    order => order.date_order == getTomorrow(),
+  const nextOrder = props.orders.find(
+    order => order.date_order === getTomorrow(),
   );
 
   const deleteOrderCallback = () => {
@@ -38,8 +37,8 @@ const HistoryScreen = props => {
       <HistoryCard price={item.cost} date={formatDate(item.date_order)} />
     </TouchableOpacity>
   );
-  const filterOrders = props.history.orders.filter(
-    order => order.date_order != getTomorrow(),
+  const filterOrders = props.orders.filter(
+    order => order.date_order !== getTomorrow(),
   );
   return (
     <>
@@ -55,8 +54,7 @@ const HistoryScreen = props => {
             style={styles.cardOnDay}
             onPress={() =>
               props.navigation.navigate('OrderScreen', {
-                products: props.history.orders[0],
-                // products: nextOrder.products,
+                products: props.orders[0],
                 orderDate: nextOrder.date_order,
                 orderId: nextOrder.id,
               })
@@ -69,7 +67,7 @@ const HistoryScreen = props => {
             />
           </TouchableOpacity>
         )}
-        {props.history.loading ? (
+        {props.loading ? (
           <UIActivityIndicator color={'#AAAAAA'} size={30} />
         ) : (
           <FlatList
@@ -87,8 +85,9 @@ const HistoryScreen = props => {
   );
 };
 const mapStateToProps = store => ({
-  history: store.history,
-  user: store.authUser,
+    orders:store.history.orders,
+  user: store.authUser.user,
+    loading:store.history.loading,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Modal from 'react-native-modal';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text} from 'react-native';
 import {styles} from './ModalLogoutStyle';
 import {UiButton} from '../ui-kit';
 

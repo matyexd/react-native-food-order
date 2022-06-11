@@ -9,12 +9,15 @@ import {
   clearBasketAction,
   deleteProductAction,
 } from '../../store/actions/basketActions';
-import {SBasketCard} from '../../components';
+import {
+  ModalMessageFailed,
+  ModalMessageSuccess,
+  SBasketCard,
+} from '../../components';
 import {createOrderRequest} from '../../http/orderService';
-import {getNextWorkingDay, getTomorrow} from '../../utils/utilits';
-import ModalMessageFailed from '../../components/ModalMessage/ModalMessageFailed/ModalMessageFailed';
-import ModalMessageSuccess from '../../components/ModalMessage/ModalMessageSuccess/ModalMessageSuccess';
-import {UIActivityIndicator} from 'react-native-indicators';
+import {getTomorrow} from '../../utils/utilits';
+import {getMaxPriceAction} from "../../store/actions/settingAction";
+
 
 const BasketScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -46,28 +49,25 @@ const BasketScreen = props => {
   );
   const createOrder = async () => {
     setIsLoading(true);
-    const date = await getTomorrow();
-    const basket = props.products.products.map(product => {
+    const date = getTomorrow();
+    const basket = props.products.map(product => {
       return {
         quantity: product.count,
         dish_id: product.product.id,
       };
     });
     const res = await createOrderRequest(basket, date);
-    console.log(res, '25235234');
     if (res?.status > 199 && res.status < 300) {
       props.clearBasket();
       setModalVisible(true);
       setTextError('Заказ успешно отправлен');
     } else if (
       res?.data?.errors &&
-      res?.data?.errors[0] == 'Order has been created'
+      res?.data?.errors[0] === 'Order has been created'
     ) {
-      // console.log(res?.data);
       setModalFailedVisible(true);
       setTextError('Заказ уже был создан');
     } else {
-      // console.log(1);
       setModalFailedVisible(true);
       setTextError('Заказ не отправлен, попробуйте позже');
     }
@@ -82,16 +82,16 @@ const BasketScreen = props => {
           <View style={styles.limitPrice}>
             <Text
               style={
-                props.products.totalCost > props.maxPrice
+                props.totalCost > props.maxPrice
                   ? styles.limitCountRed
                   : styles.limitCount
               }>
-              {props.products.totalCost}
+              {props.totalCost}
             </Text>
             <UiIcon
               iconName="ruble"
               iconColor={
-                props.products.totalCost > props.maxPrice ? 'red' : '#333333'
+                props.totalCost > props.maxPrice ? 'red' : '#333333'
               }
               style={styles.icon}
               iconSize={24}
@@ -104,7 +104,7 @@ const BasketScreen = props => {
               paddingHorizontal: width(20),
               paddingTop: height(12),
             }}
-            data={props.products.products}
+            data={props.products}
             renderItem={renderItem}
             keyExtractor={item => item.product.id + 'b'}
           />
@@ -114,14 +114,12 @@ const BasketScreen = props => {
         <UiButton
           text="Оформить заказ"
           disabled={
-            props.products.totalCost > props.maxPrice ||
-            props.products.totalCost == 0
-              ? true
-              : false
+            props.totalCost > props.maxPrice ||
+              props.totalCost === 0
           }
           style={
-            props.products.totalCost > props.maxPrice ||
-            props.products.totalCost == 0
+            props.totalCost > props.maxPrice ||
+            props.totalCost === 0
               ? styles.buttonDisable
               : {}
           }
@@ -144,7 +142,8 @@ const BasketScreen = props => {
 };
 
 const mapStateToProps = store => ({
-  products: store.basket,
+  totalCost: store.basket.totalCost,
+  products: store.basket.products,
   maxPrice: store.setting.maxPrice,
 });
 

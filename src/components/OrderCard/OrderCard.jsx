@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, Text, View, Image} from 'react-native';
-import {UiButton, UiCounter, UiIcon, UiMainButton} from '../ui-kit';
+import React from 'react';
+import {Text, View, Image} from 'react-native';
+import {UiIcon} from '../ui-kit';
 import {Shadow} from 'react-native-shadow-2';
 import {styles} from './OrderCardStyle';
 import {API_PICT} from '@env';

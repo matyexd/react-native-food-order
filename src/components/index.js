@@ -5,6 +5,8 @@ import {OrderCard} from './OrderCard';
 import {SBasketCard} from './SBasketCard';
 import {SDishCard} from './SDishCard';
 import {SModal} from './SModal';
+import {ModalMessageFailed} from './ModalMessage/ModalMessageFailed';
+import {ModalMessageSuccess} from './ModalMessage/ModalMessageSuccess';
 
 export {
   HistoryCard,
@@ -14,4 +16,6 @@ export {
   SBasketCard,
   SDishCard,
   SModal,
+  ModalMessageFailed,
+  ModalMessageSuccess,
 };

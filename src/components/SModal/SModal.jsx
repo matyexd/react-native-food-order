@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-native-modal';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import {styles} from './SModalStyle';
 import {UiCounter, UiIcon, UiMainButton} from '../ui-kit';
 import {API_PICT} from '@env';

@@ -1,5 +1,5 @@
 import $api from './index';
-import {retrieveUserSession} from '../storage';
+
 
 export async function getTokenFromServer() {
   return $api.get('/get-tokens').then(response => response.data);

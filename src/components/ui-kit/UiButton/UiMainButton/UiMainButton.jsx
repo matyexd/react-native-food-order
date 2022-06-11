@@ -1,9 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
-import {UIActivityIndicator} from 'react-native-indicators';
 import {styles} from './UiMainButtonStyle';
 
-const UiMainButton = ({text, onPress, disabled = false, isLoading = false}) => {
+const UiMainButton = ({text, onPress, disabled = false}) => {
   return (
     <View>
       {disabled ? (
