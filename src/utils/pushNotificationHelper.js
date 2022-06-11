@@ -26,8 +26,6 @@ async function GetFCMToken() {
     let fcmtoken = await retrieveUserSession('fcmtoken');
     fcmtoken = JSON.parse(fcmtoken);
 
-    console.log(dataTokenFromServer);
-    console.log(fcmtoken);
     let fcmToken = await messaging().getToken();
     if (
       (!dataTokenFromServer.data.length && !fcmtoken) ||

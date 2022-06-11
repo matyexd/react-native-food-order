@@ -44,7 +44,6 @@ const AuthenticationScreen = props => {
       setLoginError('');
       setPasswordError('');
       props.login(login, password);
-      // alert('что');
     }
   };
 
