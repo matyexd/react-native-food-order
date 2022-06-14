@@ -86,14 +86,7 @@ const AppNavigation = props => {
   );
 
   useEffect(() => {
-    // const init = async () => {
     props.checkIsAuthUser();
-    // };
-
-    // init().finally(async () => {
-    //   await RNBootSplash.hide({fade: true});
-    //   console.log('Bootsplash has been hidden successfully');
-    // });
   }, []);
 
   useEffect(() => {
