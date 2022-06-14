@@ -16,8 +16,7 @@ import {
 } from '../../components';
 import {createOrderRequest} from '../../http/orderService';
 import {getTomorrow} from '../../utils/utilits';
-import {getMaxPriceAction} from "../../store/actions/settingAction";
-
+import {getMaxPriceAction} from '../../store/actions/settingAction';
 
 const BasketScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -57,6 +56,7 @@ const BasketScreen = props => {
       };
     });
     const res = await createOrderRequest(basket, date);
+    console.log(res);
     if (res?.status > 199 && res.status < 300) {
       props.clearBasket();
       setModalVisible(true);
@@ -67,6 +67,18 @@ const BasketScreen = props => {
     ) {
       setModalFailedVisible(true);
       setTextError('Заказ уже был создан');
+    } else if (
+      res?.data?.errors &&
+      res?.data?.errors[0] === 'order time expired'
+    ) {
+      setModalFailedVisible(true);
+      setTextError('Время оформления заказа вышло');
+    } else if (
+      res?.data?.errors &&
+      res?.data?.errors[0] === 'can`t order on weekends'
+    ) {
+      setModalFailedVisible(true);
+      setTextError('Создание заказа в выходной день недоступно');
     } else {
       setModalFailedVisible(true);
       setTextError('Заказ не отправлен, попробуйте позже');
@@ -90,9 +102,7 @@ const BasketScreen = props => {
             </Text>
             <UiIcon
               iconName="ruble"
-              iconColor={
-                props.totalCost > props.maxPrice ? 'red' : '#333333'
-              }
+              iconColor={props.totalCost > props.maxPrice ? 'red' : '#333333'}
               style={styles.icon}
               iconSize={24}
             />
@@ -113,13 +123,9 @@ const BasketScreen = props => {
       <View style={styles.button}>
         <UiButton
           text="Оформить заказ"
-          disabled={
-            props.totalCost > props.maxPrice ||
-              props.totalCost === 0
-          }
+          disabled={props.totalCost > props.maxPrice || props.totalCost === 0}
           style={
-            props.totalCost > props.maxPrice ||
-            props.totalCost === 0
+            props.totalCost > props.maxPrice || props.totalCost === 0
               ? styles.buttonDisable
               : {}
           }
