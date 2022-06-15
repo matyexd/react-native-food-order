@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { UiContainerWP, UiIcon} from '../../components/ui-kit';
+import {UiContainerWP, UiIcon} from '../../components/ui-kit';
 import {styles} from './HistoryScreenStyle';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {height, width} from '../../utils/Responsive';
@@ -16,9 +16,8 @@ const HistoryScreen = props => {
   const nextOrder = props.orders.find(
     order => order.date_order === getTomorrow(),
   );
-
   const deleteOrderCallback = () => {
-    props.getHistory(props.user.user.id);
+    props.getHistory(props.user.id);
   };
   const goToProfile = () => {
     props.navigation.navigate('ProfileMain');
@@ -85,9 +84,9 @@ const HistoryScreen = props => {
   );
 };
 const mapStateToProps = store => ({
-    orders:store.history.orders,
+  orders: store.history.orders,
   user: store.authUser.user,
-    loading:store.history.loading,
+  loading: store.history.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
