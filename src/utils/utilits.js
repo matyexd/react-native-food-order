@@ -34,7 +34,12 @@ export const formatDate = dateStr => {
 export const getTomorrow = () => {
   const today = Date.now();
   const date = new Date(today);
-  date.setDate(date.getDate() + 1);
+  const dayW = date.getDay();
+  if (dayW == 5) {
+    date.setDate(date.getDate() + 3);
+  } else {
+    date.setDate(date.getDate() + 1);
+  }
   const ndate = date.toISOString().split('T')[0];
   return ndate;
 };
