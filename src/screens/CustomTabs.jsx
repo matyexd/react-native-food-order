@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import SIcon from '../components/ui-kit/UiIcon';
 import {styles} from './ CustomTabsStyle';
 
@@ -11,19 +11,17 @@ const CustomTabs = ({route}) => ({
     iconColor = focused ? 'black' : 'gray';
 
     if (route.name === 'Home') {
-      iconName = focused ? 'main' : 'main';
+      iconName = 'main';
     } else if (route.name === 'Basket') {
-      iconName = focused ? 'shopCart' : 'shopCart';
-    } else if (route.name === 'Favourites') {
-      iconName = focused ? 'favorites' : 'favorites';
+      iconName = 'basket';
     } else if (route.name === 'Profile') {
-      iconName = focused ? 'profile' : 'profile';
+      iconName = 'profile';
     }
 
     // You can return any component that you like here!
     return <SIcon iconName={iconName} iconColor={iconColor} />;
   },
-  tabBarLabel: ({focused, color}) => {
+  tabBarLabel: ({focused}) => {
     let textColor;
     textColor = focused ? 'black' : 'gray';
     let textContent;
@@ -32,8 +30,6 @@ const CustomTabs = ({route}) => ({
       textContent = 'Главная';
     } else if (route.name === 'Basket') {
       textContent = 'Корзина';
-    } else if (route.name === 'Favourites') {
-      textContent = 'Избранное';
     } else if (route.name === 'Profile') {
       textContent = 'Профиль';
     }
@@ -44,6 +40,8 @@ const CustomTabs = ({route}) => ({
       </Text>
     );
   },
+
+  tabBarHideOnKeyboard: true,
 });
 
 export default CustomTabs;

@@ -1,25 +1,45 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import UiIcon from '../UiIcon';
 import {styles} from './UiSearchStyle';
+import {Shadow} from 'react-native-shadow-2';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const UiSearch = () => {
+const UiSearch = props => {
+  const onInputChange = () => {
+    props.onInputChangeHandler('');
+  };
   return (
-    <View style={styles.container}>
-      <View style={styles.input}>
-        <View style={styles.searchIcon}>
-          <UiIcon iconName="search" iconColor="#DDDDDD" iconSize={18} />
-        </View>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Поиск"
-          placeholderTextColor="#DDDDDD"
+    <Shadow
+      viewStyle={{alignSelf: 'stretch'}}
+      offset={[0, 8]}
+      startColor="rgba(51, 51, 51, 0.06)">
+      <View style={styles.searchSection}>
+        <UiIcon
+          iconName={'search'}
+          iconSize={18}
+          iconColor="rgba(170, 170, 170, 1)"
+          style={styles.searchIcon}
         />
-        <View style={styles.closeIcon}>
-          <UiIcon iconName="close" iconColor="#DDDDDD" iconSize={18} />
-        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Поиск"
+          underlineColorAndroid="transparent"
+          value={props.value}
+          onChangeText={props.onInputChangeHandler}
+        />
+        <TouchableOpacity
+          disabled={props.value?.length === 0}
+          onPress={onInputChange}>
+          <UiIcon
+            iconName={'close'}
+            iconSize={18}
+            iconColor="rgba(170, 170, 170, 1)"
+            style={styles.iconClose}
+          />
+        </TouchableOpacity>
       </View>
-    </View>
+    </Shadow>
   );
 };
 

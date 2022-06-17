@@ -3,37 +3,46 @@ import {fonts} from '../../theme/Fonts';
 import {height, width} from '../../utils/Responsive';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: width(20),
+  styleScreen: {
+    backgroundColor: 'white',
   },
+
   mainList: {
     flex: 1,
   },
   card: {
     flex: 1,
     marginBottom: height(10),
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: height(12),
-    paddingHorizontal: 2,
+    paddingBottom: height(12),
+    paddingHorizontal: width(20),
   },
   limitPrice: {
     flexDirection: 'row',
   },
   limitCount: {
     ...fonts.h2,
-    color: '#333333',
+    color: '#000000',
+  },
+  limitCountRed: {
+    ...fonts.h2,
+    color: 'red',
   },
   limitLabel: {
-    ...fonts.SecondaryTextBig,
-    color: '#333333',
+    ...fonts.h2,
+    color: '#000000',
   },
   icon: {
     alignSelf: 'center',
+  },
+  dropdown: {
+    marginTop: height(7),
+    marginBottom: height(24),
+    paddingHorizontal: width(20),
   },
 });

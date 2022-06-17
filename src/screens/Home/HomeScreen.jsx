@@ -1,97 +1,186 @@
-import React from 'react';
-import {View, Text, FlatList} from 'react-native';
-import SDishCard from '../../components/SDishCard';
-import {UiIcon, UiSearch} from '../../components/ui-kit';
+import React, {useState, useEffect} from 'react';
+import {View, Text, FlatList, Platform} from 'react-native';
+import {
+  UiIcon,
+  UiSearch,
+  UiDropdown,
+  UiContainerHome,
+} from '../../components/ui-kit';
 import {styles} from './HomeScreenStyle';
+import {height, width} from '../../utils/Responsive';
+import {
+  addProductAction,
+  changeProductCountAction,
+} from '../../store/actions/basketActions';
+import {connect} from 'react-redux';
+import {SDishCard, SModal} from '../../components';
+import {UIActivityIndicator} from 'react-native-indicators';
+import {getMaxPriceAction} from '../../store/actions/settingAction';
+import {
+  requestUserPermission,
+} from '../../utils/pushNotificationHelper';
+import {useDebouncedCallback} from 'use-debounce';
 
-const HomeScreen = () => {
-  const data = [
-    {
-      id: 1,
-      name: 'Винегрет овощной',
-      price: '40',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 2,
-      name: 'Винегрет овощной',
-      price: '70',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 3,
-      name: 'Винегрет овощной',
-      price: '60',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 4,
-      name: 'Винегрет овощной',
-      price: '80',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 5,
-      name: 'Винегрет овощной',
-      price: '40',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 6,
-      name: 'Винегрет овощной',
-      price: '70',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 7,
-      name: 'Винегрет овощной',
-      price: '60',
-      calorie: '550',
-      category: 'salad',
-    },
-    {
-      id: 8,
-      name: 'Винегрет овощной',
-      price: '80',
-      calorie: '550',
-      category: 'salad',
-    },
-  ];
+const HomeScreen = props => {
+  const categories = props.categories.categories;
+  const data = props.products.products;
+
+  const [item, setItem] = useState();
+  const [visible, setVisible] = useState(false);
+  const [filterData, setFilterData] = useState(data);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchedData, setSearchedData] = useState(data);
+
+  useEffect(() => {
+    filterByCategory(categories[0]?.id);
+  }, [props.categories, props.products]);
+
+  useEffect(() => {
+    props.getMaxPrice();
+    if (Platform.OS !== 'ios') {
+      requestUserPermission();
+    }
+  }, []);
+  const onPressCardHandler = obj => {
+    setItem(obj);
+    setVisible(true);
+  };
+
+  const closeModalCallback = () => {
+    setVisible(false);
+  };
 
   const renderItem = ({item}) => (
-    <View style={styles.card} key={item.id}>
-      <SDishCard header={item.name} price={item.price} gramm={100} />
-    </View>
+    <SDishCard
+      product={item}
+      addToBasket={addProductCallback}
+      style={styles.card}
+      key={item.id}
+      onPress={() => onPressCardHandler(item)}
+      disabled={!!props.basket.find(p => item.id == p.product.id)}
+    />
   );
+  const filterByCategory = category => {
+    if (!category) return;
+    const newData = data.filter(pr => pr.category_id === category);
+    setFilterData(newData);
+  };
+
+  const addProductCallback = product => {
+    props.addProduct(product);
+  };
+  const setProductCount = (product, count) => {
+    props.changeCount(product, count);
+  };
+
+  const getProductsCount = () => {
+    const count =
+      props.basket.find(p => p.product.id == item?.id)?.count || 1;
+    return count;
+  };
+  const debounce = useDebouncedCallback(searchString => {
+    const data = [];
+    for (let i = 0; i < props.products.products.length; i++) {
+      if (
+        props.products.products[i].name
+          ?.toLowerCase()
+          .includes(searchString.toLowerCase())
+      ) {
+        data.push(props.products.products[i]);
+      }
+    }
+    setSearchedData(data);
+  }, 1000);
+  const onSearchChangeHandler = searchString => {
+    setSearchQuery(searchString);
+    debounce(searchString);
+    if (searchString.length == 0) filterByCategory(categories[0]?.id);
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.limitLabel}>Осталось потратить</Text>
-        <View style={styles.limitPrice}>
-          <Text style={styles.limitCount}>230</Text>
-          <UiIcon iconName="ruble" iconColor="#333333" style={styles.icon} />
+    <>
+      <UiContainerHome>
+        <View style={styles.header}>
+          <Text style={styles.limitLabel}>Меню</Text>
+          <View style={styles.limitPrice}>
+            <Text
+              style={
+                props.totalCost > props.maxPrice
+                  ? styles.limitCountRed
+                  : styles.limitCount
+              }>
+              {props.totalCost}
+            </Text>
+            <UiIcon
+              iconName="ruble"
+              iconColor={
+                props.totalCost > props.maxPrice ? 'red' : '#333333'
+              }
+              style={styles.icon}
+              iconSize={24}
+            />
+          </View>
         </View>
-      </View>
-      <View>
-        <UiSearch />
-      </View>
-      <View style={styles.mainList}>
-        <FlatList
-          numColumns={2}
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
+        <View>
+          <View style={{paddingHorizontal: width(20)}}>
+            <UiSearch
+              value={searchQuery}
+              onInputChangeHandler={onSearchChangeHandler}
+            />
+          </View>
+          {searchQuery.length == 0 && (
+            <View style={styles.dropdown}>
+              <UiDropdown
+                titleDropdown={categories[0]?.name}
+                items={categories}
+                filter={filterByCategory}
+              />
+            </View>
+          )}
+        </View>
+        <View style={styles.mainList}>
+          {props.products.loading ? (
+            <UIActivityIndicator color={'#AAAAAA'} size={30} />
+          ) : (
+            <FlatList
+              contentContainerStyle={{
+                paddingHorizontal: width(20),
+                paddingTop: height(12),
+              }}
+              data={searchQuery.length > 0 ? searchedData : filterData}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          )}
+        </View>
+      </UiContainerHome>
+      {visible && (
+        <SModal
+          product={item}
+          addToBasket={addProductCallback}
+          isVisible={visible}
+          closeModal={closeModalCallback}
+          setProductCount={setProductCount}
+          count={getProductsCount()}
         />
-      </View>
-    </View>
+      )}
+    </>
   );
 };
 
-export default HomeScreen;
+const mapStateToProps = store => ({
+  products: store.products,
+  categories: store.categories,
+  basket: store.basket.products,
+  totalCost:store.basket.totalCost,
+  maxPrice: store.setting.maxPrice,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addProduct: product => dispatch(addProductAction(product)),
+  changeCount: (product, count) =>
+    dispatch(changeProductCountAction(product, count)),
+  getMaxPrice: () => dispatch(getMaxPriceAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

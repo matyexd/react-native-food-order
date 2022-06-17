@@ -1,42 +1,29 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {
-  HomeScreen,
-  ProfileScreen,
-  FavouritesScreen,
-  BasketScreen,
-  CustomTabs,
-} from './screens';
-
-const Tab = createBottomTabNavigator();
-
+import React, {useEffect} from 'react';
+import {Provider} from 'react-redux';
+import reduxStore from './store/configureStore';
+import {PersistGate} from 'redux-persist/integration/react';
+import {rootSaga} from './sagas';
+import {Platform} from 'react-native';
+import AppNavigation from './navigation/AppNavigation';
+import {StatusBar} from 'react-native';
+import {NotificationListner} from './utils/pushNotificationHelper';
 const App = () => {
+  const {store, persistor, sagaMiddleware} = reduxStore();
+  sagaMiddleware.run(rootSaga);
+
+  useEffect(() => {
+    if (Platform.OS !== 'ios') {
+      NotificationListner();
+    }
+  }, []);
+
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={props => CustomTabs(props)}>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen
-          name="Basket"
-          component={BasketScreen}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen
-          name="Favourites"
-          component={FavouritesScreen}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{headerShown: false}}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <StatusBar backgroundColor={'black'} />
+        <AppNavigation />
+      </PersistGate>
+    </Provider>
   );
 };
 

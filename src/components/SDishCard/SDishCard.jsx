@@ -2,34 +2,54 @@ import React from 'react';
 import {TouchableOpacity, Text, View, Image} from 'react-native';
 import {UiIcon, UiMainButton} from '../ui-kit';
 import {styles} from './SDishCardStyle';
-
+import {Shadow} from 'react-native-shadow-2';
+import {API_PICT} from '@env';
 const SDishCard = props => {
-  const {header, calorie, gramm, price} = props;
-  const onPressHandler = () => {
-    console.log('Нажата кнопка');
+  const {product, addToBasket} = props;
+  const onPressAddProductHandler = () => {
+    addToBasket(product);
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.img}
-        source={require('./../../assets/img/salat.png')}
-      />
-      <Text style={styles.header}>{header}</Text>
-      <View style={styles.about}>
-        <Text style={styles.calorie}>{gramm} гр</Text>
-        <View style={styles.price}>
-          <Text style={styles.count}>{price}</Text>
-          <UiIcon
-            iconName="ruble"
-            iconColor="black"
-            iconSize={18}
-            style={styles.icon}
+    <TouchableOpacity onPress={props.onPress} style={props.style}>
+      <Shadow
+        viewStyle={{
+          alignSelf: 'stretch',
+        }}
+        startColor="#00000015">
+        <View style={styles.container}>
+          <Image
+            style={styles.img}
+            source={{uri: `${API_PICT}${product.image}`}}
           />
+          <View style={styles.info}>
+            <Text style={styles.header}>{product.name}</Text>
+            <Text style={styles.calorie}>
+              {product.apiece ? '1шт' : product.weight + 'гр'}{' '}
+              {product.calories}Ккал
+            </Text>
+            <View style={{flex: 1, justifyContent: 'flex-end'}}>
+              <View style={styles.about}>
+                <View style={styles.price}>
+                  <Text style={styles.count}>{product.price}</Text>
+                  <UiIcon
+                    iconName="ruble"
+                    iconColor="#333333"
+                    iconSize={24}
+                    style={styles.icon}
+                  />
+                </View>
+                <UiMainButton
+                  text="Добавить"
+                  onPress={onPressAddProductHandler}
+                  disabled={props.disabled}
+                />
+              </View>
+            </View>
+          </View>
         </View>
-      </View>
-      <UiMainButton text="Добавить" onPress={onPressHandler} />
-    </View>
+      </Shadow>
+    </TouchableOpacity>
   );
 };
 
